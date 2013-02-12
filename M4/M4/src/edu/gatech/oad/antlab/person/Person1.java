@@ -30,8 +30,11 @@ public class Person1 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 1 put your implementation here
-	  return null;
+		//works if string is big enough
+	  String mod = input.substring(2);
+	 mod = mod.concat(input.substring(0, 1));
+	 mod = mod.concat(input.substring(1, 2));
+	  return mod;
 	}
 	
 	/**
@@ -43,7 +46,7 @@ public class Person1 {
 	 *         object
 	 */
 	public String toString(String input) {
-	  return name + calc(input);
+	  return name  +  calc(input);
 	}
 
 }

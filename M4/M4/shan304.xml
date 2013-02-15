@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="shan304" basedir="." default="all">
+ 
+	<target name="init">
+		<property name="prog.name"    value="AntLab" />       
+		<property name="src" value="src"/>
+		<property name="build" value="build"/>
+		<property name="jar" value="jar"/>
+		<property name="apidoc" value="apidoc"/>
+		<property name="lib" value="lib"/>
+	
+		<path id="dep.runtime">
+	    	<fileset dir="./lib">
+	        	<include name="**/*.jar" />
+	    	</fileset>
+		</path>
+	</target>
+	
+	<target name="prepare" depends="init">
+	     <mkdir dir="${build}"/>
+	     <mkdir dir="${apidoc}"/>
+	     <mkdir dir="${build}"/>
+	     <mkdir dir="${jar}"/>
+	 </target>
+	     
+	 
+	 <target name="compile" depends="prepare">
+		 <javac srcdir="${src}" destdir="${build}" classpath="lib/resources.jar"/>
+	 </target>
+	
+	 	
+	<target name="javadoc" depends="prepare">
+	   <javadoc sourcepath="${src}" access="public" destdir="apidoc" packagenames="edu.gatech.oad.antlab.pkg1,
+		edu.gatech.oad.antlab.pkg2,edu.gatech.oad.antlab.person">
+		   	
+			<classpath>
+				<pathelement path="${lib}/resources.jar"/>
+			</classpath>
+			   	
+			<fileset dir="${src}">
+				<include name="**/*.java"></include>
+			</fileset>
+		
+		</javadoc>
+	</target>
+	
+	 
+	<target name="jar" depends="compile">
+		<jar destfile="${jar}/AntLabRun.jar" basedir="${build}">
+			<manifest>
+				<attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+				<attribute name="Class-Path" value="resources.jar" />
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="run" depends="jar">
+	   <java jar="lib/AntLabRun.jar" fork="true">
+	   </java>
+	</target>
+	
+	<target name="all" depends="init,prepare,compile,javadoc,jar,run ">
+	</target>
+	
+	<target name="clean" >
+	    <delete dir="${apidoc}"/>
+		<delete dir="${build}"/>
+		<delete dir="${jar}"/>
+	  </target>
+
+</project>
+         
+       

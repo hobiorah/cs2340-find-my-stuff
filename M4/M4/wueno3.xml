@@ -1,0 +1,70 @@
+
+<project name="wueno3M4" basedir="." default="all">
+ 
+  <target name="init">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="jar.dir" value="${build.dir}/jar"/>
+    <property name="apidoc.dir" value="apidoc"/>
+      <path id="dep.runtime">
+          <fileset dir="./lib">
+              <include name="**/*.jar" />
+          </fileset>
+      </path>
+  </target>
+
+ <target name="prepare" depends="init">
+  <mkdir dir="${build.dir}"/>
+  <mkdir dir="${apidoc.dir}"/>
+  <mkdir dir="${classes.dir}"/>
+  <mkdir dir="${jar.dir}"/>
+ </target>
+     
+ 
+ <target name="compile" depends="prepare">
+	 <javac srcdir="${src.dir}" destdir="${classes.dir}" classpath="lib/resources.jar" includeantruntime="false"/>
+ </target>
+
+ 	
+ <target name="javadoc" depends="prepare">
+   <javadoc sourcepath="${src.dir}" access="public" destdir="apidoc" packagenames="edu.gatech.oad.antlab.person,edu.gatech.oad.antlab.pkg1, edu.gatech.oad.antlab.pkg2">
+    <classpath>
+      <pathelement path="${lib.dir}/resources.jar"/>
+    </classpath>
+    <fileset dir="${src.dir}">
+      <include name="**/*.java"/>
+    </fileset>
+   </javadoc>
+  </target>
+
+
+ 
+  <target name="jar" depends="compile">
+   <jar destfile="lib/AntLabRun.jar" basedir="${classes.dir}">
+     <manifest>
+       <attribute name="Main-Class" value="edu.gatech.oad.antlab.pkg1.AntLabMain"/>
+       <attribute name="Class-Path" value="resources.jar" />
+     </manifest>
+   </jar>
+ </target>
+
+  <target name="run" depends="jar">
+    <java jar="lib/AntLabRun.jar" fork="true"/>
+  </target>
+
+  <target name="all" depends="init,prepare,compile,javadoc,jar,run, clean">
+  </target>
+
+
+  <target name="clean" >
+  	<delete file="lib/AntLabRun.jar"/>
+    <delete dir="${build.dir}"/>
+    <delete dir="${apidoc.dir}"/>
+    <delete dir="${classes.dir}"/>
+    <delete dir="${jar.dir}"/>
+  </target>
+        
+       
+</project>

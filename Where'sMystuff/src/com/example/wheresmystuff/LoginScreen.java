@@ -33,7 +33,9 @@ public class LoginScreen extends Activity {
 	 * Runs when the login 
 	 * @param view
 	 */
-	public void login(View view){}
+	public void login(View view){
+		
+	}
 	
 	public void signUp(View view){
 		 // Create the Intent

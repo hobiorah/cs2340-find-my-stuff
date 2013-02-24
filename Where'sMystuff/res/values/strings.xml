@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Where\'s My Stuff?</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello worldc!</string>
+    <string name="userName">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signUp">Sign Up for Wheres My Stuff</string>
+    <string name="signUpPage">Sign Up</string>
+    <string name="title_activity_register_error">RegisterError</string>
+
+</resources>

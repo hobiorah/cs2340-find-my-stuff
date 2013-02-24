@@ -70,11 +70,11 @@ public class LoginScreen extends Activity {
 		protected void onPostExecute(LoginResult params){
 			pd.dismiss();
 
-			String x = "User created.";
+			String x = "Successfully logged in.";
 
 			switch(params){
 			case INVALID:
-				x = "Invalid Username";
+				x = "Invalid user/password combination";
 				break;
 			case DB_ERROR:
 				x = "Database Error";

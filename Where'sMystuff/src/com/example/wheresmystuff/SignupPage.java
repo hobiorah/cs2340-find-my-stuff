@@ -71,8 +71,10 @@ public class SignupPage extends Activity {
 
 			if (params == RegisterResult.ACCEPTED){
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
+				
 			} else {
 				popUp(x);
+				finish();
 			}
 
 		}
@@ -102,6 +104,7 @@ public class SignupPage extends Activity {
 
 	public void register(View view){	
 		new RegisterAttemptTask().execute();
+		
 	}
 
 

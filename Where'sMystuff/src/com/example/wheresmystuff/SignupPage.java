@@ -86,12 +86,9 @@ public class SignupPage extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.signup_page);
-		//Button register = (Button)this.findViewById(R.id.register_button);
-		//register.setOnClickListener(new Login());
 		userName = (TextView)this.findViewById(R.id.userName_register);
 		password = (TextView)this.findViewById(R.id.password_register);
 		reg = new RegisterQuery();
-		// outcome = new Outcome();
 
 	}
 
@@ -101,14 +98,22 @@ public class SignupPage extends Activity {
 		getMenuInflater().inflate(R.menu.login_screen, menu);
 		return true;
 	}
-
+	
+	/**
+	 * runs when user hits register button which takes information from username and password field and attempts to make
+	 * new user in the database through the RegisterAttemptTask class
+	 * @param view
+	 */
 	public void register(View view){	
 		new RegisterAttemptTask().execute();
 		
 	}
 
 
-
+	/**
+	 * pop up what what went wrong with registering new account
+	 * @param problem CharSequence representation of the problem
+	 */
 	public void popUp(CharSequence problem){
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);

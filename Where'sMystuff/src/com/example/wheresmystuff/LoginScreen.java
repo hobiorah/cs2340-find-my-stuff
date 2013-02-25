@@ -26,10 +26,6 @@ public class LoginScreen extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_screen);
-		Button login = (Button)this.findViewById(R.id.login_button);
-		//login.setOnClickListener(new Login());
-		Button signUp = (Button)this.findViewById(R.id.signup_button);
-		//signUp.setOnClickListener(new SignUp());
 		userName = (TextView)this.findViewById(R.id.username_login);
 		password = (TextView)this.findViewById(R.id.password_login); 
 		log = new LoginQuery();
@@ -44,7 +40,8 @@ public class LoginScreen extends Activity {
 	
 	
 	/**
-	 * Runs when the login 
+	 * Runs when the login button is pressed which then calls the private class LoginAttemptTask 
+	 * which attempts to login with the information provided from the user name and password textfields
 	 * @param view
 	 */
 	public void login(View view){
@@ -96,6 +93,10 @@ public class LoginScreen extends Activity {
 		}
 	}
 
+	/**
+	 * displays a pop up what went wrong with the attempted login
+	 * @param problem CharSequence representation of the problem
+	 */
 	public void popUp(CharSequence problem){
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -114,11 +115,14 @@ public class LoginScreen extends Activity {
 		dialog.show();
 	}
 	
-	
+	/**
+	 * runs when user hits the sign up button which transistions screen to the sign up activity
+	 * @param view
+	 */
 	public void signUp(View view){
 		 // Create the Intent
 		  Intent register = new Intent(this, SignupPage.class);
-		  // Start the other Activity, using the Intent
+		  // Start signuppage activity, using the Intent
 		  this.startActivity(register);
 
 	}

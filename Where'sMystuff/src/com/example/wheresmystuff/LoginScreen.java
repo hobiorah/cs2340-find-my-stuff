@@ -28,7 +28,7 @@ public class LoginScreen extends Activity {
 		setContentView(R.layout.login_screen);
 		userName = (TextView)this.findViewById(R.id.username_login);
 		password = (TextView)this.findViewById(R.id.password_login); 
-		log = new LoginQuery();
+		//log = new LoginQuery();
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class LoginScreen extends Activity {
 
 		protected LoginResult doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-
+			log = new LoginQuery();
 			String user =  userName.getText().toString();
 			String pass =  password.getText().toString();
 			return   log.login(user, pass);//.register(user, pass);

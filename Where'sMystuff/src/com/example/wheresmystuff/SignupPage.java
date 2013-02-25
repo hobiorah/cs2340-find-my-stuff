@@ -38,7 +38,7 @@ public class SignupPage extends Activity {
 
 		protected RegisterResult doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-
+			reg = new RegisterQuery();
 			String user =  userName.getText().toString();
 			String pass =  password.getText().toString();
 			return reg.register(user, pass);
@@ -88,7 +88,7 @@ public class SignupPage extends Activity {
 		setContentView(R.layout.signup_page);
 		userName = (TextView)this.findViewById(R.id.userName_register);
 		password = (TextView)this.findViewById(R.id.password_register);
-		reg = new RegisterQuery();
+		//reg = new RegisterQuery();
 
 	}
 

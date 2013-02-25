@@ -6,6 +6,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class LoginQuery {
+	
+	/**
+	 * Queries server and attempts to login
+	 * @return returns the result for whether the user was logged in
+	 */
 	public LoginResult login(String username, String hash){
 		Document doc = null;
 		LoginResult log = LoginResult.NETWORK_ERROR;

@@ -5,11 +5,17 @@ import java.util.Arrays;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-
-
-
+/**
+ * Object that queries server, attempting to register a user
+ * @author Steven Han
+ */
 public class RegisterQuery {
 
+	
+	/**
+	 * Queries server and attempts to register
+	 * @return returns the result for whether the user was registered
+	 */
 	public RegisterResult register(String username, String hash){
 		Document doc = null;
 		RegisterResult reg = RegisterResult.NETWORK_ERROR;

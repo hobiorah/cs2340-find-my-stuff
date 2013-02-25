@@ -71,10 +71,10 @@ public class SignupPage extends Activity {
 
 			if (params == RegisterResult.ACCEPTED){
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
-				
+				finish();
 			} else {
 				popUp(x);
-				finish();
+				//finish();
 			}
 
 		}

@@ -15,20 +15,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 import android.view.View.OnClickListener;
-
+/**
+ * login screen so that user can log in and make a new user if necessary
+ * @author HarryO
+ *
+ */
 public class LoginScreen extends Activity {
 
 	
-	TextView userName;
-	TextView password;
-	LoginQuery log;
+	protected TextView userName;
+	protected TextView password;
+	protected LoginQuery log;
+	boolean move = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_screen);
 		userName = (TextView)this.findViewById(R.id.username_login);
 		password = (TextView)this.findViewById(R.id.password_login); 
-		//log = new LoginQuery();
 	}
 
 	@Override
@@ -46,6 +50,7 @@ public class LoginScreen extends Activity {
 	 */
 	public void login(View view){
 		new LoginAttemptTask().execute();
+		
 	}
 	
 	private class LoginAttemptTask extends AsyncTask<Void, Void, LoginResult>{
@@ -83,7 +88,12 @@ public class LoginScreen extends Activity {
 
 
 			if (params == LoginResult.ACCEPTED){
+				move = true;
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
+				 Intent test = new Intent(LoginScreen.this, Options.class);
+				  // Start signuppage activity, using the Intent
+				 startActivity(test);
+
 				
 			} else {
 				popUp(x);

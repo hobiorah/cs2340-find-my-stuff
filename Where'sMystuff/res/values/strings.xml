@@ -10,5 +10,15 @@
     <string name="signUp">Sign Up for Wheres My Stuff</string>
     <string name="signUpPage">Sign Up</string>
     <string name="title_activity_register_error">RegisterError</string>
+    <string name="welcome">Wlecome to Wheres My stuff!</string>
+    <string name="add_lost_item">Enter Lost Item</string>
+    <string-array name="categories">
+        <item >Animal</item>
+        <item >Thing</item>
+    </string-array>
+    <string name="category_prompt">Choose a Category</string>
+    <string-array name="cities">
+        <item />
+    </string-array>
 
 </resources>

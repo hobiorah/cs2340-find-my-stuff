@@ -22,7 +22,11 @@ import android.view.View.OnClickListener;
 
 
 
-
+/**
+ * this signup screen for the user to make a new account
+ * @author HarryO
+ *
+ */
 public class SignupPage extends Activity {
 
 	TextView userName;
@@ -74,7 +78,6 @@ public class SignupPage extends Activity {
 				finish();
 			} else {
 				popUp(x);
-				//finish();
 			}
 
 		}
@@ -88,7 +91,6 @@ public class SignupPage extends Activity {
 		setContentView(R.layout.signup_page);
 		userName = (TextView)this.findViewById(R.id.userName_register);
 		password = (TextView)this.findViewById(R.id.password_register);
-		//reg = new RegisterQuery();
 
 	}
 

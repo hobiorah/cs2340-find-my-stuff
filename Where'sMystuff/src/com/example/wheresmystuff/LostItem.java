@@ -11,6 +11,7 @@ import android.content.ComponentName;
 //import android.app.DialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +20,7 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class LostItem extends FragmentActivity implements DatePicker.OnDateChangedListener {
+public class LostItem extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
 
 	private static final int MY_DATE_DIALOG_ID = 3;
 	static int[] date= new int[3];
@@ -37,8 +38,8 @@ public class LostItem extends FragmentActivity implements DatePicker.OnDateChang
 		return true;
 	}
 
-	public static class DatePickerFragment extends DialogFragment implements
-			DatePickerDialog.OnDateSetListener {
+	public static class DatePickerFragment extends DialogFragment 
+			 {
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -49,22 +50,44 @@ public class LostItem extends FragmentActivity implements DatePicker.OnDateChang
 			int day = c.get(Calendar.DAY_OF_MONTH);
 
 			// Create a new instance of DatePickerDialog and return it
-			return new DatePickerDialog(getActivity(), this, year, month, day);
+			return new DatePickerDialog(getActivity(), (LostItem)getActivity(), year, month, day);
 		}
 		
 
-		public void onDateSet(DatePicker view, int year, int month, int day) {
-			 date[0] = year;
+		//public void onDateSet(DatePicker view, int year, int month, int day) {
+			// date[0] = year;
+			 //date[1] = month;
+			 //date[2] = day;
+		//}
+	}
+	
+	 public void onDateSet(DatePicker view, int year, int month, int day) {
+	        //do some stuff for example write on log and update TextField on activity
+	        Log.w("DatePicker","Date = " + year);
+	        date[0] = year;
 			 date[1] = month;
 			 date[2] = day;
-		}
+	        ((TextView) findViewById(R.id.date_lost)).setText(date[0] + "/" + date[1] + "/" + date[2]);
+	    }
+	public class EditSessionActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
+		
+		    @Override
+		    public void onDateSet(DatePicker view, int year, int month, int day) {
+		        //do some stuff for example write on log and update TextField on activity
+		        Log.w("DatePicker","Date = " + year);
+		        date[0] = year;
+				 date[1] = month;
+				 date[2] = day;
+		        ((TextView) findViewById(R.id.date_lost)).setText(date[0] + "/" + date[1] + "/" + date[2]);
+		    }
+	
 	}
-
+	
 	public void showDatePickerDialog(View v) {
 		
 	    final DialogFragment newFragment = new DatePickerFragment();
-	    newFragment.show(getSupportFragmentManager(), "datePicker");
-	    setDate();
+	  newFragment.show(getSupportFragmentManager(), "DatePicker");
+	    //setDate();
 	    
 	}
 		
@@ -88,13 +111,7 @@ public class LostItem extends FragmentActivity implements DatePicker.OnDateChang
 
 	}
 
-	@Override
-	public void onDateChanged(DatePicker view, int year, int monthOfYear,
-			int dayOfMonth) {
-		TextView lost = (TextView) findViewById(R.id.date_lost);
-		lost.setText(year + "/" + monthOfYear + "/" + dayOfMonth);
-		
-				
-	}
+	
+
 
 }

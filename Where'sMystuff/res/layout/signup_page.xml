@@ -34,4 +34,15 @@
         android:hint="@string/userName"
         android:inputType="textPersonName" />
 
+    <EditText
+        android:id="@+id/email_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/register_button"
+        android:layout_alignLeft="@+id/password_register"
+        android:layout_marginBottom="21dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Email" />
+
 </RelativeLayout>

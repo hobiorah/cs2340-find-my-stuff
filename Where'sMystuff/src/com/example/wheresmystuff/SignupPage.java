@@ -3,8 +3,6 @@ package com.example.wheresmystuff;
 
 import java.io.IOException;
 
-
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -31,6 +29,7 @@ public class SignupPage extends Activity {
 
 	TextView userName;
 	TextView password;
+	TextView email;
 	RegisterQuery reg;
 
 	private class RegisterAttemptTask extends AsyncTask<Void, Void, RegisterResult>{
@@ -45,7 +44,8 @@ public class SignupPage extends Activity {
 			reg = new RegisterQuery();
 			String user =  userName.getText().toString();
 			String pass =  password.getText().toString();
-			return reg.register(user, pass);
+			String em = email.getText().toString();
+			return reg.register(user, pass, em);
 
 		}
 
@@ -70,6 +70,9 @@ public class SignupPage extends Activity {
 			case NETWORK_ERROR:
 				x = "Network Error";
 				break;
+			case INVALID_EMAIL:
+				x = "Invalid email";
+				break;
 			}
 
 
@@ -91,6 +94,7 @@ public class SignupPage extends Activity {
 		setContentView(R.layout.signup_page);
 		userName = (TextView)this.findViewById(R.id.userName_register);
 		password = (TextView)this.findViewById(R.id.password_register);
+		email = (TextView)this.findViewById(R.id.email_register);
 
 	}
 

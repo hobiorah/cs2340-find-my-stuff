@@ -19,7 +19,7 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class LostItem extends FragmentActivity {
+public class LostItem extends FragmentActivity implements DatePicker.OnDateChangedListener {
 
 	private static final int MY_DATE_DIALOG_ID = 3;
 	static int[] date= new int[3];
@@ -37,7 +37,7 @@ public class LostItem extends FragmentActivity {
 		return true;
 	}
 
-	public static  class DatePickerFragment extends DialogFragment implements
+	public static class DatePickerFragment extends DialogFragment implements
 			DatePickerDialog.OnDateSetListener {
 
 		@Override
@@ -51,22 +51,27 @@ public class LostItem extends FragmentActivity {
 			// Create a new instance of DatePickerDialog and return it
 			return new DatePickerDialog(getActivity(), this, year, month, day);
 		}
+		
 
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 			 date[0] = year;
 			 date[1] = month;
 			 date[2] = day;
-			 
 		}
 	}
 
 	public void showDatePickerDialog(View v) {
-	    DialogFragment newFragment = new DatePickerFragment();
+		
+	    final DialogFragment newFragment = new DatePickerFragment();
 	    newFragment.show(getSupportFragmentManager(), "datePicker");
 	    setDate();
-	    //ComponentName thisWidget = new ComponentName( getBaseContext(), LostItem.class );
-	    //AppWidgetManager.getInstance( getBaseContext() ).updateAppWidget( thisWidget, rempoteViews );
+	    
 	}
+		
+	
+	
+	
+	
 	
 	public void setDate() {
 		TextView lost = (TextView) findViewById(R.id.date_lost);
@@ -78,10 +83,18 @@ public class LostItem extends FragmentActivity {
 	public void submitItem(View view) {
 		//send it to thing
 		//Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
-
 		//String category = String.valueOf(categoryChooser.getSelectedItem());
 		finish();
 
+	}
+
+	@Override
+	public void onDateChanged(DatePicker view, int year, int monthOfYear,
+			int dayOfMonth) {
+		TextView lost = (TextView) findViewById(R.id.date_lost);
+		lost.setText(year + "/" + monthOfYear + "/" + dayOfMonth);
+		
+				
 	}
 
 }

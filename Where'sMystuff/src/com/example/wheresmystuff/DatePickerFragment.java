@@ -34,6 +34,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 	}
 	
 	public int[] getDate(){
+		//TextView lost = (TextView) findViewById(R.id.date_lost);
+		//lost.setText(date[0] + "/" + date[1] + "/" + date[2]);
 		return date;
 	}
 }

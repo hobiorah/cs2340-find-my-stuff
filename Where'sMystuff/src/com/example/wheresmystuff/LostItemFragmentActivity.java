@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.Intent;
 //import android.app.DialogFragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -107,8 +108,10 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		//send it to thing
 		//Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
 		//String category = String.valueOf(categoryChooser.getSelectedItem());
-		finish();
-
+	//	finish();
+		Intent test = new Intent(LostItemFragmentActivity.this, AllLostItems.class);
+		  // Start signuppage activity, using the Intent
+		 startActivity(test);
 	}
 
 

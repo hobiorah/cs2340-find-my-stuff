@@ -84,6 +84,9 @@ public class LoginScreen extends Activity {
 			case NETWORK_ERROR:
 				x = "Network Error";
 				break;
+			case LOCKED:
+				x = "This account has been locked";
+				break;
 			}
 
 

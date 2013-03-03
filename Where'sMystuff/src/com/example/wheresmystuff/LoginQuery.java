@@ -29,6 +29,8 @@ public class LoginQuery {
 			log = LoginResult.DB_ERROR;
 		else if (!array[2].equals("okuser"))
 			log = LoginResult.INVALID;
+		else if (!array[4].equals("ok"))
+			log = LoginResult.LOCKED;
 		else if (!array[3].equals("okpass"))
 			log = LoginResult.INVALID;
 		else

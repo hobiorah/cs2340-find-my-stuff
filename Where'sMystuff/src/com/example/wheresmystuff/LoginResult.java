@@ -5,5 +5,5 @@ package com.example.wheresmystuff;
  * @author Steven Han
  */
 public enum LoginResult {
-	ACCEPTED, INVALID, DB_ERROR, NETWORK_ERROR 
+	LOCKED, ACCEPTED, INVALID, DB_ERROR, NETWORK_ERROR 
 }

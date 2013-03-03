@@ -12,13 +12,18 @@
     <string name="title_activity_register_error">RegisterError</string>
     <string name="welcome">Wlecome to Wheres My stuff!</string>
     <string name="add_lost_item">Enter Lost Item</string>
+
     <string-array name="categories">
-        <item >Animal</item>
-        <item >Thing</item>
+        <item>Animal</item>
+        <item>Thing</item>
     </string-array>
+
     <string name="category_prompt">Choose a Category</string>
+
     <string-array name="cities">
-        <item />
+        <item/>
     </string-array>
+
+    <string name="title_activity_all_lost_items">AllLostItems</string>
 
 </resources>

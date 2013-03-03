@@ -20,17 +20,22 @@
             android:name="com.example.wheresmystuff.LoginScreen"
             android:label="@string/app_name" >
             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.example.wheresmystuff.SignupPage" />
-         <activity android:name="com.example.wheresmystuff.Options" />
+        <activity android:name="com.example.wheresmystuff.Options" />
         <activity android:name="com.example.wheresmystuff.LostItem" />
+        
         <activity
             android:name="com.example.wheresmystuff.RegisterError"
             android:label="@string/title_activity_register_error" >
+        </activity>
+        <activity
+            android:name="com.example.wheresmystuff.AllLostItems"
+            android:label="@string/title_activity_all_lost_items" >
         </activity>
     </application>
 

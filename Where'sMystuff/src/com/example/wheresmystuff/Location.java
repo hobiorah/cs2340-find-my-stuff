@@ -1,4 +1,4 @@
-package com.example.wheresmystuff;
+
 
 public class Location {
 	protected String city;

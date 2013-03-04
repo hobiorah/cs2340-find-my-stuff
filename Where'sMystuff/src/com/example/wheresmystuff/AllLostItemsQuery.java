@@ -1,6 +1,7 @@
-package com.example.wheresmystuff;
+
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,20 +20,28 @@ public class AllLostItemsQuery {
 			return log;
 		}
 
-		String[] array = doc.text().split("^");
-
+		String[] array = doc.text().split("\\^");
+		System.out.println(Arrays.toString(array));
+		
 		String[][] array2 = new String[array.length][7];
 		for (int i = 0; i < array.length; i++)
-			array2[i] = array[i].split("|");
+			array2[i] = array[i].split("\\|");
 
 		items = new LostItem[array.length];
 		for (int i = 0; i < array.length; i++){
-			items[i] = new LostItem(array2[i][1], array2[i][4], Utils.convertCategoryBack(array2[i][2]), array2[i][3], 
-					new Date(Integer.valueOf(array2[i][5].split(",")[0]),Integer.valueOf(array2[i][5].split(",")[1]),Integer.valueOf(array2[i][5].split(",")[2])));
+			
+			System.out.println(Arrays.toString(array2[i]));
+			items[i] = new LostItem(array2[i][1],
+					array2[i][4],
+					Utils.convertCategoryBack(array2[i][2]),
+					array2[i][3], 
+					new Date(Integer.valueOf(array2[i][5].split(",")[0]),
+							Integer.valueOf(array2[i][5].split(",")[1]),
+							Integer.valueOf(array2[i][5].split(",")[2])));
 		}
-		if (!array[0].equals("ok"))
-			log = SimpleQueryResult.DB_ERROR;
-		else
+		//if (!array[0].equals("ok"))
+//			log = SimpleQueryResult.DB_ERROR;
+//		else
 			log = SimpleQueryResult.OK;
 
 		return log;

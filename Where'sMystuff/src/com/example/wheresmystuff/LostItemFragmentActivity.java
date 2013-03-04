@@ -68,7 +68,7 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		date[0] = year;
 		date[1] = month;
 		date[2] = day;
-		((TextView) findViewById(R.id.date_lost)).setText(date[0] + "/" + date[1] + "/" + date[2]);
+		((TextView) findViewById(R.id.date_lost)).setText(date[1] + "/" + date[2] + "/" + date[0]);
 	}
 	public class EditSessionActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
 

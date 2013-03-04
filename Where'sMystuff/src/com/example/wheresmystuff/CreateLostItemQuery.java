@@ -15,7 +15,7 @@ public class CreateLostItemQuery {
 		CreateLostItemResult reg = CreateLostItemResult.NETWORK_ERROR;
 
 		try {
-			doc = Jsoup.connect("http://steve.node13.info/findmystuff/createuser.php")
+			doc = Jsoup.connect("http://steve.node13.info/findmystuff/createlostitem.php")
 					.data("name", item.getName())
 					.data("category", Utils.convertCategory(item.getCategory()).toLowerCase())
 					.data("reward", item.getReward())

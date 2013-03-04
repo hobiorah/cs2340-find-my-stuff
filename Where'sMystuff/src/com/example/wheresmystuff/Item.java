@@ -1,24 +1,21 @@
 package com.example.wheresmystuff;
 
-
 public class Item {
 	
 	
 	protected String description;
-	protected String category;
 	protected String reward;
-	protected String dateEntered;
 	protected String name;
-	protected String city;
-	protected String state;
 	
+	protected Location loc;
+	protected Category cat;
+	protected Date date;
 	
-	public Item(String des, String cat, String rew, String date, 
-			String name){
+	public Item(String name, String des, Category cat, String rew, Date date){
 		description = des;
-		category = cat;
+		this.cat = cat;
 		reward = rew;
-		dateEntered = date;
+		this.date = date;
 		this.name = name;
 	}
 	
@@ -33,8 +30,8 @@ public class Item {
 	/**
 	 * @return the category
 	 */
-	public String getCategory() {
-		return category;
+	public Category getCategory() {
+		return cat;
 	}
 
 
@@ -44,13 +41,17 @@ public class Item {
 	public String getReward() {
 		return reward;
 	}
+	
+	public Location getLocation(){
+		return loc;
+	}
 
 
 	/**
 	 * @return the dateEntered
 	 */
-	public String getDateEntered() {
-		return dateEntered;
+	public Date getDateEntered() {
+		return date;
 	}
 
 	public String toString(){
@@ -58,10 +59,7 @@ public class Item {
 		data = name + " " + description;
 		return data;
 	}
-	
 
-	
-	
 	public String getName(){
 		return name;
 	}

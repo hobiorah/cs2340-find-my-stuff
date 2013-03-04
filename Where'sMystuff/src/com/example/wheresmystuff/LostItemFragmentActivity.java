@@ -109,7 +109,7 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		//Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
 		//String category = String.valueOf(categoryChooser.getSelectedItem());
 	//	finish();
-		Intent test = new Intent(LostItemFragmentActivity.this, AllLostItems.class);
+		Intent test = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
 		  // Start signuppage activity, using the Intent
 		 startActivity(test);
 	}

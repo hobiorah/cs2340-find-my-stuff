@@ -16,7 +16,7 @@ public class LoginQuery {
 		LoginResult log = LoginResult.NETWORK_ERROR;
 		
 		try {
-			doc = Jsoup.connect("http://steve.node13.info/findmystuff/login.php").data("name", username).data("hash", hash).get();
+			doc = Jsoup.connect("http://steve.node13.info/findmystuff/login.php").data("name", username).data("hash", hash).timeout(15*1000).get();
 		} catch (IOException e) {
 			return log;
 		}

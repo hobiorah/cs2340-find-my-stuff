@@ -21,7 +21,6 @@ public class AllLostItemsQuery {
 		}
 
 		String[] array = doc.text().split("\\^");
-		System.out.println(Arrays.toString(array));
 		
 		String[][] array2 = new String[array.length][7];
 		for (int i = 0; i < array.length; i++)
@@ -30,7 +29,6 @@ public class AllLostItemsQuery {
 		items = new LostItem[array.length];
 		for (int i = 0; i < array.length; i++){
 			
-			System.out.println(Arrays.toString(array2[i]));
 			items[i] = new LostItem(array2[i][1],
 					array2[i][4],
 					Utils.convertCategoryBack(array2[i][2]),

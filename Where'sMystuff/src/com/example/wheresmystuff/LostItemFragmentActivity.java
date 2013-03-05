@@ -2,11 +2,14 @@ package com.example.wheresmystuff;
 
 import java.util.Calendar;
 
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -58,11 +61,6 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		}
 
 
-		//public void onDateSet(DatePicker view, int year, int month, int day) {
-		// date[0] = year;
-		//date[1] = month;
-		//date[2] = day;
-		//}
 	}
 
 	public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -73,19 +71,7 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		date[2] = day;
 		((TextView) findViewById(R.id.date_lost)).setText(date[1] + "/" + date[2] + "/" + date[0]);
 	}
-	public class EditSessionActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
-
-		@Override
-		public void onDateSet(DatePicker view, int year, int month, int day) {
-			//do some stuff for example write on log and update TextField on activity
-			Log.w("DatePicker","Date = " + year);
-			date[0] = year;
-			date[1] = month;
-			date[2] = day;
-			((TextView) findViewById(R.id.date_lost)).setText(date[0] + "/" + date[1] + "/" + date[2]);
-		}
-
-	}
+	
 
 	public void showDatePickerDialog(View v) {
 
@@ -97,16 +83,6 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 
 
-
-
-
-	public void setDate() {
-		TextView lost = (TextView) findViewById(R.id.date_lost);
-		lost.setText(date[0] + "/" + date[1] + "/" + date[2]);
-
-
-	}
-
 	public void submitItem(View view) {
 	  TextView name =((TextView) findViewById(R.id.item_name));
 	  TextView desc =((TextView) findViewById(R.id.item_description));
@@ -116,35 +92,61 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 	  
 		//LostItem lost = new LostItem(name.toString(), desc.toString(), Utils.convertCategoryBack(category), reward.toString(), new Date(date[1],date[2],date[0]));
 		LostItem lost = new LostItem("name","descr234234234iptionnnnn", Category.HEIRLOOMS, "500 reward", new Date(2,3,4));
+		new CreateItemAttemptTask().execute();
+		
 
-		CreateLostItemQuery query = new CreateLostItemQuery();
-		CreateLostItemResult res = query.create(lost);
-/*
+	}
+	
+	private class CreateItemAttemptTask extends AsyncTask<Void, Void, CreateLostItemResult>{
+		private ProgressDialog pd;
 
-		String x = "defaults";
-		switch (res){
-		case ACCEPTED:
-			x = "Accepted";			
-			break;
-		case DB_ERROR:
-			x = "db error";
-			break;
-		case NETWORK_ERROR:
-			x = "network";
-			break;
+		protected void onPreExecute(){
+			pd = ProgressDialog.show(LostItemFragmentActivity.this, null, "Submitting Item...", true);
 		}
-		
-		if (res == CreateLostItemResult.ACCEPTED){
-			Toast.makeText(getApplicationContext(), "Item Submitted Successfully", Toast.LENGTH_LONG).show();
-			Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
-			  // Start signuppage activity, using the Intent
-			// startActivity(lostItemList);
-			finish();
-		} else {
-			popUp(x);
-		}*/
-		
-		
+
+		protected CreateLostItemResult doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			
+			CreateLostItemQuery query = new CreateLostItemQuery();
+			//LostItem lost = new LostItem("nlkjklame","descr234234234iptionnnnn", Category.HEIRLOOMS, "500 reward", new Date(2,3,4));
+			TextView name =((TextView) findViewById(R.id.item_name));
+			  TextView desc =((TextView) findViewById(R.id.item_description));
+			  TextView reward =((TextView) findViewById(R.id.item_reward));
+			  Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
+			  String category = String.valueOf(categoryChooser.getSelectedItem());
+			  LostItem lost = new LostItem(name.toString(), desc.toString(), Utils.convertCategoryBack(category), reward.toString(), new Date(date[1],date[2],date[0]));
+			return query.create(lost);
+
+		}
+
+		protected void onPostExecute(CreateLostItemResult res){
+			pd.dismiss();
+
+
+			String x = "defaults";
+			switch (res){
+			case ACCEPTED:
+				x = "Accepted";			
+				break;
+			case DB_ERROR:
+				x = "db error";
+				break;
+			case NETWORK_ERROR:
+				x = "network";
+				break;
+			}
+
+			if (res == CreateLostItemResult.ACCEPTED){
+				Toast.makeText(getApplicationContext(), "Item Submitted Successfully", Toast.LENGTH_LONG).show();
+				Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
+				  // Start signuppage activity, using the Intent
+				 startActivity(lostItemList);
+				finish();
+			} else {
+				popUp(x);
+			}
+
+		}
 	}
 	
 	public void popUp(CharSequence problem){

@@ -11,13 +11,15 @@ public class Item {
 	protected Location loc;
 	protected Category cat;
 	protected Date date;
+	protected boolean found;
 	
-	public Item(String name, String des, Category cat, String rew, Date date){
+	public Item(String name, String des, Category cat, String rew, Date date, boolean found){
 		description = des;
 		this.cat = cat;
 		reward = rew;
 		this.date = date;
 		this.name = name;
+		this.found = found;
 	}
 	
 	/**
@@ -65,6 +67,13 @@ public class Item {
 		return name;
 	}
 	
+	public String getStatus(){
+		String status = "";
+		if(found == false){
+			status = "Not found";
+		}
+		return status;
+	}
 	
 
 }

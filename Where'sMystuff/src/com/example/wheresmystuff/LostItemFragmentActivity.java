@@ -84,10 +84,14 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 
 	public void submitItem(View view) {
+	  new CreateItemAttemptTask().execute();		
+	}
 	
-	  		new CreateItemAttemptTask().execute();
-		
-
+	public void goToAllLostItems(View veiw){
+		Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
+		  // Start signuppage activity, using the Intent
+		 startActivity(lostItemList);
+		 finish();
 	}
 	
 	private class CreateItemAttemptTask extends AsyncTask<Void, Void, CreateLostItemResult>{
@@ -131,9 +135,9 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 			if (res == CreateLostItemResult.ACCEPTED){
 				Toast.makeText(getApplicationContext(), "Item Submitted Successfully", Toast.LENGTH_LONG).show();
-				//Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
+				Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
 				  // Start signuppage activity, using the Intent
-				// startActivity(lostItemList);
+				 startActivity(lostItemList);
 				finish();
 			} else {
 				popUp(x);

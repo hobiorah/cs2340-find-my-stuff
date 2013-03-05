@@ -33,7 +33,7 @@ public class Date {
 	}
 	
 	public String serialize(){
-		return month + "," + date + "," + year;
+		return month + "/" + date + "/" + year;
 	}
 	
 	

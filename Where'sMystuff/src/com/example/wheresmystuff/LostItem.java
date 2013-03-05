@@ -7,7 +7,7 @@ public class LostItem extends Item{
 
 	
 	public LostItem(String name, String des, Category cat, String rew, Date date){
-		super(name, des,cat,rew,date);
+		super(name, des,cat,rew,date,false);
 		found = false;
 	}
 	

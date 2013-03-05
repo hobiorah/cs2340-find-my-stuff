@@ -1,6 +1,7 @@
 package com.example.wheresmystuff;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -24,23 +25,20 @@ import android.widget.Toast;
 public class AllLostItemsListActivity extends ListActivity{
 
 	LostItem[] items;
+	ArrayAdapter<LostItem> adapter ;
 		  public void onCreate(Bundle icicle) {
 		    super.onCreate(icicle);
 		    String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
 		        "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
 		        "Linux", "OS/2" };
 		    
+		   
 		    
-		    AllLostItemsQuery all = new AllLostItemsQuery();
-			SimpleQueryResult sres = all.getAll();
-			
 			 new GetItemsAttemptTask().execute();
-			
-			
-			 items = all.getList();
-				 ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(this,android.R.layout.simple_list_item_1, items);
-				 setListAdapter(adapter);
-			
+			 
+			 
+		
+				 
 	
 		  }
 		  private class GetItemsAttemptTask extends AsyncTask<Void, Void, SimpleQueryResult>{
@@ -53,7 +51,6 @@ public class AllLostItemsListActivity extends ListActivity{
 
 				protected SimpleQueryResult doInBackground(Void... params) {
 					 all = new AllLostItemsQuery();
-					//
 					
 					return all.getAll();
 
@@ -78,10 +75,11 @@ public class AllLostItemsListActivity extends ListActivity{
 
 					if (sres == SimpleQueryResult.OK){
 						items = all.getList();
-						//Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
-						  // Start signuppage activity, using the Intent
-						// startActivity(lostItemList);
-					//	finish();
+						
+						
+						adapter = new ArrayAdapter<LostItem>(AllLostItemsListActivity.this,android.R.layout.simple_list_item_1, items);
+						 setListAdapter(adapter);
+					
 					} else {
 						popUp(x);
 					}
@@ -91,16 +89,15 @@ public class AllLostItemsListActivity extends ListActivity{
 		  
 		  public void onListItemClick( ListView parent, View v, int position, long id)
 		  { 
-			  popUp(items[position].toString(),items[position]);
+			  popUp(items[position].getName().toString(),items[position]);
 			  
-		 // Toast.makeText(getApplicationContext(), a, Toast.LENGTH_LONG).show();
 			  
 		  }
 		  
 		  public void popUp(CharSequence name,LostItem a){
-			 // LostItem item = a;
 			  String present = "";
-			  present += "Reward is: " + a.getReward() + "\n Category: " + a.getCategory() + " Date Lost: " + a.getDateEntered();
+			  present += "Reward is: "+ a.getReward() + "\n Category: " + a.getCategory() + " \n Date Lost: " + a.getDateEntered().serialize()
+					  + "\n Status : " + a.getStatus();
 				// 1. Instantiate an AlertDialog.Builder with its constructor
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				
@@ -119,7 +116,7 @@ public class AllLostItemsListActivity extends ListActivity{
 			}
 		  
 		  public void popUp(CharSequence problem){
-			  
+
 				// 1. Instantiate an AlertDialog.Builder with its constructor
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				

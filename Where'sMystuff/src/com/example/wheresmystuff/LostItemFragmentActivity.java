@@ -4,10 +4,12 @@ import java.util.Calendar;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 //import android.app.DialogFragment;
 import android.support.v4.app.DialogFragment;
@@ -20,6 +22,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LostItemFragmentActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
 
@@ -105,13 +108,61 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 	}
 
 	public void submitItem(View view) {
-		//send it to thing
-		//Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
-		//String category = String.valueOf(categoryChooser.getSelectedItem());
-	//	finish();
-		Intent test = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
-		  // Start signuppage activity, using the Intent
-		 startActivity(test);
+	  TextView name =((TextView) findViewById(R.id.item_name));
+	  TextView desc =((TextView) findViewById(R.id.item_description));
+	  TextView reward =((TextView) findViewById(R.id.item_reward));
+	  Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
+	  String category = String.valueOf(categoryChooser.getSelectedItem());
+	  
+		//LostItem lost = new LostItem(name.toString(), desc.toString(), Utils.convertCategoryBack(category), reward.toString(), new Date(date[1],date[2],date[0]));
+		LostItem lost = new LostItem("name","descr234234234iptionnnnn", Category.HEIRLOOMS, "500 reward", new Date(2,3,4));
+
+		CreateLostItemQuery query = new CreateLostItemQuery();
+		CreateLostItemResult res = query.create(lost);
+/*
+
+		String x = "defaults";
+		switch (res){
+		case ACCEPTED:
+			x = "Accepted";			
+			break;
+		case DB_ERROR:
+			x = "db error";
+			break;
+		case NETWORK_ERROR:
+			x = "network";
+			break;
+		}
+		
+		if (res == CreateLostItemResult.ACCEPTED){
+			Toast.makeText(getApplicationContext(), "Item Submitted Successfully", Toast.LENGTH_LONG).show();
+			Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
+			  // Start signuppage activity, using the Intent
+			// startActivity(lostItemList);
+			finish();
+		} else {
+			popUp(x);
+		}*/
+		
+		
+	}
+	
+	public void popUp(CharSequence problem){
+		// 1. Instantiate an AlertDialog.Builder with its constructor
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setMessage("Please try again").setTitle(problem);
+
+		// Add the buttons
+		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// User clicked OK button
+			}
+		});
+		// 3. Get the AlertDialog from create()
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 

@@ -84,15 +84,8 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 
 	public void submitItem(View view) {
-	  TextView name =((TextView) findViewById(R.id.item_name));
-	  TextView desc =((TextView) findViewById(R.id.item_description));
-	  TextView reward =((TextView) findViewById(R.id.item_reward));
-	  Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
-	  String category = String.valueOf(categoryChooser.getSelectedItem());
-	  
-		//LostItem lost = new LostItem(name.toString(), desc.toString(), Utils.convertCategoryBack(category), reward.toString(), new Date(date[1],date[2],date[0]));
-		LostItem lost = new LostItem("name","descr234234234iptionnnnn", Category.HEIRLOOMS, "500 reward", new Date(2,3,4));
-		new CreateItemAttemptTask().execute();
+	
+	  		new CreateItemAttemptTask().execute();
 		
 
 	}

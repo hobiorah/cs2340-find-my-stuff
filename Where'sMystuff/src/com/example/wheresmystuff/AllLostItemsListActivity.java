@@ -1,11 +1,15 @@
 package com.example.wheresmystuff;
 
+
 import java.util.Calendar;
 
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.ListFragment;
@@ -13,6 +17,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class AllLostItemsListActivity extends ListActivity{
@@ -28,30 +34,60 @@ public class AllLostItemsListActivity extends ListActivity{
 		    AllLostItemsQuery all = new AllLostItemsQuery();
 			SimpleQueryResult sres = all.getAll();
 			
-			String x = "defaults";
-			switch (sres){
-			case OK:
-				x = "ok";
-				break;
-			case DB_ERROR:
-				x = "db error";
-				break;
-			case NETWORK_ERROR:
-				x = "network";
-				break;
-			}
+			 new GetItemsAttemptTask().execute();
 			
-			if (sres == SimpleQueryResult.OK){
+			
 			 items = all.getList();
 				 ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(this,android.R.layout.simple_list_item_1, items);
 				 setListAdapter(adapter);
-			} else {
-				popUp(x);
-			}
 			
-			
-		   
+	
 		  }
+		  private class GetItemsAttemptTask extends AsyncTask<Void, Void, SimpleQueryResult>{
+				private ProgressDialog pd;
+
+				AllLostItemsQuery all;
+				protected void onPreExecute(){
+					pd = ProgressDialog.show(AllLostItemsListActivity.this, null, "Getting Lost Items...", true);
+				}
+
+				protected SimpleQueryResult doInBackground(Void... params) {
+					 all = new AllLostItemsQuery();
+					//
+					
+					return all.getAll();
+
+				}
+
+				protected void onPostExecute(SimpleQueryResult sres){
+					pd.dismiss();
+
+					
+					String x = "defaults";
+					switch (sres){
+					case OK:
+						x = "ok";
+						break;
+					case DB_ERROR:
+						x = "db error";
+						break;
+					case NETWORK_ERROR:
+						x = "network";
+						break;
+					}
+
+					if (sres == SimpleQueryResult.OK){
+						items = all.getList();
+						//Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
+						  // Start signuppage activity, using the Intent
+						// startActivity(lostItemList);
+					//	finish();
+					} else {
+						popUp(x);
+					}
+
+				}
+			}
 		  
 		  public void onListItemClick( ListView parent, View v, int position, long id)
 		  { 

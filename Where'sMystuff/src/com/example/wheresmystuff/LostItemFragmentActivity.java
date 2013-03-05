@@ -114,7 +114,7 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 			  TextView reward =((TextView) findViewById(R.id.item_reward));
 			  Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
 			  String category = String.valueOf(categoryChooser.getSelectedItem());
-			  LostItem lost = new LostItem(name.toString(), desc.toString(), Utils.convertCategoryBack(category), reward.toString(), new Date(date[1],date[2],date[0]));
+			  LostItem lost = new LostItem(name.getText().toString(), desc.getText().toString(), Utils.convertCategoryBack(category), reward.getText().toString(), new Date(date[1],date[2],date[0]));
 			return query.create(lost);
 
 		}
@@ -138,9 +138,9 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 			if (res == CreateLostItemResult.ACCEPTED){
 				Toast.makeText(getApplicationContext(), "Item Submitted Successfully", Toast.LENGTH_LONG).show();
-				Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
+				//Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
 				  // Start signuppage activity, using the Intent
-				 startActivity(lostItemList);
+				// startActivity(lostItemList);
 				finish();
 			} else {
 				popUp(x);

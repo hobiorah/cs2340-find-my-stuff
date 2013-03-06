@@ -138,7 +138,6 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		protected void onPostExecute(CreateLostItemResult res){
 			pd.dismiss();
 
-
 			String x = "defaults";
 			switch (res){
 			case ACCEPTED:
@@ -161,7 +160,6 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 			} else {
 				popUp(x);
 			}
-
 		}
 	}
 	

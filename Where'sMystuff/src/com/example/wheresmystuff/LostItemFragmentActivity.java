@@ -84,11 +84,11 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 
 	public void submitItem(View view) {
-		if(valid()){
+		//if(valid()){
 	  new CreateItemAttemptTask().execute();		
-		}else{
-			popUp("All fields must be entered into");
-		}
+	//	}else{
+		//	popUp("All fields must be entered into");
+		//}
 	}
 	
 	private boolean valid() {

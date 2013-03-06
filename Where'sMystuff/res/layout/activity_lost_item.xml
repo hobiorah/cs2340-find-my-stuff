@@ -121,10 +121,20 @@
         android:id="@+id/submit_lost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/item_description"
+        android:layout_alignLeft="@+id/city_location"
         android:layout_below="@+id/city_location"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="19dp"
         android:onClick="submitItem"
         android:text="Submit Lost Item" />
+
+    <Button
+        android:id="@+id/cancel_lostItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/submit_lost"
+        android:layout_alignBottom="@+id/submit_lost"
+        android:layout_alignRight="@+id/date_lost"
+        android:onClick="goToAllLostItems"
+        android:text="Cancel" />
 
 </RelativeLayout>

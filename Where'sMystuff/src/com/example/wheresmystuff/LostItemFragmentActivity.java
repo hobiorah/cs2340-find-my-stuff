@@ -84,9 +84,27 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 
 	public void submitItem(View view) {
+		if(valid()){
 	  new CreateItemAttemptTask().execute();		
+		}else{
+			popUp("All fields must be entered into");
+		}
 	}
 	
+	private boolean valid() {
+		TextView name =((TextView) findViewById(R.id.item_name));
+		TextView desc =((TextView) findViewById(R.id.item_description));
+		TextView reward =((TextView) findViewById(R.id.item_reward));
+		Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
+		String category = String.valueOf(categoryChooser.getSelectedItem());
+		if(name.getText().toString()!=null && desc.getText().toString()!=null &&  Utils.convertCategoryBack(category)!=null && reward.getText().toString()!=null){
+			return true;
+		}else{
+		return false;
+		}
+	}
+	
+
 	public void goToAllLostItems(View veiw){
 		Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
 		  // Start signuppage activity, using the Intent
@@ -112,7 +130,8 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 			  Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
 			  String category = String.valueOf(categoryChooser.getSelectedItem());
 			  LostItem lost = new LostItem(name.getText().toString(), desc.getText().toString(), Utils.convertCategoryBack(category), reward.getText().toString(), new Date(date[1],date[2],date[0]));
-			return query.create(lost);
+			
+			  return query.create(lost);
 
 		}
 

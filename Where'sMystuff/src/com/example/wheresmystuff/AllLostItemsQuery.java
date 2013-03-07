@@ -51,7 +51,7 @@ public class AllLostItemsQuery {
 							new Date(Integer.valueOf(array2[i][5].split("/")[0]),
 									Integer.valueOf(array2[i][5].split("/")[1]),
 									Integer.valueOf(array2[i][5].split("/")[2])),
-									new Location(array2[i][6].split(",")[0],array2[i][6].split(",")[1],array2[i][6].split(",")[2]));
+									new Location(array2[i][6].split(",")[0],array2[i][6].split(",")[1]));
 				}
 
 			}

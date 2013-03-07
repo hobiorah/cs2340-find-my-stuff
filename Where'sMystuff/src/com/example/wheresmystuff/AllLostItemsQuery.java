@@ -9,10 +9,19 @@ import org.jsoup.nodes.Document;
 
 import android.util.Log;
 
+/**
+ * Attempts to get all lost items in the database
+ *
+ */
+
+
 public class AllLostItemsQuery {
 	private LostItem[] items;
 
-
+	/**
+	 * Query to get all lost items in the database
+	 * @return result of whether it worked or not
+	 */
 	public AllLostItemsQueryResult getAll(){
 		Document doc = null;
 		AllLostItemsQueryResult log = AllLostItemsQueryResult.NETWORK_ERROR;
@@ -55,6 +64,10 @@ public class AllLostItemsQuery {
 		return log;
 	}
 
+	/**
+	 * Gets all the items in the database
+	 * @return items in the database in an array of type LostItem 
+	 */
 	public LostItem[] getList(){
 		return items;
 	}

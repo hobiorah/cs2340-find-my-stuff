@@ -11,9 +11,9 @@ public class CreateLostItemQuery {
 	 * Queries server and attempts to register
 	 * @return returns the result for whether the user was registered
 	 */
-	public CreateLostItemResult create(LostItem item){
+	public SimpleQueryResult create(LostItem item){
 		Document doc = null;
-		CreateLostItemResult reg = CreateLostItemResult.NETWORK_ERROR;
+		SimpleQueryResult reg = SimpleQueryResult.NETWORK_ERROR;
 
 		try {
 			doc = Jsoup.connect("http://steve.node13.info/findmystuff/createlostitem.php")
@@ -33,9 +33,9 @@ public class CreateLostItemQuery {
 		String[] array = doc.text().split(":");
 
 		if (!array[0].equals("ok"))
-			reg = CreateLostItemResult.DB_ERROR;
+			reg = SimpleQueryResult.DB_ERROR;
 		else
-			reg = CreateLostItemResult.ACCEPTED;
+			reg = SimpleQueryResult.OK;
 
 		return reg;
 	}

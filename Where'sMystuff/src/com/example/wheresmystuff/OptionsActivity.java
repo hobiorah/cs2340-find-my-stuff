@@ -22,7 +22,7 @@ public class OptionsActivity extends Activity {
 	}
 	
 	public void newLostItem(View view){
-		Intent lostItem = new Intent(this, LostItemFragmentActivity.class);
+		Intent lostItem = new Intent(this, CreateLostItemFragmentActivity.class);
 		  // Start signuppage activity, using the Intent
 		  this.startActivity(lostItem);
 	}

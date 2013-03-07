@@ -34,7 +34,7 @@ public class AllLostItemsListActivity extends ListActivity{
 
 		new GetItemsAttemptTask().execute();
 	}
-	private class GetItemsAttemptTask extends AsyncTask<Void, Void, SimpleQueryResult>{
+	private class GetItemsAttemptTask extends AsyncTask<Void, Void, AllLostItemsQueryResult>{
 		private ProgressDialog pd;
 
 		AllLostItemsQuery all;
@@ -42,12 +42,12 @@ public class AllLostItemsListActivity extends ListActivity{
 			pd = ProgressDialog.show(AllLostItemsListActivity.this, null, "Getting Lost Items...", true);
 		}
 
-		protected SimpleQueryResult doInBackground(Void... params) {
+		protected AllLostItemsQueryResult doInBackground(Void... params) {
 			all = new AllLostItemsQuery();
 			return all.getAll();
 		}
 
-		protected void onPostExecute(SimpleQueryResult sres){
+		protected void onPostExecute(AllLostItemsQueryResult sres){
 			pd.dismiss();
 			String x = "defaults";
 			
@@ -61,9 +61,12 @@ public class AllLostItemsListActivity extends ListActivity{
 			case NETWORK_ERROR:
 				x = "network";
 				break;
+			case EMPTY:
+				x = "No available items.";
+				break;
 			}
 
-			if (sres == SimpleQueryResult.OK){
+			if (sres == AllLostItemsQueryResult.OK){
 				items = all.getList();
 				adapter = new ArrayAdapter<LostItem>(AllLostItemsListActivity.this,android.R.layout.simple_list_item_1, items);
 				setListAdapter(adapter);

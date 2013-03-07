@@ -31,7 +31,7 @@ public class OptionsActivity extends Activity {
 	 * @param view
 	 */
 	public void newLostItem(View view){
-		Intent lostItem = new Intent(this, LostItemFragmentActivity.class);
+		Intent lostItem = new Intent(this, CreateLostItemFragmentActivity.class);
 		  // Start signuppage activity, using the Intent
 		  this.startActivity(lostItem);
 	}

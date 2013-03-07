@@ -22,10 +22,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Screen to show all the lost items in the database
+ * 
+ */
 public class AllLostItemsListActivity extends ListActivity{
 
 	LostItem[] items;
-	ArrayAdapter<LostItem> adapter ;
+	
+	ArrayAdapter<LostItem> adapter;
+	
+	
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
@@ -34,19 +41,37 @@ public class AllLostItemsListActivity extends ListActivity{
 
 		new GetItemsAttemptTask().execute();
 	}
+	
+	/**
+	 * Allows app to query the database for the lost items in an AsyncTask as to not interfere with the thread android is using
+	 */
 	private class GetItemsAttemptTask extends AsyncTask<Void, Void, AllLostItemsQueryResult>{
+		
 		private ProgressDialog pd;
 
 		AllLostItemsQuery all;
+		
+		/**
+		 * Method that shows progress bar as query is being executed
+		 */
 		protected void onPreExecute(){
 			pd = ProgressDialog.show(AllLostItemsListActivity.this, null, "Getting Lost Items...", true);
 		}
 
+		/**
+		 * Creates object to execute query and then executes the query
+		 * @return  the result of the query
+		 */
 		protected AllLostItemsQueryResult doInBackground(Void... params) {
 			all = new AllLostItemsQuery();
 			return all.getAll();
 		}
 
+		/**
+		 * Receives the result of the query and checks if it was ok, if it was
+		 * it gets all the items in the database and puts it into an array for the array adapter
+		 * which then sets the array adapter for the activity to the list from the dataabse
+		 */
 		protected void onPostExecute(AllLostItemsQueryResult sres){
 			pd.dismiss();
 			String x = "defaults";
@@ -76,11 +101,20 @@ public class AllLostItemsListActivity extends ListActivity{
 		}
 	}
 
+	/**
+	 * When a user clicks on an item a pop up will show up
+	 */
 	public void onListItemClick( ListView parent, View v, int position, long id)
 	{ 
 		popUp(items[position].getName().toString(),items[position]);
 	}
 
+	/**
+	 * Pop up dialog to show the user the attributes of the item they clicked
+	 *
+	 * @param name the name of the item
+	 * @param a the lost item reference 
+	 */
 	public void popUp(CharSequence name,LostItem a){
 		String present = "";
 		present += "Reward is: "+ a.getReward() + "\n Category: " + a.getCategory() + " \n Date Lost: " + a.getDateEntered().serialize()
@@ -102,6 +136,11 @@ public class AllLostItemsListActivity extends ListActivity{
 		dialog.show();
 	}
 
+	/**
+	 * Pop up dialog that shows user what went wrong with the query
+	 *
+	 * @param problem the problem
+	 */
 	public void popUp(CharSequence problem){
 
 		// 1. Instantiate an AlertDialog.Builder with its constructor

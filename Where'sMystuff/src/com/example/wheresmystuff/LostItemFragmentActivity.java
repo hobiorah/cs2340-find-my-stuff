@@ -45,6 +45,10 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		return true;
 	}
 
+	/**
+	 * Displays a date picker dialog
+	 *
+	 */
 	public static class DatePickerFragment extends DialogFragment 
 	{
 
@@ -63,6 +67,9 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 	}
 
+	/**
+	 * Sets textview of date to what the user chose
+	 */
 	public void onDateSet(DatePicker view, int year, int month, int day) {
 		//do some stuff for example write on log and update TextField on activity
 		Log.w("DatePicker","Date = " + year);
@@ -72,23 +79,25 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		((TextView) findViewById(R.id.date_lost)).setText(date[1] + "/" + date[2] + "/" + date[0]);
 	}
 	
-
+	/**
+	 * Shows the date picker dialog
+	 * @param v
+	 */
 	public void showDatePickerDialog(View v) {
 
 		final DialogFragment newFragment = new DatePickerFragment();
 		newFragment.show(getSupportFragmentManager(), "DatePicker");
-		//setDate();
 
 	}
 
 
-
+	/**
+	 * Runs query to submit lost item to database when submitItem button is pressed
+	 * @param view
+	 */
 	public void submitItem(View view) {
-		//if(valid()){
 	  new CreateItemAttemptTask().execute();		
-	//	}else{
-		//	popUp("All fields must be entered into");
-		//}
+	
 	}
 	
 	private boolean valid() {
@@ -104,7 +113,10 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		}
 	}
 	
-
+	/**
+	 * If user hits cancel they will be taken to screen displaying all the lost items
+	 * @param veiw
+	 */
 	public void goToAllLostItems(View veiw){
 		Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
 		  // Start signuppage activity, using the Intent
@@ -112,6 +124,10 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		 finish();
 	}
 	
+	/**
+	 * Runs query to submit the lost item entered by user into database
+	 *
+	 */
 	private class CreateItemAttemptTask extends AsyncTask<Void, Void, CreateLostItemResult>{
 		private ProgressDialog pd;
 
@@ -120,10 +136,8 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		}
 
 		protected CreateLostItemResult doInBackground(Void... params) {
-			// TODO Auto-generated method stub
 			
 			CreateLostItemQuery query = new CreateLostItemQuery();
-			//LostItem lost = new LostItem("nlkjklame","descr234234234iptionnnnn", Category.HEIRLOOMS, "500 reward", new Date(2,3,4));
 			TextView name =((TextView) findViewById(R.id.item_name));
 			  TextView desc =((TextView) findViewById(R.id.item_description));
 			  TextView reward =((TextView) findViewById(R.id.item_reward));
@@ -134,7 +148,6 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 			  LostItem lost = new LostItem(name.getText().toString(), desc.getText().toString(), 
 					  Utils.convertCategoryBack(category), reward.getText().toString(), new Date(date[1],date[2],date[0]),
 					  new Location(city.getText().toString(),state.getText().toString()));
-			//	Toast.makeText(getApplicationContext(),"kllkklkllk" , Toast.LENGTH_LONG).show();
 
 			  return query.create(lost);
 
@@ -168,6 +181,10 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 		}
 	}
 	
+	/**
+	 * Displays a pop dialog is a problem occured while executing the query
+	 * @param problem
+	 */
 	public void popUp(CharSequence problem){
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);

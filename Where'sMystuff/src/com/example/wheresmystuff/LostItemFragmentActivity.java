@@ -127,10 +127,15 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 			TextView name =((TextView) findViewById(R.id.item_name));
 			  TextView desc =((TextView) findViewById(R.id.item_description));
 			  TextView reward =((TextView) findViewById(R.id.item_reward));
+			  TextView state =((TextView) findViewById(R.id.state_location));
+			  TextView city =((TextView) findViewById(R.id.city_location));
 			  Spinner categoryChooser = (Spinner) findViewById(R.id.category_selector);
 			  String category = String.valueOf(categoryChooser.getSelectedItem());
-			  LostItem lost = new LostItem(name.getText().toString(), desc.getText().toString(), Utils.convertCategoryBack(category), reward.getText().toString(), new Date(date[1],date[2],date[0]));
-			
+			  LostItem lost = new LostItem(name.getText().toString(), desc.getText().toString(), 
+					  Utils.convertCategoryBack(category), reward.getText().toString(), new Date(date[1],date[2],date[0]),
+					  new Location(city.getText().toString(),state.getText().toString()));
+			//	Toast.makeText(getApplicationContext(),"kllkklkllk" , Toast.LENGTH_LONG).show();
+
 			  return query.create(lost);
 
 		}

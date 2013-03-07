@@ -81,7 +81,7 @@ public class AllLostItemsListActivity extends ListActivity{
 	public void popUp(CharSequence name,LostItem a){
 		String present = "";
 		present += "Reward is: "+ a.getReward() + "\n Category: " + a.getCategory() + " \n Date Lost: " + a.getDateEntered().serialize()
-				+ "\n Status : " + a.getStatus();
+				+ "\n Status : " + a.getStatus() + "\n Location: " + a.getLocation().toString();
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

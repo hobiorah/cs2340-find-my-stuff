@@ -22,6 +22,7 @@ public class CreateLostItemQuery {
 					.data("reward", item.getReward())
 					.data("description", item.getDescription())
 					.data("date", item.getDateEntered().serialize())
+					.data("location", item.getLocation().toString())
 					//.data("location", item.getLocation().serialize())
 					.timeout(15*1000)
 					.get();

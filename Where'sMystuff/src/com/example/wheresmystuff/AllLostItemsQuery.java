@@ -36,7 +36,8 @@ public class AllLostItemsQuery {
 					array2[i][3], 
 					new Date(Integer.valueOf(array2[i][5].split("/")[0]),
 							Integer.valueOf(array2[i][5].split("/")[1]),
-							Integer.valueOf(array2[i][5].split("/")[2])));
+							Integer.valueOf(array2[i][5].split("/")[2])),
+					new Location(array2[i][5].split(",")[0],array2[i][5].split(",")[0],array2[i][5].split(",")[0]));
 		}
 		//if (!array[0].equals("ok"))
 //			log = SimpleQueryResult.DB_ERROR;

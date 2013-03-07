@@ -5,6 +5,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+/**
+ * Screen shown after user logs in providing them the ability to submit a lost item
+ * @author HarryO
+ *
+ */
 
 public class OptionsActivity extends Activity {
 
@@ -21,8 +26,12 @@ public class OptionsActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * Takes user to screen to submit a lost item
+	 * @param view
+	 */
 	public void newLostItem(View view){
-		Intent lostItem = new Intent(this, CreateLostItemFragmentActivity.class);
+		Intent lostItem = new Intent(this, LostItemFragmentActivity.class);
 		  // Start signuppage activity, using the Intent
 		  this.startActivity(lostItem);
 	}

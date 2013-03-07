@@ -3,6 +3,7 @@ package com.example.wheresmystuff;
 public class User {
 	private String user;
 	private String hash;
+	private String email;
 	
 	public User(String user, String hash){
 		this.user = user;

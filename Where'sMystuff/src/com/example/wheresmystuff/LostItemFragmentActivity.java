@@ -128,14 +128,14 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 	 * Runs query to submit the lost item entered by user into database
 	 *
 	 */
-	private class CreateItemAttemptTask extends AsyncTask<Void, Void, CreateLostItemResult>{
+	private class CreateItemAttemptTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		private ProgressDialog pd;
 
 		protected void onPreExecute(){
 			pd = ProgressDialog.show(LostItemFragmentActivity.this, null, "Submitting Item...", true);
 		}
 
-		protected CreateLostItemResult doInBackground(Void... params) {
+		protected SimpleQueryResult doInBackground(Void... params) {
 			
 			CreateLostItemQuery query = new CreateLostItemQuery();
 			TextView name =((TextView) findViewById(R.id.item_name));
@@ -153,12 +153,12 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 
 		}
 
-		protected void onPostExecute(CreateLostItemResult res){
+		protected void onPostExecute(SimpleQueryResult res){
 			pd.dismiss();
 
 			String x = "defaults";
 			switch (res){
-			case ACCEPTED:
+			case OK:
 				x = "Accepted";			
 				break;
 			case DB_ERROR:
@@ -169,7 +169,7 @@ public class LostItemFragmentActivity extends FragmentActivity implements DatePi
 				break;
 			}
 
-			if (res == CreateLostItemResult.ACCEPTED){
+			if (res == SimpleQueryResult.OK){
 				Toast.makeText(getApplicationContext(), "Item Submitted Successfully", Toast.LENGTH_LONG).show();
 				Intent lostItemList = new Intent(LostItemFragmentActivity.this, AllLostItemsListActivity.class);
 				  // Start signuppage activity, using the Intent

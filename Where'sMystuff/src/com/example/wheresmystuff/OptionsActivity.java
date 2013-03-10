@@ -5,12 +5,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+
 /**
  * Screen shown after user logs in providing them the ability to submit a lost item
  * @author HarryO
  *
  */
-
 public class OptionsActivity extends Activity {
 
 	@Override

@@ -27,7 +27,7 @@
         </activity>
         <activity android:name="com.example.wheresmystuff.SignupPageActivity" />
         <activity android:name="com.example.wheresmystuff.OptionsActivity" />
-        <activity android:name="com.example.wheresmystuff.LostItemFragmentActivity" />
+        <activity android:name="com.example.wheresmystuff.CreateLostItemFragmentActivity" />
         
         <activity
             android:name="com.example.wheresmystuff.RegisterError"

@@ -31,7 +31,12 @@ public class SignupPageActivity extends Activity {
 	TextView password;
 	TextView email;
 	RegisterQuery reg;
-
+	
+	/**
+	 * executes query to register a new user
+	 * @author HarryO
+	 *
+	 */
 	private class RegisterAttemptTask extends AsyncTask<Void, Void, RegisterResult>{
 		private ProgressDialog pd;
 

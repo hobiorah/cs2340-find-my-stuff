@@ -27,6 +27,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Screen that allows user to submit a lost item
+ * @author HarryO
+ *
+ */
 public class CreateLostItemFragmentActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
 
 	private static final int MY_DATE_DIALOG_ID = 3;
@@ -44,7 +49,12 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 		getMenuInflater().inflate(R.menu.lost_item, menu);
 		return true;
 	}
-
+	
+	/**
+	 * used to create a datepicker dialog for user to pick a date
+	 * @author HarryO
+	 *
+	 */
 	public static class DatePickerFragment extends DialogFragment 
 	{
 
@@ -82,13 +92,13 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 	}
 
 
-
+	/**
+	 * When user hits submit item the query to submit the item will be executed
+	 * @param view
+	 */
 	public void submitItem(View view) {
-		//if(valid()){
 	  new CreateItemAttemptTask().execute();		
-	//	}else{
-		//	popUp("All fields must be entered into");
-		//}
+	
 	}
 	
 	private boolean valid() {
@@ -104,7 +114,10 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 		}
 	}
 	
-
+	/**
+	 * takes user to screen showing all the lost items
+	 * @param veiw
+	 */
 	public void goToAllLostItems(View veiw){
 		Intent lostItemList = new Intent(CreateLostItemFragmentActivity.this, AllLostItemsListActivity.class);
 		  // Start signuppage activity, using the Intent
@@ -112,6 +125,12 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 		 finish();
 	}
 	
+	
+	/**
+	 * Executes query to submit a new lost item
+	 * @author HarryO
+	 *
+	 */
 	private class CreateItemAttemptTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		private ProgressDialog pd;
 
@@ -123,7 +142,6 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 			// TODO Auto-generated method stub
 			
 			CreateLostItemQuery query = new CreateLostItemQuery();
-			//LostItem lost = new LostItem("nlkjklame","descr234234234iptionnnnn", Category.HEIRLOOMS, "500 reward", new Date(2,3,4));
 			TextView name =((TextView) findViewById(R.id.item_name));
 			  TextView desc =((TextView) findViewById(R.id.item_description));
 			  TextView reward =((TextView) findViewById(R.id.item_reward));
@@ -134,7 +152,6 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 			  LostItem lost = new LostItem(name.getText().toString(), desc.getText().toString(), 
 					  Utils.convertCategoryBack(category), reward.getText().toString(), new Date(date[1],date[2],date[0]),
 					  new Location(city.getText().toString(),state.getText().toString()));
-			//	Toast.makeText(getApplicationContext(),"kllkklkllk" , Toast.LENGTH_LONG).show();
 
 			  return query.create(lost);
 
@@ -165,6 +182,10 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 		}
 	}
 	
+	/**
+	 * If a problem occured during query a pop showing what happened will show
+	 * @param problem what went wrong with query
+	 */
 	public void popUp(CharSequence problem){
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);

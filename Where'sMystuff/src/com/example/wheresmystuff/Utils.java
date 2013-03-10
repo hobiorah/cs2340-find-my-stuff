@@ -1,7 +1,16 @@
 package com.example.wheresmystuff;
 
-
+/**
+ * converts Enum type of categories into string and strings into Enums
+ * @author HarryO
+ *
+ */
 public class Utils {
+	/**
+	 * converts enum type to a string
+	 * @param cat Category
+	 * @return String representation of the enum
+	 */
 	public static String convertCategory(Category cat){
 		switch(cat){
 		case MISCELLANEOUS:
@@ -15,6 +24,11 @@ public class Utils {
 		return "Miscellaneous";
 	}
 	
+	/**
+	 * converts a string into an enum type
+	 * @param s enum type in String format
+	 * @return Enum type fo the string
+	 */
 	public static Category convertCategoryBack(String s){
 		if (s.equalsIgnoreCase("miscellaneous"))
 			return Category.MISCELLANEOUS;

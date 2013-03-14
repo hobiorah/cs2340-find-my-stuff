@@ -27,7 +27,7 @@ public class AdminScreenActivity extends Activity {
 	String adminPass;
 	String adminEmail;
 	String usernameDelete;
-	
+	RegisterQuery reg;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,6 +50,61 @@ public class AdminScreenActivity extends Activity {
 		popUp("Create Admin", create);
 	}
 	
+	private class RegisterAttemptTask extends AsyncTask<Void, Void, RegisterResult>{
+		private ProgressDialog pd;
+
+		protected void onPreExecute(){
+			pd = ProgressDialog.show(AdminScreenActivity.this, null, "Creating admin...", true);
+		}
+
+		protected RegisterResult doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			reg = new RegisterQuery();
+			String userN =  adminUser;
+			String pass =  adminPass;
+			String em = adminEmail;
+			return reg.register(userN, pass, em);
+
+		}
+
+		protected void onPostExecute(RegisterResult params){
+			pd.dismiss();
+
+			String x = "Admin created.";
+
+			switch(params){
+			case INVALID_USERNAME:
+				x = "Invalid Username";
+				break;
+			case INVALID_PASS:
+				x = "Invalid Password";
+				break;
+			case DB_ERROR:
+				x = "Database Error";
+				break;
+			case USER_ALREADY_EXISTS:
+				x = "User already exists";
+				break;
+			case NETWORK_ERROR:
+				x = "Network Error";
+				break;
+			case INVALID_EMAIL:
+				x = "Invalid email";
+				break;
+			}
+
+
+			if (params == RegisterResult.ACCEPTED){
+				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
+				//finish();
+			} else {
+				popUp(x);
+			}
+
+		}
+	}
+
+	
 	/**
 	 * deletes a user by username
 	 * @param view
@@ -59,10 +114,60 @@ public class AdminScreenActivity extends Activity {
 		popUp("Delete User", delete);
 	}
 	
-	public void unlockUsers(View view){
-		
-		//unlockusers query
+	private class DeleteUserTask extends AsyncTask<Void, Void, SimpleQueryResult>{
+		//private ProgressDialog pd;
+
+		protected void onPreExecute(){
+			//pd = ProgressDialog.show(AdminScreenActivity.this, null, "Deleting users...", true);
+		}
+
+		protected SimpleQueryResult doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			DeleteUserQuery deleteU = new DeleteUserQuery();
+			
+			return   deleteU.delete(user);//.register(user, pass);
+
+		}
+
+		protected void onPostExecute(SimpleQueryResult params){
+		//	pd.dismiss();
+
+			String x = "Successfully logged in.";
+
+			switch(params){
+			case DB_ERROR:
+				x = "User isn't in System";
+				break;
+			case NETWORK_ERROR:
+				x = "User isn't in System";
+				break;
+			default:
+				break;
+			}
+
+
+			if (params == SimpleQueryResult.OK){
+				x = "Deleted user.";
+				
+				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
+				
+				
+
+				
+			} else {
+				popUp(x);
+			}
+
+		}
 	}
+	
+	
+	
+	public void unlockUsers(View view){
+		popUp("Unlock User",0);
+		//new UnlockUserTask().execute();
+	}
+	
 	
 	private class UnlockUserTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		private ProgressDialog pd;
@@ -85,41 +190,26 @@ public class AdminScreenActivity extends Activity {
 			String x = "Successfully logged in.";
 
 			switch(params){
-			case INVALID:
-				x = "Invalid user/password combination";
-				break;
 			case DB_ERROR:
-				x = "Database Error";
+				x = "User isn't in System";
 				break;
 			case NETWORK_ERROR:
-				x = "Network Error";
+				x= "User isn't in System";
 				break;
-			case LOCKED:
-				x = "This account has been locked";
+			default:
 				break;
 			}
 
 
 			if (params == SimpleQueryResult.OK){
-				move = true;
-				user = log.getUser();
+				x = "Deleted user.";
 				
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
-				if(user instanceof User){
-				 Intent option = new Intent(LoginScreenActivity.this, OptionsActivity.class);
-				  // Start signuppage activity, using the Intent
-				 startActivity(option);
-				}else{
-					Intent admin = new Intent(LoginScreenActivity.this, AdminScreenActivity.class);
-					  // Start signuppage activity, using the Intent
-					 startActivity(admin);
-				}
-				
 
 				
 			} else {
 				popUp(x);
-				//finish();
+				
 			}
 
 		}
@@ -137,8 +227,10 @@ public class AdminScreenActivity extends Activity {
 		switch (which) {
         case delete:  promptsView = li.inflate(R.layout.delete_user_prompt, null);
                  break;
-        case create:   promptsView = li.inflate(R.layout.delete_user_prompt, null);
+        case create:   promptsView = li.inflate(R.layout.create_admin, null);
                  break;
+         default:	promptsView = li.inflate(R.layout.unlock_user, null);
+        		break;
 			
 		}
 		
@@ -147,7 +239,7 @@ public class AdminScreenActivity extends Activity {
 		final EditText aPass = (EditText) promptsView.findViewById(R.id.admin_pass);
 		final EditText aEmail = (EditText) promptsView.findViewById(R.id.admin_email);
 		final EditText userDelete = (EditText) promptsView.findViewById(R.id.username_delete);
-		 
+		final EditText userUnlock =  (EditText) promptsView.findViewById(R.id.user_unlock);
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(promptsView);
@@ -161,12 +253,16 @@ public class AdminScreenActivity extends Activity {
 					adminUser = aUser.getText().toString();
 					adminPass = aPass.getText().toString();
 					adminEmail = aEmail.getText().toString();
-				//	createAdminQuery
+					new RegisterAttemptTask().execute();
 					
-				}else{
+				}else if(make == delete){
 					user = new User(userDelete.getText().toString(),"l");
-					//delete user
+					new DeleteUserTask().execute();
+				}else{
+					user = new User(userUnlock.getText().toString(),"l");
+					new UnlockUserTask().execute();
 				}
+				
 			
 		}});
 		
@@ -176,6 +272,24 @@ public class AdminScreenActivity extends Activity {
 					dialog.cancel();
 				    }
 				  });
+		// 3. Get the AlertDialog from create()
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+	
+	public void popUp(CharSequence problem){
+		// 1. Instantiate an AlertDialog.Builder with its constructor
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setMessage("Please try again").setTitle(problem);
+
+		// Add the buttons
+		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// User clicked OK button
+			}
+		});
 		// 3. Get the AlertDialog from create()
 		AlertDialog dialog = builder.create();
 		dialog.show();

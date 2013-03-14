@@ -3,7 +3,7 @@ package com.example.wheresmystuff;
 /**
  * Represents a user in the system.
  */
-public class User {
+public class User{
 	private String user;
 	private String hash;
 	private String email;

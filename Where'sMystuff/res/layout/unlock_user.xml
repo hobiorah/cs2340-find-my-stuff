@@ -11,19 +11,6 @@
         android:layout_centerVertical="true"
         android:ems="10"
         android:hint="Username"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/user_unlock"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="89dp"
-        android:text="Username you want to unlock"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:inputType="textPersonName" />
 
 </RelativeLayout>

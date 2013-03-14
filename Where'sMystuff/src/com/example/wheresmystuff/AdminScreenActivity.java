@@ -50,6 +50,11 @@ public class AdminScreenActivity extends Activity {
 		popUp("Create Admin", create);
 	}
 	
+	/**
+	 * query to make new admin
+	 * @author HarryO
+	 *
+	 */
 	private class CreateAdminTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		private ProgressDialog pd;
 
@@ -87,9 +92,6 @@ public class AdminScreenActivity extends Activity {
 			}
 
 
-			
-
-
 			if (params == SimpleQueryResult.OK){
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
 				//finish();
@@ -110,6 +112,11 @@ public class AdminScreenActivity extends Activity {
 		popUp("Delete User", delete);
 	}
 	
+	/**
+	 * query to delete a user
+	 * @author HarryO
+	 *
+	 */
 	private class DeleteUserTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		//private ProgressDialog pd;
 
@@ -158,13 +165,20 @@ public class AdminScreenActivity extends Activity {
 	}
 	
 	
-	
+	/**
+	 * shows popup for user to specity what user to unlock
+	 * @param view
+	 */
 	public void unlockUsers(View view){
 		popUp("Unlock User",0);
 		//new UnlockUserTask().execute();
 	}
 	
-	
+	/**
+	 * query to unlock a user
+	 * @author HarryO
+	 *
+	 */
 	private class UnlockUserTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		private ProgressDialog pd;
 
@@ -273,6 +287,10 @@ public class AdminScreenActivity extends Activity {
 		dialog.show();
 	}
 	
+	/**
+	 * if theres a problem this pop up will tell user what it is
+	 * @param problem
+	 */
 	public void popUp(CharSequence problem){
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);

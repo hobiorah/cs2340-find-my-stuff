@@ -4,7 +4,11 @@ import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
+/**
+ * Attempts to run qeury to make a user an Admin
+ * @author HarryO
+ *
+ */
 public class CreateAdminQuery {
 		public SimpleQueryResult create(User user){
 			Document doc = null;

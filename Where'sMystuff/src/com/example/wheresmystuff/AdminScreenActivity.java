@@ -27,7 +27,7 @@ public class AdminScreenActivity extends Activity {
 	String adminPass;
 	String adminEmail;
 	String usernameDelete;
-	CreateAdminQuery reg;
+	PromoteToAdminQuery reg;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,7 +70,7 @@ public class AdminScreenActivity extends Activity {
 
 		protected SimpleQueryResult doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			reg = new CreateAdminQuery();
+			reg = new PromoteToAdminQuery();
 			String userN =  adminUser;
 			String pass =  adminPass;
 			String em = adminEmail;

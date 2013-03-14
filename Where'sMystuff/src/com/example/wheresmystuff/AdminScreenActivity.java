@@ -110,11 +110,20 @@ public class AdminScreenActivity extends Activity {
 			}
 		
 	}
-
+	
+	/**
+	 * pop up for user to provide information to create an admin
+	 * @param view
+	 */
 	public void createAdmin(View view){
 		popUp("Create Admin",create);
 	}
 	
+	/**
+	 * query to make a new admin
+	 * @author HarryO
+	 *
+	 */
 	private class CreateAdminTask extends AsyncTask<Void, Void, RegisterResult>{
 		private ProgressDialog pd;
 

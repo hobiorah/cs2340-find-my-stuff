@@ -68,7 +68,7 @@ public class AdminScreenActivity extends Activity {
 			String userN =  adminUser;
 			String pass =  adminPass;
 			String em = adminEmail;
-			user = new Admin(userN, pass);
+			user = new Admin(userN, "ok");
 ;			return reg.create(user);
 
 		}
@@ -246,8 +246,8 @@ public class AdminScreenActivity extends Activity {
 		
 
 		final EditText aUser = (EditText) promptsView.findViewById(R.id.admin_user);
-		final EditText aPass = (EditText) promptsView.findViewById(R.id.admin_pass);
-		final EditText aEmail = (EditText) promptsView.findViewById(R.id.admin_email);
+		//final EditText aPass = (EditText) promptsView.findViewById(R.id.admin_pass);
+		//final EditText aEmail = (EditText) promptsView.findViewById(R.id.admin_email);
 		final EditText userDelete = (EditText) promptsView.findViewById(R.id.username_delete);
 		final EditText userUnlock =  (EditText) promptsView.findViewById(R.id.user_unlock);
 		// 1. Instantiate an AlertDialog.Builder with its constructor
@@ -261,8 +261,8 @@ public class AdminScreenActivity extends Activity {
 			public void onClick(DialogInterface dialog, int id) {
 				if(make == create){
 					adminUser = aUser.getText().toString();
-					adminPass = aPass.getText().toString();
-					adminEmail = aEmail.getText().toString();
+					//adminPass = aPass.getText().toString();
+					//adminEmail = aEmail.getText().toString();
 					new CreateAdminTask().execute();
 					
 				}else if(make == delete){

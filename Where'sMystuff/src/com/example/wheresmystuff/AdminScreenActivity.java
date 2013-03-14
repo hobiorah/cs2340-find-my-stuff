@@ -42,7 +42,7 @@ public class AdminScreenActivity extends Activity {
 	}
 
 	
-	public void goOption(View view){
+	public void goOptions(View view){
 		 Intent option = new Intent(AdminScreenActivity.this, OptionsActivity.class);
 		  // Start signuppage activity, using the Intent
 		 startActivity(option);

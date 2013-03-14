@@ -9,6 +9,11 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+/**
+ * the screeen an admin of the app goes to
+ * @author HarryO
+ *
+ */
 public class AdminScreenActivity extends Activity {
 
 	final int delete = 100;
@@ -32,11 +37,19 @@ public class AdminScreenActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * creates a new admin
+	 * @param view
+	 */
 	public void createAdmin(View view){
 		
 		popUp("Create Admin", create);
 	}
 	
+	/**
+	 * deletes a user by username
+	 * @param view
+	 */
 	public void deleteUser(View view){
 		
 		popUp("Delete User", delete);
@@ -47,7 +60,11 @@ public class AdminScreenActivity extends Activity {
 		//unlockusers query
 	}
 	
-	
+	/**
+	 * pop up to show textbox to delete a user or create a new admin
+	 * @param what
+	 * @param which
+	 */
 	public void popUp(CharSequence what, int which){
 		final int make = which;//may have to fix this
 		View promptsView=null;

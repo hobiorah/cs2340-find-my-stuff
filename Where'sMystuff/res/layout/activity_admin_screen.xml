@@ -15,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="87dp"
+        android:onClick="deleteUser"
         android:text="Delete a User" />
 
     <Button
@@ -24,6 +25,7 @@
         android:layout_below="@+id/delete_user"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="41dp"
+        android:onClick="createAdmin"
         android:text="Create an Admin" />
 
     <Button
@@ -33,6 +35,7 @@
         android:layout_below="@+id/create_admin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
+        android:onClick="unlockUsers"
         android:text="Unlock Users" />
 
 </RelativeLayout>

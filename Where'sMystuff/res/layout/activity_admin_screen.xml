@@ -12,9 +12,9 @@
         android:id="@+id/delete_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp"
+        android:layout_marginTop="118dp"
         android:onClick="deleteUser"
         android:text="Delete a User" />
 
@@ -22,30 +22,39 @@
         android:id="@+id/create_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/delete_user"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp"
+        android:layout_alignBaseline="@+id/delete_user"
+        android:layout_alignBottom="@+id/delete_user"
+        android:layout_toRightOf="@+id/delete_user"
         android:onClick="createAdmin"
         android:text="Create an Admin" />
-
-    <Button
-        android:id="@+id/unlock_users"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/create_admin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:onClick="unlockUsers"
-        android:text="Unlock Users" />
 
     <Button
         android:id="@+id/enter_app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/unlock_users"
+        android:layout_below="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="36dp"
         android:onClick="goOptions"
         android:text="Enter App" />
+
+    <Button
+        android:id="@+id/unlock_users"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/delete_user"
+        android:layout_below="@+id/delete_user"
+        android:layout_marginTop="41dp"
+        android:onClick="unlockUsers"
+        android:text="Unlock Users" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/unlock_users"
+        android:layout_alignRight="@+id/create_admin"
+        android:onClick="promoteUser"
+        android:text="Promote User" />
 
 </RelativeLayout>

@@ -38,9 +38,9 @@ public class LoginQuery {
 		else{
 			log = LoginResult.ACCEPTED;
 			if (array[5].equalsIgnoreCase("admin"))
-				user = new Admin(username, hash);
+				user = new Admin(username, hash,"d");
 			else
-				user = new User(username, hash);
+				user = new User(username, hash,"d");
 			
 		}
 		

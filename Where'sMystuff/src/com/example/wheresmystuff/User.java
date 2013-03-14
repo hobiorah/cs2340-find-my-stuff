@@ -14,9 +14,10 @@ public class User{
 	 * @param user the user
 	 * @param hash the hash
 	 */
-	public User(String user, String hash){
+	public User(String user, String hash,String email){
 		this.user = user;
 		this.hash = hash;
+		this.email = email;
 	}
 	
 	/**
@@ -35,5 +36,9 @@ public class User{
 	 */
 	public String getHash(){
 		return hash;
+	}
+	
+	public String getEmail(){
+		return email;
 	}
 }

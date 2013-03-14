@@ -21,13 +21,17 @@ import android.widget.Toast;
 public class AdminScreenActivity extends Activity {
 
 	final int delete = 100;
-	final int create = 200;
+	final int promote = 200;
+	final int create = 300;
+	
 	User user;
+	String adminPromote;
 	String adminUser;
 	String adminPass;
 	String adminEmail;
 	String usernameDelete;
 	PromoteToAdminQuery reg;
+	CreateAdminQuery cr;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,12 +52,12 @@ public class AdminScreenActivity extends Activity {
 		 startActivity(option);
 	}
 	/**
-	 * creates a new admin
+	 * turns a user into an admin
 	 * @param view
 	 */
-	public void createAdmin(View view){
+	public void promoteUser(View view){
 		
-		popUp("Create Admin", create);
+		popUp("Promote Admin", promote);
 	}
 	
 	/**
@@ -61,20 +65,19 @@ public class AdminScreenActivity extends Activity {
 	 * @author HarryO
 	 *
 	 */
-	private class CreateAdminTask extends AsyncTask<Void, Void, SimpleQueryResult>{
+	private class PromoteAdminTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		private ProgressDialog pd;
 
 		protected void onPreExecute(){
-			pd = ProgressDialog.show(AdminScreenActivity.this, null, "Creating admin...", true);
+			pd = ProgressDialog.show(AdminScreenActivity.this, null, "Promoting admin...", true);
 		}
 
 		protected SimpleQueryResult doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			reg = new PromoteToAdminQuery();
-			String userN =  adminUser;
-			String pass =  adminPass;
-			String em = adminEmail;
-			user = new Admin(userN, "ok");
+			String userN =  adminPromote;
+	
+			user = new Admin(userN, "ok","n");
 ;			return reg.create(user);
 
 		}
@@ -82,16 +85,16 @@ public class AdminScreenActivity extends Activity {
 		protected void onPostExecute(SimpleQueryResult params){
 			pd.dismiss();
 
-			String x = "Admin created.";
+			String x = "User Promoted";
 
 			switch(params){
 			
 
 			case DB_ERROR:
-				x = "Admin user already in system";
+				x = "User is already an admin";
 				break;
 			case NETWORK_ERROR:
-				x = "Admin user already in system";
+				x = "User is already an admin";
 				break;
 			default:
 				break;
@@ -108,7 +111,66 @@ public class AdminScreenActivity extends Activity {
 		
 	}
 
+	public void createAdmin(View view){
+		popUp("Create Admin",create);
+	}
 	
+	private class CreateAdminTask extends AsyncTask<Void, Void, RegisterResult>{
+		private ProgressDialog pd;
+
+		protected void onPreExecute(){
+		pd = ProgressDialog.show(AdminScreenActivity.this, null, "Creating admin...", true);
+		}
+
+		protected RegisterResult doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			cr = new CreateAdminQuery();
+			String userN =  adminUser;
+			String pass =  adminPass;
+			String em = adminEmail;
+			//user = new Admin(userN, pass,em);
+			return cr.register(userN,pass,em);
+
+		}
+
+		protected void onPostExecute(RegisterResult params){
+			pd.dismiss();
+
+			String x = "Admin created.";
+
+			switch(params){
+			case INVALID_USERNAME:
+				x = "Invalid Username";
+				break;
+			case INVALID_PASS:
+				x = "Invalid Password";
+				break;
+			case DB_ERROR:
+				x = "Database Error";
+				break;
+			case USER_ALREADY_EXISTS:
+				x = "User already exists";
+				break;
+			case NETWORK_ERROR:
+				x = "Network Error";
+				break;
+			case INVALID_EMAIL:
+				x = "Invalid email";
+				break;
+			}
+
+
+
+			if (params == RegisterResult.ACCEPTED){
+				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
+				//finish();
+			} else {
+				popUp(x);
+			}
+			}
+		
+	}
+
 	/**
 	 * deletes a user by username
 	 * @param view
@@ -243,8 +305,10 @@ public class AdminScreenActivity extends Activity {
 		switch (which) {
         case delete:  promptsView = li.inflate(R.layout.delete_user_prompt, null);
                  break;
-        case create:   promptsView = li.inflate(R.layout.create_admin, null);
+        case promote:   promptsView = li.inflate(R.layout.promote_admin, null);
                  break;
+        case create:   promptsView = li.inflate(R.layout.create_admin, null);
+        		break;
          default:	promptsView = li.inflate(R.layout.unlock_user, null);
         		break;
 			
@@ -252,10 +316,11 @@ public class AdminScreenActivity extends Activity {
 		
 
 		final EditText aUser = (EditText) promptsView.findViewById(R.id.admin_user);
-		//final EditText aPass = (EditText) promptsView.findViewById(R.id.admin_pass);
-		//final EditText aEmail = (EditText) promptsView.findViewById(R.id.admin_email);
+		final EditText aPass = (EditText) promptsView.findViewById(R.id.admin_pass);
+		final EditText aEmail = (EditText) promptsView.findViewById(R.id.admin_email);
 		final EditText userDelete = (EditText) promptsView.findViewById(R.id.username_delete);
 		final EditText userUnlock =  (EditText) promptsView.findViewById(R.id.user_unlock);
+		final EditText aPromote =  (EditText) promptsView.findViewById(R.id.user_to_admin);
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setView(promptsView);
@@ -265,17 +330,23 @@ public class AdminScreenActivity extends Activity {
 		// Add the buttons
 		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				if(make == create){
-					adminUser = aUser.getText().toString();
+				if(make == promote){
+					adminPromote = aPromote.getText().toString();
 					//adminPass = aPass.getText().toString();
 					//adminEmail = aEmail.getText().toString();
-					new CreateAdminTask().execute();
+					new PromoteAdminTask().execute();
 					
 				}else if(make == delete){
-					user = new User(userDelete.getText().toString(),"l");
+					user = new User(userDelete.getText().toString(),"l","n");
 					new DeleteUserTask().execute();
+				}else if(make == create){
+					adminUser = aUser.getText().toString();
+					adminPass = aPass.getText().toString();
+					adminEmail = aEmail.getText().toString();
+					new CreateAdminTask().execute();
+					
 				}else{
-					user = new User(userUnlock.getText().toString(),"l");
+					user = new User(userUnlock.getText().toString(),"l","n");
 					new UnlockUserTask().execute();
 				}
 				

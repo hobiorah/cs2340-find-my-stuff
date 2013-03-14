@@ -15,8 +15,8 @@ public class Admin extends User {
 	 * @param user username
 	 * @param hash [assword
 	 */
-	public Admin(String user, String hash) {
-		super(user, hash);
+	public Admin(String user, String hash,String email) {
+		super(user, hash,email);
 		// TODO Auto-generated constructor stub
 	}
 	

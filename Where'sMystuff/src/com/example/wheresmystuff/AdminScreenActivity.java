@@ -50,58 +50,54 @@ public class AdminScreenActivity extends Activity {
 		popUp("Create Admin", create);
 	}
 	
-	private class CreateAdminTask extends AsyncTask<Void, Void, RegisterResult>{
+	private class CreateAdminTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		private ProgressDialog pd;
 
 		protected void onPreExecute(){
 			pd = ProgressDialog.show(AdminScreenActivity.this, null, "Creating admin...", true);
 		}
 
-		protected RegisterResult doInBackground(Void... params) {
+		protected SimpleQueryResult doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			reg = new CreateAdminQuery();
 			String userN =  adminUser;
 			String pass =  adminPass;
 			String em = adminEmail;
-			return reg.(userN, pass, em);
+			user = new Admin(userN, pass);
+;			return reg.create(user);
 
 		}
 
-		protected void onPostExecute(RegisterResult params){
+		protected void onPostExecute(SimpleQueryResult params){
 			pd.dismiss();
 
 			String x = "Admin created.";
 
 			switch(params){
-			case INVALID_USERNAME:
-				x = "Invalid Username";
-				break;
-			case INVALID_PASS:
-				x = "Invalid Password";
-				break;
+			
+
 			case DB_ERROR:
-				x = "Database Error";
-				break;
-			case USER_ALREADY_EXISTS:
-				x = "User already exists";
+				x = "Admin user already in system";
 				break;
 			case NETWORK_ERROR:
-				x = "Network Error";
+				x = "Admin user already in system";
 				break;
-			case INVALID_EMAIL:
-				x = "Invalid email";
+			default:
 				break;
 			}
 
 
-			if (params == RegisterResult.ACCEPTED){
+			
+
+
+			if (params == SimpleQueryResult.OK){
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
 				//finish();
 			} else {
 				popUp(x);
 			}
-
-		}
+			}
+		
 	}
 
 	
@@ -202,7 +198,7 @@ public class AdminScreenActivity extends Activity {
 
 
 			if (params == SimpleQueryResult.OK){
-				x = "Deleted user.";
+				x = "Unlocked user.";
 				
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
 
@@ -253,7 +249,7 @@ public class AdminScreenActivity extends Activity {
 					adminUser = aUser.getText().toString();
 					adminPass = aPass.getText().toString();
 					adminEmail = aEmail.getText().toString();
-					new RegisterAttemptTask().execute();
+					new CreateAdminTask().execute();
 					
 				}else if(make == delete){
 					user = new User(userDelete.getText().toString(),"l");

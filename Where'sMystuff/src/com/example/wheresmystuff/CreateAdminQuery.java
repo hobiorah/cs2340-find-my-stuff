@@ -6,7 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class CreateAdminQuery {
-		public SimpleQueryResult delete(User user){
+		public SimpleQueryResult create(User user){
 			Document doc = null;
 			SimpleQueryResult reg = SimpleQueryResult.NETWORK_ERROR;
 

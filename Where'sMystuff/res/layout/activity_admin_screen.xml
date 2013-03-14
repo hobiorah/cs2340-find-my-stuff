@@ -38,4 +38,14 @@
         android:onClick="unlockUsers"
         android:text="Unlock Users" />
 
+    <Button
+        android:id="@+id/enter_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/unlock_users"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        android:onClick="goOptions"
+        android:text="Enter App" />
+
 </RelativeLayout>

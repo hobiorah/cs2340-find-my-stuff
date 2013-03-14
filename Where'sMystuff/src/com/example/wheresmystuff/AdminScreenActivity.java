@@ -41,6 +41,12 @@ public class AdminScreenActivity extends Activity {
 		return true;
 	}
 
+	
+	public void goOption(View view){
+		 Intent option = new Intent(AdminScreenActivity.this, OptionsActivity.class);
+		  // Start signuppage activity, using the Intent
+		 startActivity(option);
+	}
 	/**
 	 * creates a new admin
 	 * @param view

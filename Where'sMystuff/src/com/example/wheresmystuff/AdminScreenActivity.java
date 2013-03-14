@@ -1,13 +1,17 @@
 package com.example.wheresmystuff;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * the screeen an admin of the app goes to
@@ -18,7 +22,7 @@ public class AdminScreenActivity extends Activity {
 
 	final int delete = 100;
 	final int create = 200;
-	
+	User user;
 	String adminUser;
 	String adminPass;
 	String adminEmail;
@@ -60,6 +64,67 @@ public class AdminScreenActivity extends Activity {
 		//unlockusers query
 	}
 	
+	private class UnlockUserTask extends AsyncTask<Void, Void, SimpleQueryResult>{
+		private ProgressDialog pd;
+
+		protected void onPreExecute(){
+			pd = ProgressDialog.show(AdminScreenActivity.this, null, "Unlocking users...", true);
+		}
+
+		protected SimpleQueryResult doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			UnlockUserQuery unlock = new UnlockUserQuery();
+			
+			return   unlock.unlock(user);//.register(user, pass);
+
+		}
+
+		protected void onPostExecute(SimpleQueryResult params){
+			pd.dismiss();
+
+			String x = "Successfully logged in.";
+
+			switch(params){
+			case INVALID:
+				x = "Invalid user/password combination";
+				break;
+			case DB_ERROR:
+				x = "Database Error";
+				break;
+			case NETWORK_ERROR:
+				x = "Network Error";
+				break;
+			case LOCKED:
+				x = "This account has been locked";
+				break;
+			}
+
+
+			if (params == SimpleQueryResult.OK){
+				move = true;
+				user = log.getUser();
+				
+				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
+				if(user instanceof User){
+				 Intent option = new Intent(LoginScreenActivity.this, OptionsActivity.class);
+				  // Start signuppage activity, using the Intent
+				 startActivity(option);
+				}else{
+					Intent admin = new Intent(LoginScreenActivity.this, AdminScreenActivity.class);
+					  // Start signuppage activity, using the Intent
+					 startActivity(admin);
+				}
+				
+
+				
+			} else {
+				popUp(x);
+				//finish();
+			}
+
+		}
+	}
+	
 	/**
 	 * pop up to show textbox to delete a user or create a new admin
 	 * @param what
@@ -99,7 +164,7 @@ public class AdminScreenActivity extends Activity {
 				//	createAdminQuery
 					
 				}else{
-					usernameDelete = userDelete.getText().toString();
+					user = new User(userDelete.getText().toString(),"l");
 					//delete user
 				}
 			

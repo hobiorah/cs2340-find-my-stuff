@@ -26,6 +26,7 @@ public class LoginScreenActivity extends Activity {
 	protected TextView userName;
 	protected TextView password;
 	protected LoginQuery log;
+	protected User user;
 	boolean move = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,10 +93,19 @@ public class LoginScreenActivity extends Activity {
 
 			if (params == LoginResult.ACCEPTED){
 				move = true;
+				user = log.getUser();
+				
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
-				 Intent test = new Intent(LoginScreenActivity.this, OptionsActivity.class);
+				if(user instanceof User){
+				 Intent option = new Intent(LoginScreenActivity.this, OptionsActivity.class);
 				  // Start signuppage activity, using the Intent
-				 startActivity(test);
+				 startActivity(option);
+				}else{
+					Intent admin = new Intent(LoginScreenActivity.this, AdminScreenActivity.class);
+					  // Start signuppage activity, using the Intent
+					 startActivity(admin);
+				}
+				
 
 				
 			} else {

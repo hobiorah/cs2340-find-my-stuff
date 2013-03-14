@@ -96,14 +96,15 @@ public class LoginScreenActivity extends Activity {
 				user = log.getUser();
 				
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
-				if(user instanceof User){
-				 Intent option = new Intent(LoginScreenActivity.this, OptionsActivity.class);
-				  // Start signuppage activity, using the Intent
-				 startActivity(option);
-				}else{
+				if(user instanceof Admin){
 					Intent admin = new Intent(LoginScreenActivity.this, AdminScreenActivity.class);
 					  // Start signuppage activity, using the Intent
 					 startActivity(admin);
+				}else{
+					
+					 Intent option = new Intent(LoginScreenActivity.this, OptionsActivity.class);
+					  // Start signuppage activity, using the Intent
+					 startActivity(option);
 				}
 				
 

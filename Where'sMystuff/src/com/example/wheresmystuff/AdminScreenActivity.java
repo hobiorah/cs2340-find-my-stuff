@@ -27,7 +27,7 @@ public class AdminScreenActivity extends Activity {
 	String adminPass;
 	String adminEmail;
 	String usernameDelete;
-	RegisterQuery reg;
+	CreateAdminQuery reg;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class AdminScreenActivity extends Activity {
 		popUp("Create Admin", create);
 	}
 	
-	private class RegisterAttemptTask extends AsyncTask<Void, Void, RegisterResult>{
+	private class CreateAdminTask extends AsyncTask<Void, Void, RegisterResult>{
 		private ProgressDialog pd;
 
 		protected void onPreExecute(){
@@ -59,11 +59,11 @@ public class AdminScreenActivity extends Activity {
 
 		protected RegisterResult doInBackground(Void... params) {
 			// TODO Auto-generated method stub
-			reg = new RegisterQuery();
+			reg = new CreateAdminQuery();
 			String userN =  adminUser;
 			String pass =  adminPass;
 			String em = adminEmail;
-			return reg.register(userN, pass, em);
+			return reg.(userN, pass, em);
 
 		}
 

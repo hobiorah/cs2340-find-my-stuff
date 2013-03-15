@@ -5,7 +5,19 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+/**
+ * Deletes a user from the database which can only be done by a admin
+ * @author HarryO
+ *
+ */
 public class DeleteUserQuery {
+	
+	/**
+	 * 
+	 * deletes a user in the system
+	 * @param user to be deleted
+	 * @return if query was successful
+	 */
 		public SimpleQueryResult delete(User user){
 			Document doc = null;
 			SimpleQueryResult reg = SimpleQueryResult.NETWORK_ERROR;

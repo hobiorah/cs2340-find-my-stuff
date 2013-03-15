@@ -38,6 +38,10 @@ public class User{
 		return hash;
 	}
 	
+	/**
+	 * Gets the email
+	 * @return the email
+	 */
 	public String getEmail(){
 		return email;
 	}

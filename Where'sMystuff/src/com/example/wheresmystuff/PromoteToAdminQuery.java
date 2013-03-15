@@ -10,6 +10,12 @@ import org.jsoup.nodes.Document;
  *
  */
 public class PromoteToAdminQuery {
+	
+	/**
+	 * makes a regular user an admin
+	 * @param user
+	 * @return if the query was successful
+	 */
 		public SimpleQueryResult create(User user){
 			Document doc = null;
 			SimpleQueryResult reg = SimpleQueryResult.NETWORK_ERROR;

@@ -13,7 +13,8 @@ public class Admin extends User {
 	/**
 	 * An admin
 	 * @param user username
-	 * @param hash [assword
+	 * @param hash password
+	 * @param email email
 	 */
 	public Admin(String user, String hash,String email) {
 		super(user, hash,email);

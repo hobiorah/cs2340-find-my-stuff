@@ -5,6 +5,11 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+/**
+ * query for a user to login 
+ * @author HarryO
+ *
+ */
 public class LoginQuery {
 	
 	protected User user;

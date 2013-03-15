@@ -5,7 +5,18 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+/**
+ * Query to unlock a user who has been locked. Can only be done by an admind
+ * @author HarryO
+ *
+ */
 public class UnlockUserQuery {
+	
+	/**
+	 * Runs query to unlock a user
+	 * @param user to unlock
+	 * @return whether the query was successful or not
+	 */
 		public SimpleQueryResult unlock(User user){
 			Document doc = null;
 			SimpleQueryResult reg = SimpleQueryResult.NETWORK_ERROR;

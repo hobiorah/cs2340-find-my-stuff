@@ -227,7 +227,7 @@ public class AdminScreenActivity extends Activity {
 
 
 			if (params == SimpleQueryResult.OK){
-				x = "Deleted user.";
+				x = "Deleted user";
 				
 				Toast.makeText(getApplicationContext(), x, Toast.LENGTH_LONG).show();
 				
@@ -248,7 +248,6 @@ public class AdminScreenActivity extends Activity {
 	 */
 	public void unlockUsers(View view){
 		popUp("Unlock User",0);
-		//new UnlockUserTask().execute();
 	}
 	
 	/**

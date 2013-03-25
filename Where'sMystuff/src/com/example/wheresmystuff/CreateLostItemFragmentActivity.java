@@ -77,8 +77,10 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 		//do some stuff for example write on log and update TextField on activity
 		Log.w("DatePicker","Date = " + year);
 		date[0] = year;
-		date[1] = month;
+		date[1] = month +1;
 		date[2] = day;
+		  Toast.makeText(getApplicationContext(), "month" + date[1], Toast.LENGTH_LONG).show();
+
 		((TextView) findViewById(R.id.date_lost)).setText(date[1] + "/" + date[2] + "/" + date[0]);
 	}
 	
@@ -152,7 +154,6 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 			  LostItem lost = new LostItem(name.getText().toString(), desc.getText().toString(), 
 					  Utils.convertCategoryBack(category), reward.getText().toString(), new Date(date[1],date[2],date[0]),
 					  new Location(city.getText().toString(),state.getText().toString()));
-
 			  return query.create(lost);
 
 		}

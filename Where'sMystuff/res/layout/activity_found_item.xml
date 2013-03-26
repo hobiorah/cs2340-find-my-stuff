@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+
+    
+     <TextView
+        android:id="@+id/lf_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/category_label"
+        android:text="New Lost Item"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/cancel_foundItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/date_found"
+        android:layout_marginBottom="49dp"
+        android:onClick="goToAllLostItems"
+        android:text="Cancel" />
+
+    <TextView
+        android:id="@+id/category_labelf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/date_found"
+        android:layout_centerVertical="true"
+        android:text="Category:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/state_locationf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/city_locationf"
+        android:layout_alignBottom="@+id/city_locationf"
+        android:layout_alignLeft="@+id/category_selectorf"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:hint="Enter State"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/item_rewardf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/category_selectorf"
+        android:layout_alignLeft="@+id/category_labelf"
+        android:ems="10"
+        android:hint="Reward"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/item_descriptionf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/item_rewardf"
+        android:layout_alignLeft="@+id/item_rewardf"
+        android:layout_marginBottom="17dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/item_namef"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/item_descriptionf"
+        android:layout_alignLeft="@+id/item_descriptionf"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/date_pickerf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/item_rewardf"
+        android:layout_below="@+id/category_selectorf"
+        android:onClick="showDatePickerDialog"
+        android:text=" Date Found" />
+
+    <EditText
+        android:id="@+id/city_locationf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/lf_title"
+        android:layout_below="@+id/date_pickerf"
+        android:ems="10"
+        android:hint="Enter City"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/submit_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/cancel_foundItem"
+        android:layout_alignBottom="@+id/cancel_foundItem"
+        android:layout_alignLeft="@+id/date_found"
+        android:onClick="submitItem"
+        android:text="Submit Found Item" />
+
+    <TextView
+        android:id="@+id/date_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/date_pickerf"
+        android:layout_alignBottom="@+id/date_pickerf"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:text="Date"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Spinner
+        android:id="@+id/category_selectorf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/lf_title"
+        android:entries="@array/categories"
+        android:prompt="@string/category_prompt"
+        android:spinnerMode="dialog" />
+
+</RelativeLayout>

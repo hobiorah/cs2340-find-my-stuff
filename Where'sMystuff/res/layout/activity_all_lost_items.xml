@@ -8,4 +8,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AllLostItems" >
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/filterL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/list"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_marginRight="18dp"
+        android:onClick="filter"
+        android:text="Filter" />
+
+    <ListView
+        android:id="@+id/listL"
+        android:layout_width="wrap_content"
+        android:layout_height="340dp"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_centerVertical="true"
+        android:layout_weight="0.41" >
+    </ListView>
+
 </RelativeLayout>

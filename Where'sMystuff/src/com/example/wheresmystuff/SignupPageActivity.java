@@ -32,6 +32,25 @@ public class SignupPageActivity extends Activity {
 	TextView email;
 	RegisterQuery reg;
 	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		setContentView(R.layout.signup_page);
+		userName = (TextView)this.findViewById(R.id.userName_register);
+		password = (TextView)this.findViewById(R.id.password_register);
+		email = (TextView)this.findViewById(R.id.email_register);
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.login_screen, menu);
+		return true;
+	}
+	
 	/**
 	 * executes query to register a new user
 	 * @author HarryO
@@ -93,22 +112,7 @@ public class SignupPageActivity extends Activity {
 
 
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.signup_page);
-		userName = (TextView)this.findViewById(R.id.userName_register);
-		password = (TextView)this.findViewById(R.id.password_register);
-		email = (TextView)this.findViewById(R.id.email_register);
-
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login_screen, menu);
-		return true;
-	}
+	
 	
 	/**
 	 * runs when user hits register button which takes information from username and password field and attempts to make

@@ -4,19 +4,28 @@ package com.example.wheresmystuff;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.example.wheresmystuff.AllFoundItemsListActivity.DatePickerFragment;
+
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,22 +35,194 @@ import android.widget.Toast;
  * Screen to show all the lost items in the database
  * 
  */
-public class AllLostItemsListActivity extends ListActivity{
+public class AllLostItemsListActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
 
 	LostItem[] items;
 	
 	ArrayAdapter<LostItem> adapter;
-	
+	ListView listL;
+	 
+	 int[] dateChange;
+	 int change = 0;// if 1 its category, if 2 its date, if 3 its location
+	 ArrayAdapter<LostItem> filtered;
+	 String cat;
+	 String city;
+	 String state;
 	
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
+		listL = (ListView)findViewById(R.id.listL);
 		String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
 				"Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
 				"Linux", "OS/2" };
+		//getListView().setTextFilterEnabled(true);
 
 		new GetItemsAttemptTask().execute();
 	}
 	
+	
+	
+	public void filter(View view){
+popUp();
+		
+		if(change == 1){
+			LostItem[] categoryFilter = new LostItem[items.length];
+			
+			for(int a = 0; a< categoryFilter.length; a++){
+				if(Utils.convertCategory(items[a].getCategory()).equalsIgnoreCase(cat)){
+					categoryFilter[a] = items[a];
+				}
+			}
+			filtered = new ArrayAdapter<LostItem>(AllLostItemsListActivity.this,android.R.layout.simple_list_item_1, categoryFilter);
+			listL.setAdapter(adapter);
+			
+		}else if(change ==2){
+			LostItem[] dateFilter = new LostItem[items.length];
+			String dateCompare = dateChange[1] + " " + dateChange[0] + ", " + dateChange[2];
+			for(int a = 0; a< dateFilter.length; a++){
+				if(dateCompare.equalsIgnoreCase(items[a].getDateEntered().toString())){
+					dateFilter[a]=items[a];
+				}
+			}
+			filtered = new ArrayAdapter<LostItem>(AllLostItemsListActivity.this,android.R.layout.simple_list_item_1, dateFilter);
+			listL.setAdapter(adapter);
+			//go through and compare dates and add to array that match dat
+		}else if (change ==3){
+			String compareLoc = city + ", " + state; 
+			LostItem[] locationFilter = new LostItem[items.length];
+			for(int a = 0; a< locationFilter.length; a++){
+				if(compareLoc.equalsIgnoreCase(items[a].getLocation().toString())){
+					locationFilter[a]=items[a];
+				}
+			}
+			filtered = new ArrayAdapter<LostItem>(AllLostItemsListActivity.this,android.R.layout.simple_list_item_1, locationFilter);
+			listL.setAdapter(adapter);
+			}
+		else{
+			
+		}
+		change = 0;
+	}
+	
+	public void popUp(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setTitle("Filter by What?");
+	           builder.setItems(R.array.filter, new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int which) {
+	              if(which ==0){
+	            	final DialogFragment newFragment = new DatePickerFragment();
+	          		newFragment.show(getSupportFragmentManager(), "DatePicker");
+	          		change = 2;
+	              }else if(which == 1){
+	            	chooseCategory();
+	            	
+	              }else{
+	            	  chooseLocation();
+	              }
+	           }
+	    });
+	           builder.setNegativeButton("Cancel",
+	 				  new DialogInterface.OnClickListener() {
+	 				    public void onClick(DialogInterface dialog,int id) {
+	 					dialog.cancel();
+	 				    }
+	 				  });
+	           
+	           AlertDialog dialog = builder.create();
+	   		dialog.show();
+	}
+	
+	public void chooseCategory(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setTitle("Choose Category");
+	           builder.setItems(R.array.categories, new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int which) {
+	              if(which == 0){
+	            	  cat = "Miscellaneous";
+	              }else if(which ==1){
+	            	  cat = "Heirloom";
+	              }else if(which == 2){
+	            	  cat ="Keepsakes";
+	              }
+	            	change = 1;
+	           }
+	    });
+	           builder.setNegativeButton("Cancel",
+	 				  new DialogInterface.OnClickListener() {
+	 				    public void onClick(DialogInterface dialog,int id) {
+	 					dialog.cancel();
+	 				    }
+	 				  });
+	           
+	           AlertDialog dialog = builder.create();
+	   		dialog.show();
+	}
+	
+	public void chooseLocation(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	    // Get the layout inflater
+	    LayoutInflater inflater = this.getLayoutInflater();
+
+	    // Inflate and set the layout for the dialog
+	    // Pass null as the parent view because its going in the dialog layout
+	    builder.setView(inflater.inflate(R.layout.choose_location, null))
+	    // Add action buttons
+	           .setPositiveButton("Filter", new DialogInterface.OnClickListener() {
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	                   TextView c = (TextView)findViewById(R.id.choose_city);
+	                   city = c.getText().toString();
+	                   TextView s = (TextView)findViewById(R.id.choose_state);
+	                   state = s.getText().toString();
+	                   change = 2;
+	               }
+	           })
+	           .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	               public void onClick(DialogInterface dialog, int id) {
+	               }
+	           });      
+	    AlertDialog dialog = builder.create();
+  		dialog.show();
+	}
+	
+	public static class DatePickerFragment extends DialogFragment 
+	{
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			// Use the current date as the default date in the picker
+			final Calendar c = Calendar.getInstance();
+			int year = c.get(Calendar.YEAR);
+			int month = c.get(Calendar.MONTH);
+			int day = c.get(Calendar.DAY_OF_MONTH);
+
+			// Create a new instance of DatePickerDialog and return it
+			return new DatePickerDialog(getActivity(), (AllFoundItemsListActivity)getActivity(), year, month, day);
+		}
+
+
+	}
+
+	public void onDateSet(DatePicker view, int year, int month, int day) {
+		//do some stuff for example write on log and update TextField on activity
+		Log.w("DatePicker","Date = " + year);
+		dateChange[0] = year;
+		dateChange[1] = month + 1;
+		dateChange[2] = day;
+		
+	}
+	
+
+	public void showDatePickerDialog(View v) {
+
+		final DialogFragment newFragment = new DatePickerFragment();
+		newFragment.show(getSupportFragmentManager(), "DatePicker");
+		//setDate();
+
+	}
+
 	/**
 	 * Allows app to query the database for the lost items in an AsyncTask as to not interfere with the thread android is using
 	 */

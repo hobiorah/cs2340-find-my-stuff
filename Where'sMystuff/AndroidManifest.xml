@@ -44,6 +44,10 @@
             android:name="com.example.wheresmystuff.AllFoundItemsListActivity"
             android:label="@string/title_activity_all_found_items_list" >
         </activity>
+        <activity
+            android:name="com.example.wheresmystuff.Test_a"
+            android:label="@string/title_activity_test_a" >
+        </activity>
     </application>
 
 </manifest>

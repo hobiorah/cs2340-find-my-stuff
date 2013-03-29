@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 
 
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -42,14 +43,13 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_found_items_list);	
 		list = (ListView)findViewById(R.id.list);
-			values = new String[3];
+			
 			dateChange = new int[3];
-	         values[0] = "ok";
-	         values[1]="ash money";
-	         values[2]="lets get it";
+	         
 	        
-	         a =new ArrayAdapter(this, android.R.layout.simple_list_item_1, values);
-	        list.setAdapter(a);
+	         new GetFoundItemsAttemptTask().execute();
+	         //a =new ArrayAdapter(this, android.R.layout.simple_list_item_1, values);
+	        //list.setAdapter(a);
 	
 	}
 	
@@ -234,11 +234,11 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	/**
 	 * Allows app to query the database for the found items in an AsyncTask as to not interfere with the thread android is using
 	 */
-	private class GetItemsAttemptTask extends AsyncTask<Void, Void, AllLostItemsQueryResult>{
+	private class GetFoundItemsAttemptTask extends AsyncTask<Void, Void, AllFoundItemsQueryResult>{
 		
 		private ProgressDialog pd;
 
-		AllLostItemsQuery all;
+		AllFoundItemsQuery all;
 		
 		/**
 		 * Method that shows progress bar as query is being executed
@@ -251,8 +251,8 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		 * Creates object to execute query and then executes the query
 		 * @return  the result of the query
 		 */
-		protected AllLostItemsQueryResult doInBackground(Void... params) {
-			all = new AllLostItemsQuery();
+		protected AllFoundItemsQueryResult doInBackground(Void... params) {
+			all = new AllFoundItemsQuery();
 			return all.getAll();
 		}
 
@@ -261,7 +261,7 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		 * it gets all the items in the database and puts it into an array for the array adapter
 		 * which then sets the array adapter for the activity to the list from the dataabse
 		 */
-		protected void onPostExecute(AllLostItemsQueryResult sres){
+		protected void onPostExecute(AllFoundItemsQueryResult sres){
 			pd.dismiss();
 			String x = "defaults";
 			
@@ -280,10 +280,10 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 				break;
 			}
 
-			if (sres == AllLostItemsQueryResult.OK){
+			if (sres == AllFoundItemsQueryResult.OK){
 				items = all.getList();
-				adapter = new ArrayAdapter<LostItem>(AllFoundItemsListActivity.this,android.R.layout.simple_list_item_1, items);
-				setListAdapter(adapter);
+				adapter = new ArrayAdapter<FoundItem>(AllFoundItemsListActivity.this,android.R.layout.simple_list_item_1, items);
+				list.setAdapter(adapter);
 			} else {
 				popUp(x);
 			}

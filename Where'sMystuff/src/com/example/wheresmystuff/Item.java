@@ -9,6 +9,34 @@ public class Item {
 	protected String name;
 	
 	protected Location loc;
+	/**
+	 * @return the loc
+	 */
+	public Location getLoc() {
+		return loc;
+	}
+
+	/**
+	 * @return the cat
+	 */
+	public Category getCat() {
+		return cat;
+	}
+
+	/**
+	 * @return the date
+	 */
+	public Date getDate() {
+		return date;
+	}
+
+	/**
+	 * @return the found
+	 */
+	public boolean isFound() {
+		return found;
+	}
+
 	protected Category cat;
 	protected Date date;
 	protected boolean found;
@@ -105,5 +133,8 @@ public class Item {
 		return status;
 	}
 	
+	public boolean compareCategory(Item item){
+		return this.cat == item.getCat();
+	}
 
 }

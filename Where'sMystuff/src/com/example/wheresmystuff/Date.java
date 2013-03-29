@@ -77,6 +77,14 @@ public class Date {
 	public String serialize(){
 		return month + "/" + date + "/" + year;
 	}
+//	
+//	public boolean before(Date date){
+//		if (year == date.getYear()){
+////			if (date.get)
+//		}
+//	}
 	
-	
+	public boolean compare (Date compareDate){
+		return year == compareDate.getYear() && month == compareDate.getMonth() && date == compareDate.getDate();
+	}
 }

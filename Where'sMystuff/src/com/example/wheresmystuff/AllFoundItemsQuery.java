@@ -16,15 +16,15 @@ import android.util.Log;
 
 
 public class AllFoundItemsQuery {
-	private LostItem[] items;
+	private FoundItem[] items;
 
 	/**
 	 * Query to get all lost items in the database
 	 * @return result of whether it worked or not
 	 */
-	public AllLostItemsQueryResult getAll(){
+	public AllFoundItemsQueryResult getAll(){
 		Document doc = null;
-		AllLostItemsQueryResult log = AllLostItemsQueryResult.NETWORK_ERROR;
+		AllFoundItemsQueryResult log = AllFoundItemsQueryResult.NETWORK_ERROR;
 
 		try {
 			doc = Jsoup.connect("http://steve.node13.info/findmystuff/allfounditems.php").timeout(15*1000).get();
@@ -39,12 +39,12 @@ public class AllFoundItemsQuery {
 				for (int i = 0; i < array.length; i++)
 					array2[i] = array[i].split("\\|");
 
-				items = new LostItem[array.length];
+				items = new FoundItem[array.length];
 
 				Log.d("ASDF", "" + array.length);
 
 				for (int i = 0; i < array.length; i++){
-					items[i] = new LostItem(array2[i][1],
+					items[i] = new FoundItem(array2[i][1],
 							array2[i][4],
 							Utils.convertCategoryBack(array2[i][2]),
 							array2[i][3], 
@@ -55,9 +55,9 @@ public class AllFoundItemsQuery {
 				}
 
 			}
-			log = AllLostItemsQueryResult.OK;
+			log = AllFoundItemsQueryResult.OK;
 		} else {
-			log = AllLostItemsQueryResult.EMPTY;
+			log = AllFoundItemsQueryResult.EMPTY;
 		}
 		
 
@@ -68,7 +68,7 @@ public class AllFoundItemsQuery {
 	 * Gets all the items in the database
 	 * @return items in the database in an array of type LostItem 
 	 */
-	public LostItem[] getList(){
+	public FoundItem[] getList(){
 		return items;
 	}
 }

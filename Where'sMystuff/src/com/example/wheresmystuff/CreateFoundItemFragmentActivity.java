@@ -86,7 +86,7 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 	 * @param view
 	 */
 	public void submitItem(View view) {
-	  new CreateItemAttemptTask().execute();		
+	  new CreateFoundItemAttemptTask().execute();		
 	
 	}
 	
@@ -108,9 +108,9 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 	 * @param veiw
 	 */
 	public void goToAllLostItems(View veiw){
-		Intent lostItemList = new Intent(CreateLostItemFragmentActivity.this, AllLostItemsListActivity.class);
+		Intent foundItemList = new Intent(CreateFoundItemFragmentActivity.this, AllFoundItemsListActivity.class);
 		  // Start signuppage activity, using the Intent
-		 startActivity(lostItemList);
+		 startActivity(foundItemList);
 		 finish();
 	}
 	
@@ -120,17 +120,17 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 	 * @author HarryO
 	 *
 	 */
-	private class CreateItemAttemptTask extends AsyncTask<Void, Void, SimpleQueryResult>{
+	private class CreateFoundItemAttemptTask extends AsyncTask<Void, Void, SimpleQueryResult>{
 		private ProgressDialog pd;
 
 		protected void onPreExecute(){
-			pd = ProgressDialog.show(CreateLostItemFragmentActivity.this, null, "Submitting Item...", true);
+			pd = ProgressDialog.show(CreateFoundItemFragmentActivity.this, null, "Submitting Item...", true);
 		}
 
 		protected SimpleQueryResult doInBackground(Void... params) {
 			// TODO Auto-generated method stub
 			
-			CreateLostItemQuery query = new CreateLostItemQuery();
+			CreateFoundItemQuery query = new CreateFoundItemQuery();
 			TextView name =((TextView) findViewById(R.id.item_namef));
 			  TextView desc =((TextView) findViewById(R.id.item_descriptionf));
 			  TextView reward =((TextView) findViewById(R.id.item_rewardf));
@@ -138,10 +138,10 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 			  TextView city =((TextView) findViewById(R.id.city_locationf));
 			  Spinner categoryChooser = (Spinner) findViewById(R.id.category_selectorf);
 			  String category = String.valueOf(categoryChooser.getSelectedItem());
-			  LostItem lost = new LostItem(name.getText().toString(), desc.getText().toString(), 
+			  FoundItem found = new FoundItem(name.getText().toString(), desc.getText().toString(), 
 					  Utils.convertCategoryBack(category), reward.getText().toString(), new Date(date[1],date[2],date[0]),
 					  new Location(city.getText().toString(),state.getText().toString()));
-			  return query.create(lost);
+			  return query.create(found);
 
 		}
 
@@ -160,9 +160,9 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 
 			if (res == SimpleQueryResult.OK){
 				Toast.makeText(getApplicationContext(), "Item Submitted Successfully", Toast.LENGTH_LONG).show();
-				Intent lostItemList = new Intent(CreateLostItemFragmentActivity.this, AllLostItemsListActivity.class);
+				Intent foundItemList = new Intent(CreateFoundItemFragmentActivity.this, AllFoundItemsListActivity.class);
 				  // Start signuppage activity, using the Intent
-				 startActivity(lostItemList);
+				 startActivity(foundItemList);
 				finish();
 			} else {
 				popUp(x);

@@ -12,6 +12,42 @@ public class Location {
 	protected double longitude;
 	
 	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 * @return the country
+	 */
+	public String getCountry() {
+		return country;
+	}
+
+	/**
+	 * @return the latitude
+	 */
+	public double getLatitude() {
+		return latitude;
+	}
+
+	/**
+	 * @return the longitude
+	 */
+	public double getLongitude() {
+		return longitude;
+	}
+
+	
+	/**
 	 * Instantiates a new location.
 	 *
 	 * @param city the city
@@ -64,6 +100,18 @@ public class Location {
 	 */
 	public String serialize(){
 		return city + "," + state + "," + country + "," + latitude + "," + longitude;
+	}
+	
+	public boolean weakCompare(Location location){
+		return city.equals(location.getCity());
+	}
+	
+	public boolean compare(Location location){
+		return state.equals(location.getState()) && country.equals(location.getCountry()) && weakCompare(location);
+	}
+	
+	public boolean strongCompare(Location location){
+		return location.getLatitude() == latitude && location.getLongitude() == longitude && compare(location);
 	}
 	
 }

@@ -11,7 +11,7 @@ public class CreateFoundItemQuery {
 	 * Queries server and attempts to register
 	 * @return returns the result for whether the user was registered
 	 */
-	public SimpleQueryResult create(LostItem item){
+	public SimpleQueryResult create(FoundItem item){
 		Document doc = null;
 		SimpleQueryResult reg = SimpleQueryResult.NETWORK_ERROR;
 

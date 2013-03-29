@@ -1,6 +1,7 @@
 package com.example.wheresmystuff;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -29,12 +30,12 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 
 	FoundItem[] items;
 	
-	ArrayAdapter<FoundItem> adapter;
+	ArrayAdapter<Item> adapter;
 	ListView list;
 	 String[] values;
 	 int[] dateChange;
 	 int change = 0;// if 1 its category, if 2 its date, if 3 its location
-	 ArrayAdapter<FoundItem> filtered;
+	 ArrayList<Item> adapterItems = new ArrayList<Item>();
 	 String cat;
 	 String city;
 	 String state;
@@ -84,6 +85,7 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		dateChange[0] = year;
 		dateChange[1] = month + 1;
 		dateChange[2] = day;
+		filterDate(new Date(month+1,day, year));
 		
 	}
 	
@@ -100,45 +102,46 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	public void filter(View view){
 		popUp();
 		
-		if(change == 1){
-			FoundItem[] categoryFilter = new FoundItem[items.length];
-			
-			for(int a = 0; a< categoryFilter.length; a++){
-				if(Utils.convertCategory(items[a].getCategory()).equalsIgnoreCase(cat)){
-					categoryFilter[a] = items[a];
-				}
-			}
-			filtered = new ArrayAdapter<FoundItem>(AllFoundItemsListActivity.this,android.R.layout.simple_list_item_1, categoryFilter);
-			list.setAdapter(adapter);
-			
-		}else if(change ==2){
-			FoundItem[] dateFilter = new FoundItem[items.length];
-			String dateCompare = dateChange[1] + " " + dateChange[0] + ", " + dateChange[2];
-			for(int a = 0; a< dateFilter.length; a++){
-				if(dateCompare.equalsIgnoreCase(items[a].getDateEntered().toString())){
-					dateFilter[a]=items[a];
-				}
-			}
-			filtered = new ArrayAdapter<FoundItem>(AllFoundItemsListActivity.this,android.R.layout.simple_list_item_1, dateFilter);
-			list.setAdapter(adapter);
-			//go through and compare dates and add to array that match dat
-		}else if (change ==3){
-			String compareLoc = city + ", " + state; 
-			FoundItem[] locationFilter = new FoundItem[items.length];
-			for(int a = 0; a< locationFilter.length; a++){
-				if(compareLoc.equalsIgnoreCase(items[a].getLocation().toString())){
-					locationFilter[a]=items[a];
-				}
-			}
-			filtered = new ArrayAdapter<FoundItem>(AllFoundItemsListActivity.this,android.R.layout.simple_list_item_1, locationFilter);
-			list.setAdapter(adapter);
-			}
-		else{
-			
-		}
-		change = 0;
 	}
 	
+	public void filterCategory(Category category){
+		adapterItems.clear();
+		for(int a = 0; a<items.length; a++){
+			
+			if (items[a].getCat() == category) adapterItems.add(items[a]);
+
+			
+		}
+		
+		adapter.notifyDataSetChanged();
+
+
+	}
+	
+	public void filterDate(Date date){
+		adapterItems.clear();
+		for(int a = 0; a<items.length; a++){
+			
+			if (items[a].getDate().compare(date)) adapterItems.add(items[a]);
+
+			
+		}
+		
+		adapter.notifyDataSetChanged();
+	}
+	
+	public void filterLocation(Location loc){
+		adapterItems.clear();
+		for(int a = 0; a<items.length; a++){
+			
+			if (items[a].getLocation().compare(loc)) adapterItems.add(items[a]);
+
+			
+		}
+		
+		adapter.notifyDataSetChanged();	
+	}
+
 	
 	
 
@@ -173,60 +176,79 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	   		dialog.show();
 	}
 	
+	
+	
 	public void chooseCategory(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		// 2. Chain together various setter methods to set the dialog characteristics
 		builder.setTitle("Choose Category");
-	           builder.setItems(R.array.categories, new DialogInterface.OnClickListener() {
-	               public void onClick(DialogInterface dialog, int which) {
-	              if(which == 0){
-	            	  cat = "Miscellaneous";
-	              }else if(which ==1){
-	            	  cat = "Heirloom";
-	              }else if(which == 2){
-	            	  cat ="Keepsakes";
-	              }
-	            	change = 1;
-	           }
-	    });
-	           builder.setNegativeButton("Cancel",
-	 				  new DialogInterface.OnClickListener() {
-	 				    public void onClick(DialogInterface dialog,int id) {
-	 					dialog.cancel();
-	 				    }
-	 				  });
-	           
-	           AlertDialog dialog = builder.create();
-	   		dialog.show();
+		builder.setItems(R.array.categories, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				Category tempCat = Category.MISCELLANEOUS;
+				
+				switch (which){
+				case 0:
+					tempCat = Category.MISCELLANEOUS;
+					break;
+				case 1:
+					tempCat = Category.HEIRLOOMS;
+					break;
+				case 2:
+					tempCat = Category.KEEPSAKES;
+					break;
+				}
+				filterCategory(tempCat);
+				
+				
+			}
+		});
+		builder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				dialog.cancel();
+			}
+		});
+
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
+	
+	
 	
 	public void chooseLocation(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    // Get the layout inflater
-	    LayoutInflater inflater = this.getLayoutInflater();
+		// Get the layout inflater
+		LayoutInflater inflater = this.getLayoutInflater();
 
-	    // Inflate and set the layout for the dialog
-	    // Pass null as the parent view because its going in the dialog layout
-	    builder.setView(inflater.inflate(R.layout.choose_location, null))
-	    // Add action buttons
-	           .setPositiveButton("Filter", new DialogInterface.OnClickListener() {
-	               @Override
-	               public void onClick(DialogInterface dialog, int id) {
-	                   TextView c = (TextView)findViewById(R.id.choose_city);
-	                   city = c.getText().toString();
-	                   TextView s = (TextView)findViewById(R.id.choose_state);
-	                   state = s.getText().toString();
-	                   change = 2;
-	               }
-	           })
-	           .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-	               public void onClick(DialogInterface dialog, int id) {
-	               }
-	           });      
-	    AlertDialog dialog = builder.create();
-  		dialog.show();
+		// Inflate and set the layout for the dialog
+		// Pass null as the parent view because its going in the dialog layout
+		builder.setView(inflater.inflate(R.layout.choose_location, null))
+		// Add action buttons
+		.setPositiveButton("Filter", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				TextView c = (TextView)findViewById(R.id.choose_city);
+				city = c.getText().toString();
+				TextView s = (TextView)findViewById(R.id.choose_state);
+				state = s.getText().toString();
+				//change = 2;
+				filterLocation(new Location(city,state));
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+			}
+		});      
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
+	
+	
+	
+	
+	
+	
 
 	
 	
@@ -282,7 +304,11 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 
 			if (sres == AllFoundItemsQueryResult.OK){
 				items = all.getList();
-				adapter = new ArrayAdapter<FoundItem>(AllFoundItemsListActivity.this,android.R.layout.simple_list_item_1, items);
+				adapterItems.clear();
+				for(int a = 0; a<items.length; a++){
+					adapterItems.add(items[a]);
+				}
+				adapter = new ArrayAdapter<Item>(AllFoundItemsListActivity.this,android.R.layout.simple_list_item_1, adapterItems);
 				list.setAdapter(adapter);
 			} else {
 				popUp(x);

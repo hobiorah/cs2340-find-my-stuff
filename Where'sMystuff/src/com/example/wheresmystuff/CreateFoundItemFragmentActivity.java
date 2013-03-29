@@ -107,7 +107,7 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 	 * takes user to screen showing all the lost items
 	 * @param veiw
 	 */
-	public void goToAllLostItems(View veiw){
+	public void goToAllFoundItems(View veiw){
 		Intent foundItemList = new Intent(CreateFoundItemFragmentActivity.this, AllFoundItemsListActivity.class);
 		  // Start signuppage activity, using the Intent
 		 startActivity(foundItemList);

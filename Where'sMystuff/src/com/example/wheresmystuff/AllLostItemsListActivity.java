@@ -39,7 +39,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class AllLostItemsListActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener{
 
 	LostItem[] items;
-	public static ArrayList<Item> adapterItems = new ArrayList<Item>();
+	 ArrayList<Item> adapterItems = new ArrayList<Item>();
 	ArrayAdapter<Item> adapter;
 	ListView listL;
 
@@ -296,6 +296,7 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 			if (sres == AllLostItemsQueryResult.OK){
 				items = all.getList();
 				//original = all.getList();
+				adapterItems.clear();
 				for(int a = 0; a<items.length; a++){
 					adapterItems.add(items[a]);
 				}

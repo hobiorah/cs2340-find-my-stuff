@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.wheresmystuff.SignupPageActivity" />
+        <activity android:name="com.example.wheresmystuff.CreateFoundItemFragmentActivity" />
         <activity android:name="com.example.wheresmystuff.OptionsActivity" />
         <activity android:name="com.example.wheresmystuff.CreateLostItemFragmentActivity" />
         <activity
@@ -47,6 +48,10 @@
         <activity
             android:name="com.example.wheresmystuff.Test_a"
             android:label="@string/title_activity_test_a" >
+        </activity>
+        <activity
+            android:name="com.example.wheresmystuff.FilteredItemsListActivity"
+            android:label="@string/title_activity_filtered_items_list" >
         </activity>
     </application>
 

@@ -21,7 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/date_found"
         android:layout_marginBottom="49dp"
-        android:onClick="goToAllLostItems"
+        android:onClick="goToAllFoundItems"
         android:text="Cancel" />
 
     <TextView
@@ -80,15 +80,6 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/date_pickerf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/item_rewardf"
-        android:layout_below="@+id/category_selectorf"
-        android:onClick="showDatePickerDialog"
-        android:text=" Date Found" />
-
     <EditText
         android:id="@+id/city_locationf"
         android:layout_width="wrap_content"
@@ -130,5 +121,14 @@
         android:entries="@array/categories"
         android:prompt="@string/category_prompt"
         android:spinnerMode="dialog" />
+
+    <Button
+        android:id="@+id/date_pickerf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/category_selectorf"
+        android:layout_toRightOf="@+id/city_locationf"
+        android:onClick="showDatePickerDialog"
+        android:text=" Date Found" />
 
 </RelativeLayout>

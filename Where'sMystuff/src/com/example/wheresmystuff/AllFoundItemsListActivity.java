@@ -21,10 +21,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class AllFoundItemsListActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -44,7 +46,10 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_found_items_list);	
 		list = (ListView)findViewById(R.id.list);
-			
+			list.setOnItemClickListener(new OnItemClickListener() {
+				public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+					popUp(adapterItems.get(position).getName().toString(),adapterItems.get(position));
+				}});
 			dateChange = new int[3];
 	         
 	        
@@ -154,12 +159,11 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	           builder.setItems(R.array.filter, new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int which) {
 	              if(which ==0){
+		            chooseCategory();
+	          		//change = 2;
+	              }else if(which == 1){
 	            	final DialogFragment newFragment = new DatePickerFragment();
 	          		newFragment.show(getSupportFragmentManager(), "DatePicker");
-	          		change = 2;
-	              }else if(which == 1){
-	            	chooseCategory();
-	            	
 	              }else{
 	            	  chooseLocation();
 	              }
@@ -328,12 +332,12 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	 * Pop up dialog to show the user the attributes of the item they clicked
 	 *
 	 * @param name the name of the item
-	 * @param a the Found item reference 
+	 * @param item the Found item reference 
 	 */
-	public void popUp(CharSequence name,FoundItem a){
+	public void popUp(CharSequence name,Item item){
 		String present = "";
-		present += "Reward is: "+ a.getReward() + "\n Category: " + a.getCategory() + " \n Date Found: " + a.getDateEntered().serialize()
-				+ "\n Status : " + a.getStatus() + "\n Location: " + a.getLocation().toString();
+		present += "Reward is: "+ item.getReward() + "\n Category: " + item.getCategory() + " \n Date Found: " + item.getDateEntered().serialize()
+				+ "\n Status : " + item.getStatus() + "\n Location: " + item.getLocation().toString();
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 

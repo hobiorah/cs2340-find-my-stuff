@@ -129,6 +129,8 @@ public class Item {
 		String status = "";
 		if(found == false){
 			status = "Not found";
+		}else{
+			status = "Found";
 		}
 		return status;
 	}

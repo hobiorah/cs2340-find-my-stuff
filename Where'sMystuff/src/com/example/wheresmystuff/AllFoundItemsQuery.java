@@ -27,9 +27,9 @@ public class AllFoundItemsQuery {
 		AllFoundItemsQueryResult log = AllFoundItemsQueryResult.NETWORK_ERROR;
 
 		try {
-			doc = Jsoup.connect("http://steve.node13.info/findmystuff/viewfounditems.php").timeout(15*1000).get();
+			doc = Jsoup.connect("http://steve.node13.info/findmystuff/allfounditems.php").timeout(15*1000).get();
 		} catch (IOException e) {
-			Log.d("MyApp","I am here");
+		//	System.out.println(e.toString());
 			return log;
 		}
 

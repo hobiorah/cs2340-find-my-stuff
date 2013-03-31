@@ -26,7 +26,7 @@ public class LoginScreenActivity extends Activity {
 	protected TextView userName;
 	protected TextView password;
 	protected LoginQuery log;
-	protected User user;
+	public User user;
 	boolean move = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

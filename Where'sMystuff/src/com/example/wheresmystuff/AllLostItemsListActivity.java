@@ -4,6 +4,7 @@ package com.example.wheresmystuff;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+
 import com.example.wheresmystuff.AllFoundItemsListActivity.DatePickerFragment;
 
 
@@ -27,6 +28,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -179,29 +181,41 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 	}
 
 	public void chooseLocation(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		// Get the layout inflater
-		LayoutInflater inflater = this.getLayoutInflater();
+		View promptsView=null;
+		LayoutInflater li = LayoutInflater.from(AllLostItemsListActivity.this);
+		
+        	promptsView = li.inflate(R.layout.choose_location, null);
+        	
+		
 
-		// Inflate and set the layout for the dialog
-		// Pass null as the parent view because its going in the dialog layout
-		builder.setView(inflater.inflate(R.layout.choose_location, null))
-		// Add action buttons
-		.setPositiveButton("Filter", new DialogInterface.OnClickListener() {
-			@Override
+		final EditText cityE = (EditText) promptsView.findViewById(R.id.choose_city);
+		final EditText stateE = (EditText) promptsView.findViewById(R.id.choose_state);
+		
+		// 1. Instantiate an AlertDialog.Builder with its constructor
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setView(promptsView);
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setTitle("Where?");
+
+		// Add the buttons
+		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				TextView c = (TextView)findViewById(R.id.choose_city);
-				city = c.getText().toString();
-				TextView s = (TextView)findViewById(R.id.choose_state);
-				state = s.getText().toString();
-				//change = 2;
+				
+				city = cityE.getText().toString();
+				state = stateE.getText().toString();
+
 				filterLocation(new Location(city,state));
-			}
-		})
-		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-			}
-		});      
+				
+			
+		}});
+		
+		builder.setNegativeButton("Cancel",
+				  new DialogInterface.OnClickListener() {
+				    public void onClick(DialogInterface dialog,int id) {
+					dialog.cancel();
+				    }
+				  });
+		// 3. Get the AlertDialog from create()
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}

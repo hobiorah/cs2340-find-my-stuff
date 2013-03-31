@@ -103,11 +103,12 @@ public class Location {
 	}
 	
 	public boolean weakCompare(Location location){
-		return city.equals(location.getCity());
+		return city.equalsIgnoreCase(location.getCity());
+		
 	}
 	
 	public boolean compare(Location location){
-		return state.equals(location.getState()) && country.equals(location.getCountry()) && weakCompare(location);
+		return state.equalsIgnoreCase(location.getState()) && country.equals(location.getCountry()) && weakCompare(location);
 	}
 	
 	public boolean strongCompare(Location location){

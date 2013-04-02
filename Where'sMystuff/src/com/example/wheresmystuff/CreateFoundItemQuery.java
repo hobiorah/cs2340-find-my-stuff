@@ -8,8 +8,8 @@ import org.jsoup.nodes.Document;
 
 public class CreateFoundItemQuery {
 	/**
-	 * Queries server and attempts to register
-	 * @return returns the result for whether the user was registered
+	 * Queries server and attempts to sumbit a found item
+	 * @return returns the result for whether the item was submitted succesfully
 	 */
 	public SimpleQueryResult create(FoundItem item){
 		Document doc = null;

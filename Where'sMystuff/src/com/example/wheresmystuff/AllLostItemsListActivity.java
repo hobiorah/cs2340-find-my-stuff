@@ -70,11 +70,18 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 	}
 
 
-
+	/**
+	 * brings up pop up for user to choose how he or she wants to filter
+	 * @param view
+	 */
 	public void filter(View view){
 		popUp();
 	}
 
+	/**
+	 * filters item by category
+	 * @param category category user chooses
+	 */
 	public void filterCategory(Category category){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){
@@ -89,6 +96,10 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 
 	}
 	
+	/**
+	 * filter items by date
+	 * @param date date user wants
+	 */
 	public void filterDate(Date date){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){
@@ -101,6 +112,10 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 		adapter.notifyDataSetChanged();
 	}
 	
+	/**
+	 * filters by location
+	 * @param loc location user wants
+	 */
 	public void filterLocation(Location loc){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){
@@ -113,6 +128,10 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 		adapter.notifyDataSetChanged();	
 	}
 
+
+	/**
+	 * pop up that allows user to filter how he or she wants
+	 */
 	public void popUp(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		// 2. Chain together various setter methods to set the dialog characteristics
@@ -145,6 +164,9 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 		dialog.show();
 	}
 
+	/**
+	 * gives user option to choose category he or she wants to filter by
+	 */
 	public void chooseCategory(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		// 2. Chain together various setter methods to set the dialog characteristics
@@ -180,6 +202,10 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 		dialog.show();
 	}
 
+
+	/**
+	 * givers user optioin to enter location he or she wants to filter by
+	 */
 	public void chooseLocation(){
 		View promptsView=null;
 		LayoutInflater li = LayoutInflater.from(AllLostItemsListActivity.this);
@@ -238,6 +264,9 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 
 	}
 
+	/**
+	 * When user picks date the filter method is called to show items from date picked
+	 */
 	public void onDateSet(DatePicker view, int year, int month, int day) {
 		//do some stuff for example write on log and update TextField on activity
 		Log.w("DatePicker","Date = " + year);
@@ -248,7 +277,10 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 		//change = 2;
 	}
 
-
+	/**
+	 * shows datepicker Dialog
+	 * @param v
+	 */
 	public void showDatePickerDialog(View v) {
 
 		final DialogFragment newFragment = new DatePickerFragment();

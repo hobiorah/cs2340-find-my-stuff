@@ -29,6 +29,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * Screen displaying all the found items and allows user to filter by category,date, and location
+ * @author HarryO
+ *
+ */
 public class AllFoundItemsListActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener {
 
 	FoundItem[] items;
@@ -43,6 +48,7 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	 String city;
 	 String state;
 	@Override
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_found_items_list);	
@@ -55,8 +61,7 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	         
 	        
 	         new GetFoundItemsAttemptTask().execute();
-	         //a =new ArrayAdapter(this, android.R.layout.simple_list_item_1, values);
-	        //list.setAdapter(a);
+	         
 	
 	}
 	
@@ -67,6 +72,11 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		return true;
 	}
 	
+	/**
+	 * Used for user to pick a date from a date picker pop up
+	 * @author HarryO
+	 *
+	 */
 	public static class DatePickerFragment extends DialogFragment 
 	{
 
@@ -85,6 +95,9 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 
 	}
 
+	/**
+	 * When user picks date the filter method is called to show items from date picked
+	 */
 	public void onDateSet(DatePicker view, int year, int month, int day) {
 		//do some stuff for example write on log and update TextField on activity
 		Log.w("DatePicker","Date = " + year);
@@ -95,7 +108,10 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		
 	}
 	
-
+	/**
+	 * shows datepicker Dialog
+	 * @param v
+	 */
 	public void showDatePickerDialog(View v) {
 
 		final DialogFragment newFragment = new DatePickerFragment();
@@ -104,12 +120,19 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 
 	}
 
-
+	/**
+	 * brings up pop up for user to choose how he or she wants to filter
+	 * @param view
+	 */
 	public void filter(View view){
 		popUp();
 		
 	}
 	
+	/**
+	 * filters item by category
+	 * @param category category user chooses
+	 */
 	public void filterCategory(Category category){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){
@@ -124,6 +147,10 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 
 	}
 	
+	/**
+	 * filter items by date
+	 * @param date date user wants
+	 */
 	public void filterDate(Date date){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){
@@ -136,6 +163,10 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		adapter.notifyDataSetChanged();
 	}
 	
+	/**
+	 * filters by location
+	 * @param loc location user wants
+	 */
 	public void filterLocation(Location loc){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){
@@ -152,7 +183,9 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	
 
 	
-	
+	/**
+	 * pop up that allows user to filter how he or she wants
+	 */
 	public void popUp(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		// 2. Chain together various setter methods to set the dialog characteristics
@@ -182,7 +215,9 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	}
 	
 	
-	
+	/**
+	 * gives user option to choose category he or she wants to filter by
+	 */
 	public void chooseCategory(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		// 2. Chain together various setter methods to set the dialog characteristics
@@ -219,7 +254,9 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	}
 	
 	
-	
+	/**
+	 * givers user optioin to enter location he or she wants to filter by
+	 */
 	public void chooseLocation(){
 		View promptsView=null;
 		LayoutInflater li = LayoutInflater.from(AllFoundItemsListActivity.this);

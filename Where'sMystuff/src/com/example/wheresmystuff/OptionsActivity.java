@@ -35,7 +35,10 @@ public class OptionsActivity extends Activity {
 		  // Start signuppage activity, using the Intent
 		  this.startActivity(lostItem);
 	}
-	
+	/**
+	 * Takes user to screen to submit a found item
+	 * @param view
+	 */
 	public void newFoundItem(View view){
 		Intent foundItem = new Intent(this, CreateFoundItemFragmentActivity.class);
 		  // Start signuppage activity, using the Intent

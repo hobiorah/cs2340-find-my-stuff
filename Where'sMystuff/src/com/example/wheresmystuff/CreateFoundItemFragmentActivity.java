@@ -104,7 +104,7 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 	}
 	
 	/**
-	 * takes user to screen showing all the lost items
+	 * takes user to screen showing all the found items
 	 * @param veiw
 	 */
 	public void goToAllFoundItems(View veiw){
@@ -116,7 +116,7 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 	
 	
 	/**
-	 * Executes query to submit a new lost item
+	 * Executes query to submit a new found item
 	 * @author HarryO
 	 *
 	 */

@@ -84,6 +84,11 @@ public class Date {
 //		}
 //	}
 	
+	/**
+	 * To compare if to dates match
+	 * @param compareDate date to compare with
+	 * @return
+	 */
 	public boolean compare (Date compareDate){
 		return year == compareDate.getYear() && month == compareDate.getMonth() && date == compareDate.getDate();
 	}

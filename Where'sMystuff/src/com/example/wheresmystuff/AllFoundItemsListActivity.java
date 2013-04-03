@@ -310,7 +310,7 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 	/**
 	 * Allows app to query the database for the found items in an AsyncTask as to not interfere with the thread android is using
 	 */
-	private class GetFoundItemsAttemptTask extends AsyncTask<Void, Void, AllFoundItemsQueryResult>{
+	private class GetFoundItemsAttemptTask extends AsyncTask<Void, Void, AllItemsQueryResult>{
 		
 		private ProgressDialog pd;
 
@@ -327,7 +327,7 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		 * Creates object to execute query and then executes the query
 		 * @return  the result of the query
 		 */
-		protected AllFoundItemsQueryResult doInBackground(Void... params) {
+		protected AllItemsQueryResult doInBackground(Void... params) {
 			all = new AllFoundItemsQuery();
 			return all.getAll();
 		}
@@ -337,7 +337,7 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 		 * it gets all the items in the database and puts it into an array for the array adapter
 		 * which then sets the array adapter for the activity to the list from the dataabse
 		 */
-		protected void onPostExecute(AllFoundItemsQueryResult sres){
+		protected void onPostExecute(AllItemsQueryResult sres){
 			pd.dismiss();
 			String x = "defaults";
 			
@@ -356,7 +356,7 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 				break;
 			}
 
-			if (sres == AllFoundItemsQueryResult.OK){
+			if (sres == AllItemsQueryResult.OK){
 				items = all.getList();
 				adapterItems.clear();
 				for(int a = 0; a<items.length; a++){

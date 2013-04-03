@@ -38,4 +38,11 @@
 
     <string name="title_activity_filtered_items_list">FilteredItemsListActivity</string>
 
+    <string-array name="searchApp">
+        <item>Category</item>
+        <item>Item Name</item>
+    </string-array>
+
+    <string name="title_activity_searched_for_items">SearchedForItems</string>
+
 </resources>

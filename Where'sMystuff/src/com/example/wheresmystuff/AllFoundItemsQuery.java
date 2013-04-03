@@ -3,6 +3,7 @@ package com.example.wheresmystuff;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -22,9 +23,9 @@ public class AllFoundItemsQuery {
 	 * Query to get all lost items in the database
 	 * @return result of whether it worked or not
 	 */
-	public AllFoundItemsQueryResult getAll(){
+	public AllItemsQueryResult getAll(){
 		Document doc = null;
-		AllFoundItemsQueryResult log = AllFoundItemsQueryResult.NETWORK_ERROR;
+		AllItemsQueryResult log = AllItemsQueryResult.NETWORK_ERROR;
 
 		try {
 			doc = Jsoup.connect("http://steve.node13.info/findmystuff/allfounditems.php").timeout(15*1000).get();
@@ -56,9 +57,9 @@ public class AllFoundItemsQuery {
 				}
 
 			}
-			log = AllFoundItemsQueryResult.OK;
+			log = AllItemsQueryResult.OK;
 		} else {
-			log = AllFoundItemsQueryResult.EMPTY;
+			log = AllItemsQueryResult.EMPTY;
 		}
 		
 

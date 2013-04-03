@@ -292,7 +292,7 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 	/**
 	 * Allows app to query the database for the lost items in an AsyncTask as to not interfere with the thread android is using
 	 */
-	private class GetItemsAttemptTask extends AsyncTask<Void, Void, AllLostItemsQueryResult>{
+	private class GetItemsAttemptTask extends AsyncTask<Void, Void, AllItemsQueryResult>{
 
 		private ProgressDialog pd;
 
@@ -309,7 +309,7 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 		 * Creates object to execute query and then executes the query
 		 * @return  the result of the query
 		 */
-		protected AllLostItemsQueryResult doInBackground(Void... params) {
+		protected AllItemsQueryResult doInBackground(Void... params) {
 			all = new AllLostItemsQuery();
 			return all.getAll();
 		}
@@ -319,7 +319,7 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 		 * it gets all the items in the database and puts it into an array for the array adapter
 		 * which then sets the array adapter for the activity to the list from the dataabse
 		 */
-		protected void onPostExecute(AllLostItemsQueryResult sres){
+		protected void onPostExecute(AllItemsQueryResult sres){
 			pd.dismiss();
 			String x = "defaults";
 
@@ -339,7 +339,7 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 			}
 
 
-			if (sres == AllLostItemsQueryResult.OK){
+			if (sres == AllItemsQueryResult.OK){
 				items = all.getList();
 				//original = all.getList();
 				adapterItems.clear();

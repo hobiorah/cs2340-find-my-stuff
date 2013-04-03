@@ -5,6 +5,6 @@ package com.example.wheresmystuff;
  * @author HarryO
  *
  */
-public enum AllLostItemsQueryResult {
+public enum AllItemsQueryResult {
 	OK, EMPTY, DB_ERROR, NETWORK_ERROR
 }

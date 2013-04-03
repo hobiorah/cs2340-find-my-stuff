@@ -53,6 +53,10 @@
             android:name="com.example.wheresmystuff.FilteredItemsListActivity"
             android:label="@string/title_activity_filtered_items_list" >
         </activity>
+        <activity
+            android:name="com.example.wheresmystuff.SearchedForItemsFragmentActivity"
+            android:label="@string/title_activity_searched_for_items" >
+        </activity>
     </application>
 
 </manifest>

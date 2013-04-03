@@ -1,8 +1,14 @@
 package com.example.wheresmystuff;
 
+import com.example.wheresmystuff.AllLostItemsListActivity.DatePickerFragment;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 
@@ -11,7 +17,7 @@ import android.view.View;
  * @author HarryO
  *
  */
-public class OptionsActivity extends Activity {
+public class OptionsActivity extends FragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,13 @@ public class OptionsActivity extends Activity {
 		Intent foundItem = new Intent(this, CreateFoundItemFragmentActivity.class);
 		  // Start signuppage activity, using the Intent
 		  this.startActivity(foundItem);
+	}
+	
+	
+	public void searchItems(View view){
+		Intent searchItem = new Intent(this, SearchedForItemsFragmentActivity.class);
+		  // Start signuppage activity, using the Intent
+		  this.startActivity(searchItem);
 	}
 
 }

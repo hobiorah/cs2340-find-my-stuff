@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan" >
         <activity
-            android:name="com.example.wheresmystuff.LoginScreenActivity"
+            android:name="com.example.wheresmystuff.view.LoginScreenActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,36 +25,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.wheresmystuff.SignupPageActivity" />
-        <activity android:name="com.example.wheresmystuff.CreateFoundItemFragmentActivity" />
-        <activity android:name="com.example.wheresmystuff.OptionsActivity" />
-        <activity android:name="com.example.wheresmystuff.CreateLostItemFragmentActivity" />
+        <activity android:name="com.example.wheresmystuff.view.SignupPageActivity" />
+        <activity android:name="com.example.wheresmystuff.view.CreateFoundItemFragmentActivity" />
+        <activity android:name="com.example.wheresmystuff.view.OptionsActivity" />
+        <activity android:name="com.example.wheresmystuff.view.CreateLostItemFragmentActivity" />
         <activity
-            android:name="com.example.wheresmystuff.RegisterError"
+            android:name="com.example.wheresmystuff.view.RegisterError"
             android:label="@string/title_activity_register_error" >
         </activity>
         <activity
-            android:name="com.example.wheresmystuff.AllLostItemsListActivity"
+            android:name="com.example.wheresmystuff.view.AllLostItemsListActivity"
             android:label="@string/title_activity_all_lost_items" >
         </activity>
         <activity
-            android:name="com.example.wheresmystuff.AdminScreenActivity"
+            android:name="com.example.wheresmystuff.view.AdminScreenActivity"
             android:label="@string/title_activity_admin_screen" >
         </activity>
         <activity
-            android:name="com.example.wheresmystuff.AllFoundItemsListActivity"
+            android:name="com.example.wheresmystuff.view.AllFoundItemsListActivity"
             android:label="@string/title_activity_all_found_items_list" >
         </activity>
         <activity
-            android:name="com.example.wheresmystuff.Test_a"
+            android:name="com.example.wheresmystuff.view.Test_a"
             android:label="@string/title_activity_test_a" >
         </activity>
         <activity
-            android:name="com.example.wheresmystuff.FilteredItemsListActivity"
+            android:name="com.example.wheresmystuff.view.FilteredItemsListActivity"
             android:label="@string/title_activity_filtered_items_list" >
         </activity>
         <activity
-            android:name="com.example.wheresmystuff.SearchedForItemsFragmentActivity"
+            android:name="com.example.wheresmystuff.view.SearchedForItemsFragmentActivity"
             android:label="@string/title_activity_searched_for_items" >
         </activity>
     </application>

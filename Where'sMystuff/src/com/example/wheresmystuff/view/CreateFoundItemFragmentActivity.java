@@ -3,12 +3,12 @@ package com.example.wheresmystuff.view;
 import java.util.Calendar;
 
 import com.example.wheresmystuff.R;
-import com.example.wheresmystuff.model.CreateFoundItemQuery;
+import com.example.wheresmystuff.controller.CreateFoundItemQuery;
+import com.example.wheresmystuff.controller.SimpleQueryResult;
+import com.example.wheresmystuff.controller.Utils;
 import com.example.wheresmystuff.model.Date;
 import com.example.wheresmystuff.model.FoundItem;
 import com.example.wheresmystuff.model.Location;
-import com.example.wheresmystuff.model.SimpleQueryResult;
-import com.example.wheresmystuff.model.Utils;
 
 
 import android.app.AlertDialog;

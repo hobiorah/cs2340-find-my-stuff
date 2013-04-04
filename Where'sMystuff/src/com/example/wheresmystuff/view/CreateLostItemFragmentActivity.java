@@ -3,12 +3,12 @@ package com.example.wheresmystuff.view;
 import java.util.Calendar;
 
 import com.example.wheresmystuff.R;
-import com.example.wheresmystuff.model.CreateLostItemQuery;
+import com.example.wheresmystuff.controller.CreateLostItemQuery;
+import com.example.wheresmystuff.controller.SimpleQueryResult;
+import com.example.wheresmystuff.controller.Utils;
 import com.example.wheresmystuff.model.Date;
 import com.example.wheresmystuff.model.Location;
 import com.example.wheresmystuff.model.LostItem;
-import com.example.wheresmystuff.model.SimpleQueryResult;
-import com.example.wheresmystuff.model.Utils;
 
 
 import android.os.AsyncTask;

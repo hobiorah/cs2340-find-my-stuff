@@ -4,8 +4,8 @@ package com.example.wheresmystuff.view;
 import java.io.IOException;
 
 import com.example.wheresmystuff.R;
-import com.example.wheresmystuff.model.RegisterQuery;
-import com.example.wheresmystuff.model.RegisterResult;
+import com.example.wheresmystuff.controller.RegisterQuery;
+import com.example.wheresmystuff.controller.RegisterResult;
 
 import android.os.AsyncTask;
 import android.os.Bundle;

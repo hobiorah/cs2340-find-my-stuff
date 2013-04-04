@@ -1,11 +1,14 @@
 package com.example.wheresmystuff.view;
+import com.example.wheresmystuff.util.*;
+import com.example.wheresmystuff.util.Debug;
+
 
 import java.util.ArrayList;
 
 import com.example.wheresmystuff.R;
-import com.example.wheresmystuff.model.AllFoundItemsQuery;
-import com.example.wheresmystuff.model.AllItemsQueryResult;
-import com.example.wheresmystuff.model.AllLostItemsQuery;
+import com.example.wheresmystuff.controller.AllFoundItemsQuery;
+import com.example.wheresmystuff.controller.AllItemsQueryResult;
+import com.example.wheresmystuff.controller.AllLostItemsQuery;
 import com.example.wheresmystuff.model.Category;
 import com.example.wheresmystuff.model.FoundItem;
 import com.example.wheresmystuff.model.Item;
@@ -41,12 +44,12 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_searched_for_items);
 		list = (ListView)findViewById(R.id.listA);
 		new GetItemsAttemptTask().execute();
 
-		
+
 	}
 
 	@Override
@@ -202,7 +205,7 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 			all = new AllFoundItemsQuery();
 			allL = new AllLostItemsQuery();
 			allFoundOk = all.getAll();
-			allLostOk = all.getAll();
+			allLostOk = allL.getAll();
 			return null;
 		}
 
@@ -215,9 +218,10 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 			pd.dismiss();
 			String x = "defaults";
 
-
-			if ((allFoundOk == AllItemsQueryResult.OK  || allFoundOk == AllItemsQueryResult.EMPTY) 
-					&& (allLostOk == AllItemsQueryResult.OK || allLostOk == AllItemsQueryResult.EMPTY)){
+			Debug.log("ON POST EXECUTE");
+			
+			if (allFoundOk == AllItemsQueryResult.OK  
+					&& allLostOk == AllItemsQueryResult.OK){
 				Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_LONG).show();
 				items = all.getList();
 				itemsL = allL.getList();
@@ -228,20 +232,23 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 						adapterItems.add(items[a]);
 					}
 
-				
-				
-				
 				if (allLostOk != AllItemsQueryResult.EMPTY)
 					for(int b = 0;b<itemsL.length;b++){
 						adapterItems.add(itemsL[b]);
 					}
+
+				if (items == null)
+					Debug.log("ITEMS IS NULL");
+				if (itemsL == null){
+					Debug.log("ITEMSL IS NULL");
+				}
 				
-				
+
 				Log.d("ASDF", adapterItems.toString());
-				
+
 				adapter = new ArrayAdapter<Item>(SearchedForItemsFragmentActivity.this, android.R.layout.simple_list_item_1, adapterItems);
 				list.setAdapter(adapter);
-//				popUp();
+				//				popUp();
 			} else {
 				popUp("SHIT WENT WRONG YO");
 			}

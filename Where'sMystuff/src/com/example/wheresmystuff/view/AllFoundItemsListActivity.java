@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.example.wheresmystuff.R;
-import com.example.wheresmystuff.model.AllFoundItemsQuery;
-import com.example.wheresmystuff.model.AllItemsQueryResult;
+import com.example.wheresmystuff.controller.AllFoundItemsQuery;
+import com.example.wheresmystuff.controller.AllItemsQueryResult;
 import com.example.wheresmystuff.model.Category;
 import com.example.wheresmystuff.model.Date;
 import com.example.wheresmystuff.model.FoundItem;

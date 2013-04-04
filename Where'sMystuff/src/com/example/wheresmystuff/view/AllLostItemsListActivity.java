@@ -6,14 +6,13 @@ import java.util.Calendar;
 
 
 import com.example.wheresmystuff.R;
-import com.example.wheresmystuff.model.AllItemsQueryResult;
-import com.example.wheresmystuff.model.AllLostItemsQuery;
+import com.example.wheresmystuff.controller.AllItemsQueryResult;
+import com.example.wheresmystuff.controller.AllLostItemsQuery;
 import com.example.wheresmystuff.model.Category;
 import com.example.wheresmystuff.model.Date;
 import com.example.wheresmystuff.model.Item;
 import com.example.wheresmystuff.model.Location;
 import com.example.wheresmystuff.model.LostItem;
-import com.example.wheresmystuff.view.AllFoundItemsListActivity.DatePickerFragment;
 
 
 import android.os.AsyncTask;

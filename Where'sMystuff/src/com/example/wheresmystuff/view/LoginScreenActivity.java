@@ -3,9 +3,9 @@ package com.example.wheresmystuff.view;
 //import com.example.wheresmystuff.SignupPage.RegisterAttemptTask;
 
 import com.example.wheresmystuff.R;
+import com.example.wheresmystuff.controller.LoginQuery;
+import com.example.wheresmystuff.controller.LoginResult;
 import com.example.wheresmystuff.model.Admin;
-import com.example.wheresmystuff.model.LoginQuery;
-import com.example.wheresmystuff.model.LoginResult;
 import com.example.wheresmystuff.model.User;
 
 import android.os.AsyncTask;

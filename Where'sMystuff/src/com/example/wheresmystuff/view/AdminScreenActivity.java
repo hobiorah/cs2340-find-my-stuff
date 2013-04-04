@@ -1,13 +1,13 @@
 package com.example.wheresmystuff.view;
 
 import com.example.wheresmystuff.R;
+import com.example.wheresmystuff.controller.CreateAdminQuery;
+import com.example.wheresmystuff.controller.DeleteUserQuery;
+import com.example.wheresmystuff.controller.PromoteToAdminQuery;
+import com.example.wheresmystuff.controller.RegisterResult;
+import com.example.wheresmystuff.controller.SimpleQueryResult;
+import com.example.wheresmystuff.controller.UnlockUserQuery;
 import com.example.wheresmystuff.model.Admin;
-import com.example.wheresmystuff.model.CreateAdminQuery;
-import com.example.wheresmystuff.model.DeleteUserQuery;
-import com.example.wheresmystuff.model.PromoteToAdminQuery;
-import com.example.wheresmystuff.model.RegisterResult;
-import com.example.wheresmystuff.model.SimpleQueryResult;
-import com.example.wheresmystuff.model.UnlockUserQuery;
 import com.example.wheresmystuff.model.User;
 
 import android.os.AsyncTask;
@@ -175,8 +175,6 @@ public class AdminScreenActivity extends Activity {
 				break;
 			case INVALID_EMAIL:
 				x = "Invalid email";
-				break;
-			default:
 				break;
 			}
 

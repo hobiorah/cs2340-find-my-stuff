@@ -41,6 +41,7 @@
     <string-array name="searchApp">
         <item>Category</item>
         <item>Item Name</item>
+        <item >Match Item</item>
     </string-array>
 
     <string name="title_activity_searched_for_items">SearchedForItems</string>

@@ -1,18 +1,17 @@
 package com.example.wheresmystuff.view;
+import com.example.wheresmystuff.controller.*;
+import com.example.wheresmystuff.model.Category;
+import com.example.wheresmystuff.model.FoundItem;
+import com.example.wheresmystuff.model.Item;
+import com.example.wheresmystuff.model.Location;
+import com.example.wheresmystuff.model.LostItem;
 import com.example.wheresmystuff.util.*;
-import com.example.wheresmystuff.util.Debug;
 
 
 import java.util.ArrayList;
 
 import com.example.wheresmystuff.R;
-import com.example.wheresmystuff.controller.AllFoundItemsQuery;
-import com.example.wheresmystuff.controller.AllItemsQueryResult;
-import com.example.wheresmystuff.controller.AllLostItemsQuery;
-import com.example.wheresmystuff.model.Category;
-import com.example.wheresmystuff.model.FoundItem;
-import com.example.wheresmystuff.model.Item;
-import com.example.wheresmystuff.model.LostItem;
+
 import com.example.wheresmystuff.view.AllFoundItemsListActivity.DatePickerFragment;
 
 import android.os.AsyncTask;
@@ -27,10 +26,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class SearchedForItemsFragmentActivity extends FragmentActivity {
 	String itemName;
@@ -47,6 +48,10 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 
 		setContentView(R.layout.activity_searched_for_items);
 		list = (ListView)findViewById(R.id.listA);
+		list.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+				popUp(adapterItems.get(position).getName().toString(),adapterItems.get(position));
+			}});
 		new GetItemsAttemptTask().execute();
 
 
@@ -138,7 +143,7 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 			public void onClick(DialogInterface dialog, int id) {
 
 				itemName = itemN.getText().toString();
-
+				Log.d("did it get the name", itemName.toString());
 				filterName(itemName);
 
 
@@ -155,17 +160,70 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		dialog.show();
 	}
 
+	public void findMatches(String name,Location loc){
+		adapterItems.clear();
+		for(int a = 0; a<items.length; a++){
+			if (items[a].getName().equalsIgnoreCase(name) && items[a].getLocation().compare(loc)) adapterItems.add(items[a]);	
+		}
+	
+
+		adapter.notifyDataSetChanged();	
+	}
+
+	
+	public void matchFoundItem(){
+		View promptsView=null;
+		LayoutInflater li = LayoutInflater.from(SearchedForItemsFragmentActivity.this);
+
+		promptsView = li.inflate(R.layout.find_found_items, null);
+
+		final EditText itemN = (EditText) promptsView.findViewById(R.id.itemNameMatch);
+		final EditText city = (EditText) promptsView.findViewById(R.id.cityMatch);
+		final EditText state = (EditText) promptsView.findViewById(R.id.stateMatch);
+
+
+		// 1. Instantiate an AlertDialog.Builder with its constructor
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setView(promptsView);
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setTitle("What's the name and location of the Item?");
+
+		// Add the buttons
+		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+
+				itemName = itemN.getText().toString();
+				Log.d("did it get the name", itemName.toString());
+				findMatches(itemName,new Location(city.getText().toString(),state.getText().toString()));
+
+
+			}});
+
+		builder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog,int id) {
+				dialog.cancel();
+			}
+		});
+		// 3. Get the AlertDialog from create()
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+
+	
 	public void popUp(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		// 2. Chain together various setter methods to set the dialog characteristics
 		builder.setTitle("Search by What?");
-		builder.setItems(R.array.filter, new DialogInterface.OnClickListener() {
+		builder.setItems(R.array.searchApp, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				if(which ==0){
 					chooseCategory();
 
-				}else{
+				}else if(which==1){
 					searchName();
+				}else{
+					matchFoundItem();
 				}
 			}
 		});
@@ -180,6 +238,32 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		dialog.show();
 	}
 
+	/**
+	 * Pop up dialog to show the user the attributes of the item they clicked
+	 *
+	 * @param name the name of the item
+	 * @param item the Found item reference 
+	 */
+	public void popUp(CharSequence name,Item item){
+		String present = "";
+		present += "Reward is: "+ item.getReward() + "\n Category: " + item.getCategory() + " \n Date Found: " + item.getDateEntered().serialize()
+				+ "\n Status : " + item.getStatus() + "\n Location: " + item.getLocation().toString();
+		// 1. Instantiate an AlertDialog.Builder with its constructor
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setMessage(present).setTitle(name);
+
+		// Add the buttons
+		builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				// User clicked OK button
+			}
+		});
+		// 3. Get the AlertDialog from create()
+		AlertDialog dialog = builder.create();
+		dialog.show();
+	}
 
 
 	private class GetItemsAttemptTask extends AsyncTask<Void, Void, Void>{
@@ -248,7 +332,7 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 
 				adapter = new ArrayAdapter<Item>(SearchedForItemsFragmentActivity.this, android.R.layout.simple_list_item_1, adapterItems);
 				list.setAdapter(adapter);
-				//				popUp();
+								popUp();
 			} else {
 				popUp("SHIT WENT WRONG YO");
 			}

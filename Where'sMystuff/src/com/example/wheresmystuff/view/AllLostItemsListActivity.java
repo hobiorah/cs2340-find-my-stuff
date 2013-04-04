@@ -12,7 +12,7 @@ import com.example.wheresmystuff.model.Category;
 import com.example.wheresmystuff.model.Date;
 import com.example.wheresmystuff.model.Item;
 import com.example.wheresmystuff.model.Location;
-import com.example.wheresmystuff.model.LostItem;
+import com.example.wheresmystuff.model.*;
 
 
 import android.os.AsyncTask;

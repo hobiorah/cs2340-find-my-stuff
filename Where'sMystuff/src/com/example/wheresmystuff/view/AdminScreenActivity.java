@@ -176,6 +176,8 @@ public class AdminScreenActivity extends Activity {
 			case INVALID_EMAIL:
 				x = "Invalid email";
 				break;
+			default:
+				break;
 			}
 
 

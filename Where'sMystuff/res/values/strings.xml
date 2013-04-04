@@ -7,7 +7,7 @@
     <string name="userName">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="signUp">Sign Up for Wheres My Stuff</string>
+    <string name="signUp">Sign Up</string>
     <string name="signUpPage">Sign Up</string>
     <string name="title_activity_register_error">RegisterError</string>
     <string name="welcome">Wlecome to Wheres My stuff!</string>

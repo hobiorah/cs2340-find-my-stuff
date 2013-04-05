@@ -24,30 +24,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/user_ask"
+        android:layout_alignRight="@+id/user_ask"
         android:layout_below="@+id/user_ask"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="29dp"
         android:onClick="newLostItem"
         android:text="@string/add_lost_item" />
-
-    <Button
-        android:id="@+id/submit_item"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/submit_lost"
-        android:layout_alignBottom="@+id/submit_lost"
-        android:layout_alignRight="@+id/user_ask"
-        android:onClick="newFoundItem"
-        android:text="Enter Found Item" />
 
     <Button
         android:id="@+id/button3"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/submit_item"
+        android:layout_alignRight="@+id/submit_item"
+        android:layout_below="@+id/submit_item"
+        android:layout_marginTop="46dp"
         android:onClick="searchItems"
         android:text="Search All Items" />
+
+    <Button
+        android:id="@+id/submit_item"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/submit_lost"
+        android:layout_alignRight="@+id/submit_lost"
+        android:layout_below="@+id/submit_lost"
+        android:onClick="newFoundItem"
+        android:text="Enter Found Item" />
 
 </RelativeLayout>

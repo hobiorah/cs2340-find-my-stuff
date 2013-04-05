@@ -8,19 +8,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SearchedForItemsFragmentActivity" >
 
-     <TextView
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" />
 
-    
-
     <ListView
         android:id="@+id/listA"
         android:layout_width="wrap_content"
-        android:layout_height="340dp"
+        android:layout_height="match_parent"
         android:layout_alignLeft="@+id/textView1"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/textView1"
         android:layout_weight="0.41" >
     </ListView>
 

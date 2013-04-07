@@ -98,6 +98,8 @@ public class LoginScreenActivity extends Activity {
 			case LOCKED:
 				x = "This account has been locked";
 				break;
+			default:
+				break;
 			}
 
 

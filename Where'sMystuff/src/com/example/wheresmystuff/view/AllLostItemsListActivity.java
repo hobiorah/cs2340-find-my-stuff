@@ -192,6 +192,8 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 				case 2:
 					tempCat = Category.KEEPSAKES;
 					break;
+				default:
+					break;
 				}
 				filterCategory(tempCat);
 				
@@ -342,6 +344,8 @@ public class AllLostItemsListActivity extends FragmentActivity implements DatePi
 				break;
 			case EMPTY:
 				x = "No available items.";
+				break;
+			default:
 				break;
 			}
 

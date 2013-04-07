@@ -245,6 +245,8 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 				case 2:
 					tempCat = Category.KEEPSAKES;
 					break;
+				default:
+					break;
 				}
 				filterCategory(tempCat);
 				
@@ -362,6 +364,8 @@ public class AllFoundItemsListActivity extends FragmentActivity implements DateP
 				break;
 			case EMPTY:
 				x = "No available items.";
+				break;
+			default:
 				break;
 			}
 

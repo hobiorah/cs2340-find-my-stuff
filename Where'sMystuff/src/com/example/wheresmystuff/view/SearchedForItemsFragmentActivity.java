@@ -102,6 +102,8 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 				case 2:
 					tempCat = Category.KEEPSAKES;
 					break;
+				default:
+					break;
 				}
 				filterCategory(tempCat);
 

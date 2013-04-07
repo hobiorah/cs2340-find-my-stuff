@@ -167,6 +167,8 @@ public class CreateFoundItemFragmentActivity extends FragmentActivity implements
 			case NETWORK_ERROR:
 				x = "network";
 				break;
+			default:
+				break;
 			}
 
 			if (res == SimpleQueryResult.OK){

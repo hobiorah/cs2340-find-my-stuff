@@ -29,15 +29,6 @@
         android:onClick="submitItem"
         android:text="Submit" />
 
-    <Button
-        android:id="@+id/date_pickerf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/category_selectorf"
-        android:layout_below="@+id/category_selectorf"
-        android:onClick="showDatePickerDialog"
-        android:text=" Date Found" />
-
     <EditText
         android:id="@+id/item_namef"
         android:layout_width="wrap_content"
@@ -101,7 +92,7 @@
         android:layout_alignBottom="@+id/date_pickerf"
         android:layout_alignParentLeft="true"
         android:ems="10"
-        android:text="Date"
+        android:text="Date Found"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -133,5 +124,14 @@
         android:layout_centerHorizontal="true"
         android:text="New Found Item"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/date_pickerf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/category_selectorf"
+        android:layout_below="@+id/category_selectorf"
+        android:onClick="showDatePickerDialog"
+        android:text=" Date Found" />
 
 </RelativeLayout>

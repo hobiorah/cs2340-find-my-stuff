@@ -8,18 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LostItem" >
 
-    <Button
-        android:id="@+id/date_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/date_lost"
-        android:layout_alignBottom="@+id/date_lost"
-        android:layout_toRightOf="@+id/category_label"
-        android:onClick="showDatePickerDialog"
-        android:text=" Date Lost" />
-
     <TextView
-        android:id="@+id/date_lost"
+        android:id="@+id/date_lostL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/category_label"
@@ -27,7 +17,7 @@
         android:layout_marginTop="15dp"
         android:layout_toLeftOf="@+id/date_picker"
         android:ems="10"
-        android:text="Date"
+        android:text="Date Lost"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -79,7 +69,7 @@
         android:id="@+id/city_location"
         android:layout_width="165dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/date_lost"
+        android:layout_alignLeft="@+id/date_lostL"
         android:layout_below="@+id/date_picker"
         android:layout_marginTop="26dp"
         android:ems="10"
@@ -124,7 +114,7 @@
         android:id="@+id/category_selector"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/date_picker"
+        android:layout_alignLeft="@+id/lost_activity_title"
         android:layout_alignRight="@+id/item_reward"
         android:layout_below="@+id/item_reward"
         android:layout_marginTop="18dp"
@@ -140,5 +130,15 @@
         android:layout_alignTop="@+id/category_selector"
         android:text="Category:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/date_lostL"
+        android:layout_alignBottom="@+id/date_lostL"
+        android:layout_alignRight="@+id/item_reward"
+        android:onClick="showDatePickerDialog"
+        android:text=" Date Lost" />
 
 </RelativeLayout>

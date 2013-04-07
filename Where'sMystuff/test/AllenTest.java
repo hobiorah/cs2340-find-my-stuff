@@ -87,4 +87,18 @@ public class AllenTest {
 		assertEquals(LoginResult.INVALID, login.login("names", "passwords"));
 		
 		deleter.delete(user);	}
+	
+	
+	
+	public void testCreateLostItem() {
+		CreateLostItemQuery create = new CreateLostItemQuery();
+		String name ="Junit";
+		String test = "test";
+		String description = "Good Grade";
+		Date date = new  Date(4, 7, 2013);
+		//register.register(newuser);
+		LostItem lost = new LostItem(name,test, Category.HEIRLOOMS,description ,date );
+		assertEquals(SimpleQueryResult.OK,create.create(lost));
+		
+	}
 }

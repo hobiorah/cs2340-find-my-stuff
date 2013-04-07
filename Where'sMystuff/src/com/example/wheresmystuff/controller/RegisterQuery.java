@@ -4,6 +4,8 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import com.example.wheresmystuff.model.User;
+
 /**
  * Object that queries server, attempting to register a user
  * @author Steven Han
@@ -13,21 +15,23 @@ public class RegisterQuery {
 
 	/**
 	 * Queries server and attempts to register
+	 * @return 
 	 * @return returns the result for whether the user was registered
 	 */
-	public RegisterResult register(String username, String hash, String email){
+	
+	public RegisterResult register(User user){
 		Document doc = null;
 		RegisterResult reg = RegisterResult.NETWORK_ERROR;
 
-		if (!username.matches("\\w+"))
+		if (!user.getName().matches("\\w+"))
 			return RegisterResult.INVALID_USERNAME;
-		else if (!hash.matches("\\w+"))
+		else if (!user.getHash().matches("\\w+"))
 			return RegisterResult.INVALID_PASS;
-		else if (!email.matches("([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})"))
+		else if (!user.getEmail().matches("([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})"))
 			return RegisterResult.INVALID_EMAIL;
 
 		try {
-			doc = Jsoup.connect("http://steve.node13.info/findmystuff/createuser.php").data("name", username).data("hash", hash).data("email", email).timeout(15*1000).get();
+			doc = Jsoup.connect("http://steve.node13.info/findmystuff/createuser.php").data("name", user.getName()).data("hash", user.getHash()).data("email", user.getEmail()).timeout(15*1000).get();
 		} catch (IOException e) {
 			return reg;
 		}

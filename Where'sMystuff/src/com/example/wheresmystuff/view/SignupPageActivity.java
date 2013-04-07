@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.example.wheresmystuff.R;
 import com.example.wheresmystuff.controller.RegisterQuery;
 import com.example.wheresmystuff.controller.RegisterResult;
+import com.example.wheresmystuff.model.User;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -73,7 +74,10 @@ public class SignupPageActivity extends Activity {
 			String user =  userName.getText().toString();
 			String pass =  password.getText().toString();
 			String em = email.getText().toString();
-			return reg.register(user, pass, em);
+			
+			
+			User userid = new User(user, pass, em);
+			return reg.register(userid);
 
 		}
 

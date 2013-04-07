@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/user_ask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:text="What is the username of the account you want to delete?"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/username_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/user_ask"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="166dp"
         android:ems="10"
         android:hint="Enter Username"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName" >
 
-    <TextView
-        android:id="@+id/user_ask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/username_delete"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="72dp"
-        android:text="What is the username of the account you want to delete?"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

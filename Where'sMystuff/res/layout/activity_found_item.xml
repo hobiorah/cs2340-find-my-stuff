@@ -9,10 +9,9 @@
 
     <EditText
         android:id="@+id/city_locationf"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/date_found"
-        android:layout_alignRight="@+id/date_pickerf"
         android:layout_below="@+id/date_pickerf"
         android:layout_marginTop="26dp"
         android:ems="10"
@@ -26,8 +25,9 @@
         android:layout_alignBaseline="@+id/cancel_foundItem"
         android:layout_alignBottom="@+id/cancel_foundItem"
         android:layout_alignLeft="@+id/city_locationf"
+        android:layout_alignRight="@+id/city_locationf"
         android:onClick="submitItem"
-        android:text="Submit Found Item" />
+        android:text="Submit" />
 
     <Button
         android:id="@+id/date_pickerf"
@@ -37,15 +37,6 @@
         android:layout_below="@+id/category_selectorf"
         android:onClick="showDatePickerDialog"
         android:text=" Date Found" />
-
-    <TextView
-        android:id="@+id/lf_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/city_locationf"
-        android:text="New Found Item"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/item_namef"
@@ -119,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/city_locationf"
         android:layout_alignBottom="@+id/city_locationf"
-        android:layout_toRightOf="@+id/date_pickerf"
+        android:layout_alignLeft="@+id/cancel_foundItem"
         android:ems="10"
         android:hint="Enter State"
         android:inputType="textPersonName" />
@@ -133,5 +124,14 @@
         android:layout_toRightOf="@+id/submit_found"
         android:onClick="goToAllFoundItems"
         android:text="Cancel" />
+
+    <TextView
+        android:id="@+id/lf_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="New Found Item"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

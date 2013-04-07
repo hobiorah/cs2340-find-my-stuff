@@ -35,10 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/city_location"
+        android:layout_alignRight="@+id/city_location"
         android:layout_below="@+id/city_location"
         android:layout_marginTop="19dp"
         android:onClick="submitItem"
-        android:text="Submit Lost Item" />
+        android:text="Submit" />
 
     <Button
         android:id="@+id/cancel_lostItem"
@@ -46,8 +47,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/submit_lost"
         android:layout_alignBottom="@+id/submit_lost"
+        android:layout_alignLeft="@+id/state_location"
         android:layout_alignRight="@+id/state_location"
-        android:layout_toRightOf="@+id/submit_lost"
         android:onClick="goToAllLostItems"
         android:text="Cancel" />
 
@@ -76,10 +77,9 @@
     
     <EditText
         android:id="@+id/city_location"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/date_lost"
-        android:layout_alignRight="@+id/date_picker"
         android:layout_below="@+id/date_picker"
         android:layout_marginTop="26dp"
         android:ems="10"
@@ -93,7 +93,7 @@
         android:layout_alignBaseline="@+id/city_location"
         android:layout_alignBottom="@+id/city_location"
         android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/submit_lost"
+        android:layout_toRightOf="@+id/city_location"
         android:ems="10"
         android:hint="Enter State"
         android:inputType="textPersonName" />

@@ -5,28 +5,24 @@
      >
 
     <EditText
-        android:id="@+id/cityMatch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/itemNameMatch"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp"
-        android:ems="10"
-        android:hint="City"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
         android:id="@+id/itemNameMatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/cityMatch"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="15dp"
         android:ems="10"
         android:hint="Item Name"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/cityMatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/stateMatch"
+        android:layout_below="@+id/itemNameMatch"
+        android:ems="10"
+        android:hint="City"
         android:inputType="textPersonName" />
 
     <EditText
@@ -35,9 +31,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/cityMatch"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
         android:ems="10"
         android:hint="State"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

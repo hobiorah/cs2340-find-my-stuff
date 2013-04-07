@@ -3,6 +3,7 @@ package com.example.wheresmystuff.view;
 
 import java.io.IOException;
 
+import com.example.wheresmystuff.R;
 //import com.example.wheresmystuff.R;
 import com.example.wheresmystuff.controller.RegisterQuery;
 import com.example.wheresmystuff.controller.RegisterResult;

@@ -13,6 +13,9 @@ import com.example.wheresmystuff.model.*;
 public class AllenTest {
 
 	@Test
+	/**
+	 * @author Allen Tsai
+	 */
 	public void promoteToAdminTest() {
 		String username = "Allen";
 		String hash = "hash";

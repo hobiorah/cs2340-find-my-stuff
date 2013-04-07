@@ -16,7 +16,7 @@ import com.example.wheresmystuff.model.User;
  * @author Zhiyuan "Jerry" Lin
  *
  */
-public class MethodsTest extends TestCase {
+public class ZhiyuanTest extends TestCase {
 	User user = new User("zhiyuan", "zhiyuan", "zhiyuan@zhiyuan.edu");
 	
 	@Before
@@ -33,7 +33,7 @@ public class MethodsTest extends TestCase {
 	}
 	
 	@Test
-	public void unlockUserTest(){
+	public void testUnlockUser(){
 		UnlockUserQuery unlock = new UnlockUserQuery();
 		assertEquals(unlock.unlock(user),SimpleQueryResult.OK);
 	}

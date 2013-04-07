@@ -58,5 +58,5 @@
             android:label="@string/title_activity_searched_for_items" >
         </activity>
     </application>
-
+    
 </manifest>

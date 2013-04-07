@@ -105,31 +105,5 @@ public class AllenTest {
 			assertEquals(SimpleQueryResult.OK,create.create(lost));
 			
 		}
-		User user = new User("zhiyuan", "zhiyuan", "zhiyuan@zhiyuan.edu");
-		
-		@Before
-		public void setUp(){
-			//register user
-			RegisterQuery register = new RegisterQuery();
-			register.register(user);
-			
-			//lock the user
-			LoginQuery login = new LoginQuery();
-			login.login("zhiyuan", "WrongPassword");
-			login.login("zhiyuan", "WrongPassword");
-			login.login("zhiyuan", "WrongPassword");
-		}
-		
-		@Test
-		public void unlockUserTest(){
-			UnlockUserQuery unlock = new UnlockUserQuery();
-			assertEquals(unlock.unlock(user),SimpleQueryResult.OK);
-		}
-
-		@After
-		public void cleanUp(){
-			DeleteUserQuery deleteUser = new DeleteUserQuery();
-			deleteUser.delete(user);
-		}
 
 }

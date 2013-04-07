@@ -3,7 +3,6 @@ package com.example.wheresmystuff.controller;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,8 +11,6 @@ import com.example.wheresmystuff.model.Date;
 import com.example.wheresmystuff.model.Location;
 import com.example.wheresmystuff.model.LostItem;
 import com.example.wheresmystuff.util.Debug;
-
-import android.util.Log;
 
 /**
  * Attempts to get all lost items in the database

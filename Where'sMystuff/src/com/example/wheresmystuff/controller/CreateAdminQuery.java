@@ -1,6 +1,5 @@
 package com.example.wheresmystuff.controller;
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

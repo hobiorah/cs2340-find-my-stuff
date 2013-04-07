@@ -1,6 +1,5 @@
 package com.example.wheresmystuff.model;
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

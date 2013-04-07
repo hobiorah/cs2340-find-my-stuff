@@ -2,12 +2,9 @@ package com.example.wheresmystuff.model;
 
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
 
 import android.util.Log;
 

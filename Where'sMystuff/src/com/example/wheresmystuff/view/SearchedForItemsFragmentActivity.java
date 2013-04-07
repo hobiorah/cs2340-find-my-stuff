@@ -64,6 +64,10 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		return true;
 	}
 
+	/**
+	 * This filters all the items in database and brings up items in category user chooses
+	 * @param category catergory user wants
+	 */
 	public void filterCategory(Category category){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){		
@@ -77,6 +81,9 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 
 	}
 
+	/**
+	 * pop up for user to pick what vategory he wants
+	 */
 	public void chooseCategory(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		// 2. Chain together various setter methods to set the dialog characteristics
@@ -112,6 +119,10 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		dialog.show();
 	}
 
+	/**
+	 * filters all items and shows items that item name the user wants
+	 * @param name user wants this name 
+	 */
 	public void filterName(String name){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){
@@ -124,6 +135,9 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		adapter.notifyDataSetChanged();	
 	}
 
+	/**
+	 * pop up for user to type in name he or she wants
+	 */
 	public void searchName(){
 		View promptsView=null;
 		LayoutInflater li = LayoutInflater.from(SearchedForItemsFragmentActivity.this);
@@ -160,6 +174,11 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		dialog.show();
 	}
 
+	/**
+	 * brings items that match the name and location user wants
+	 * @param name user wants to match
+	 * @param loc location of item
+	 */
 	public void findMatches(String name,Location loc){
 		adapterItems.clear();
 		for(int a = 0; a<items.length; a++){
@@ -170,7 +189,9 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		adapter.notifyDataSetChanged();	
 	}
 
-	
+	/**
+	 * pop up for user to match a found item
+	 */
 	public void matchFoundItem(){
 		View promptsView=null;
 		LayoutInflater li = LayoutInflater.from(SearchedForItemsFragmentActivity.this);
@@ -210,7 +231,9 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		dialog.show();
 	}
 
-	
+	/**
+	 * pop up asking the user what he or she wants to seach by
+	 */
 	public void popUp(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		// 2. Chain together various setter methods to set the dialog characteristics
@@ -265,7 +288,11 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 		dialog.show();
 	}
 
-
+	/**
+	 * Async task to get and dispaly all items in database
+	 * @author HarryO
+	 *
+	 */
 	private class GetItemsAttemptTask extends AsyncTask<Void, Void, Void>{
 		private ProgressDialog pd;
 

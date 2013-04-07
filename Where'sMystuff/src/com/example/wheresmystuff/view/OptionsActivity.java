@@ -52,7 +52,10 @@ public class OptionsActivity extends FragmentActivity {
 		  this.startActivity(foundItem);
 	}
 	
-	
+	/**
+	 * takes user to screen to search through all items
+	 * @param view
+	 */
 	public void searchItems(View view){
 		Intent searchItem = new Intent(this, SearchedForItemsFragmentActivity.class);
 		  // Start signuppage activity, using the Intent

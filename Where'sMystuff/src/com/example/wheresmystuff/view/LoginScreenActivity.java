@@ -59,7 +59,11 @@ public class LoginScreenActivity extends Activity {
 		new LoginAttemptTask().execute();
 		
 	}
-	
+	/**
+	 * attempts to login the user
+	 * @author HarryO
+	 *
+	 */
 	private class LoginAttemptTask extends AsyncTask<Void, Void, LoginResult>{
 		private ProgressDialog pd;
 

@@ -13,7 +13,7 @@ import com.example.wheresmystuff.model.*;
 public class AllenTest {
 
 	@Test
-	public void adminTest() {
+	public void promoteToAdminTest() {
 		String username = "Allen";
 		String hash = "hash";
 		Document doc = null;

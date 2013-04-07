@@ -90,15 +90,18 @@ public class AllenTest {
 	
 	
 	
-	public void testCreateLostItem() {
-		CreateLostItemQuery create = new CreateLostItemQuery();
-		String name ="Junit";
-		String test = "test";
-		String description = "Good Grade";
-		Date date = new  Date(4, 7, 2013);
-		//register.register(newuser);
-		LostItem lost = new LostItem(name,test, Category.HEIRLOOMS,description ,date );
-		assertEquals(SimpleQueryResult.OK,create.create(lost));
-		
-	}
+		@Test
+		public void testCreateLostItem() {
+			CreateLostItemQuery create = new CreateLostItemQuery();
+			
+			String name ="Junit";
+			String test = "test";
+			String description = "Good Grade";
+			Date date = new  Date(4, 7, 2013);
+			//register.register(newuser);
+			//this better work
+	LostItem lost = new LostItem(name,description, Category.HEIRLOOMS, test ,date, new Location("Atlanta","Georgia") );
+			assertEquals(SimpleQueryResult.OK,create.create(lost));
+			
+		}
 }

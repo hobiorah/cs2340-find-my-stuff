@@ -3,6 +3,8 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 
 import org.jsoup.Jsoup;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.jsoup.nodes.Document;
 
@@ -89,7 +91,6 @@ public class AllenTest {
 		deleter.delete(user);	}
 	
 	
-	
 		@Test
 		public void testCreateLostItem() {
 			CreateLostItemQuery create = new CreateLostItemQuery();
@@ -100,8 +101,35 @@ public class AllenTest {
 			Date date = new  Date(4, 7, 2013);
 			//register.register(newuser);
 			//this better work
-	LostItem lost = new LostItem(name,description, Category.HEIRLOOMS, test ,date, new Location("Atlanta","Georgia") );
+			LostItem lost = new LostItem(name,description, Category.HEIRLOOMS, test ,date, new Location("Atlanta","Georgia") );
 			assertEquals(SimpleQueryResult.OK,create.create(lost));
 			
 		}
+		User user = new User("zhiyuan", "zhiyuan", "zhiyuan@zhiyuan.edu");
+		
+		@Before
+		public void setUp(){
+			//register user
+			RegisterQuery register = new RegisterQuery();
+			register.register(user);
+			
+			//lock the user
+			LoginQuery login = new LoginQuery();
+			login.login("zhiyuan", "WrongPassword");
+			login.login("zhiyuan", "WrongPassword");
+			login.login("zhiyuan", "WrongPassword");
+		}
+		
+		@Test
+		public void unlockUserTest(){
+			UnlockUserQuery unlock = new UnlockUserQuery();
+			assertEquals(unlock.unlock(user),SimpleQueryResult.OK);
+		}
+
+		@After
+		public void cleanUp(){
+			DeleteUserQuery deleteUser = new DeleteUserQuery();
+			deleteUser.delete(user);
+		}
+
 }

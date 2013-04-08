@@ -89,7 +89,6 @@ public class CreateLostItemFragmentActivity extends FragmentActivity implements 
 		date[0] = year;
 		date[1] = month +1;
 		date[2] = day;
-		  Toast.makeText(getApplicationContext(), "month" + date[1], Toast.LENGTH_LONG).show();
 
 		((TextView) findViewById(R.id.date_lostL)).setText(date[1] + "/" + date[2] + "/" + date[0]);
 	}

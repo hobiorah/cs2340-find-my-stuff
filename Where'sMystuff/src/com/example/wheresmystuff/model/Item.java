@@ -110,7 +110,7 @@ public class Item {
 	 */
 	public String toString(){
 		String data = "";
-		data = "Item Name: " + name + "\nDescription: " + description;
+		data = "Item Name: " + name + "\nDescription: " + description + "\n Status: " + getStatus();
 		return data;
 	}
 	

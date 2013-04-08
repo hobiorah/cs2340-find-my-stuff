@@ -95,9 +95,9 @@ public class AllenTest {
 		public void testCreateLostItem() {
 			CreateLostItemQuery create = new CreateLostItemQuery();
 			
-			String name ="Junit";
-			String test = "test";
-			String description = "Good Grade";
+			String name ="JunitDemo";
+			String test = "testTA";
+			String description = "Good Grade :)";
 			Date date = new  Date(4, 7, 2013);
 			//register.register(newuser);
 			//this better work

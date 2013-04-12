@@ -335,7 +335,7 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 			
 			if (allFoundOk == AllItemsQueryResult.OK  
 					&& allLostOk == AllItemsQueryResult.OK){
-				Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "ok", Toast.LENGTH_LONG).show();
 				items = all.getList();
 				itemsL = allL.getList();
 				adapterItems.clear();

@@ -40,6 +40,9 @@ public class AllenTest {
 	
 	
 	@Test
+	/**
+	 * @author Wataru
+	 */
 	public void testLoginValidUser() {
 		User user = new User("name","password","hey@email.com");
 		reger.register(user);
@@ -92,6 +95,9 @@ public class AllenTest {
 	
 	
 		@Test
+		/**
+		 * @author Harry
+		 */
 		public void testCreateLostItem() {
 			CreateLostItemQuery create = new CreateLostItemQuery();
 			

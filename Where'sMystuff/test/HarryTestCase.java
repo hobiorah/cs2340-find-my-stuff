@@ -10,6 +10,7 @@ import com.example.wheresmystuff.controller.RegisterResult;
 import com.example.wheresmystuff.controller.SimpleQueryResult;
 import com.example.wheresmystuff.model.Category;
 import com.example.wheresmystuff.model.Date;
+import com.example.wheresmystuff.model.Location;
 import com.example.wheresmystuff.model.LostItem;
 import com.example.wheresmystuff.model.User;
 
@@ -26,26 +27,24 @@ public class HarryTestCase {
 	
 	RegisterQuery register = new RegisterQuery();
 	LoginQuery login = new LoginQuery();
-	CreateLostItemQuery create = new CreateLostItemQuery();
+	//CreateLostItemQuery create = new CreateLostItemQuery();
 	
 	User newuser = new User("Junit","test","case@gmail.com");
 	@Test
 	
 	public void testValidSignUp() {
-		String name ="Junit";
-		String test = "test";
-		String description = "Good Grade";
+		CreateLostItemQuery create = new CreateLostItemQuery();
+		
+		String name ="JunitDemo";
+		String test = "testTA";
+		String description = "Good Grade :)";
 		Date date = new  Date(4, 7, 2013);
 		//register.register(newuser);
-		LostItem lost = new LostItem(name,test, Category.HEIRLOOMS,description ,date );
+		//this better work
+		LostItem lost = new LostItem(name,description, Category.HEIRLOOMS, test ,date, new Location("Atlanta","Georgia") );
 		assertEquals(SimpleQueryResult.OK,create.create(lost));
 		
 	}
 	
-   public void findCreatedItem() {
-		
-		
-		
-	}
 
 }

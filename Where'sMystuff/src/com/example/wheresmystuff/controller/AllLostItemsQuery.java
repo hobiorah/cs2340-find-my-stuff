@@ -36,17 +36,20 @@ public class AllLostItemsQuery {
 		}
 
 
-		String[] array = doc.text().split("\\^");{
+		if (doc.text().length() > 2){
+			String[] array = doc.text().split("\\^");
+
 
 			Debug.log("" + Arrays.toString(array));
-			
+
 			String[][] array2 = new String[array.length][7];
 			for (int i = 0; i < array.length; i++)
 				array2[i] = array[i].split("\\|");
 
 			items = new LostItem[array.length];
 
-//			Log.d("ASDF", "" + array.length);
+			//			Log.d("ASDF", "" + array.length);
+			Debug.log("" + array.length);
 
 			for (int i = 0; i < array.length; i++){
 				items[i] = new LostItem(array2[i][1],
@@ -57,9 +60,13 @@ public class AllLostItemsQuery {
 								Integer.valueOf(array2[i][5].split("/")[1]),
 								Integer.valueOf(array2[i][5].split("/")[2])),
 								new Location(array2[i][6].split(",")[0],array2[i][6].split(",")[1]));
-			}
 
+			}
+		} else{
+			items = new LostItem[0];
 		}
+
+
 		log = AllItemsQueryResult.OK;
 
 		return log;

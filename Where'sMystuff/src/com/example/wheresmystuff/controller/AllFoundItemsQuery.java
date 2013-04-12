@@ -37,15 +37,16 @@ public class AllFoundItemsQuery {
 		}
 
 
-		String[] array = doc.text().split("\\^");{
+		if (doc.text().contains("\\^")){
+			String[] array = doc.text().split("\\^");
 
-			
+
 			Debug.log("" + Arrays.toString(array));
 			String[][] array2 = new String[array.length][7];
 			for (int i = 0; i < array.length; i++)
 				array2[i] = array[i].split("\\|");
 			items = new FoundItem[array.length];
-//			Log.d("ASDF", "" + array.length);
+			//			Log.d("ASDF", "" + array.length);
 
 			for (int i = 0; i < array.length; i++){
 				items[i] = new FoundItem(array2[i][1],
@@ -57,8 +58,11 @@ public class AllFoundItemsQuery {
 								Integer.valueOf(array2[i][5].split("/")[2])),
 								new Location(array2[i][6].split(",")[0],array2[i][6].split(",")[1]));
 			}
-
+		} else {
+			items = new FoundItem[0];
 		}
+
+
 		log = AllItemsQueryResult.OK;
 
 

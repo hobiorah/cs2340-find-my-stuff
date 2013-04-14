@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import com.example.wheresmystuff.model.Date;
 import com.example.wheresmystuff.model.FoundItem;
 import com.example.wheresmystuff.model.Location;
+import com.example.wheresmystuff.model.LostItem;
 import com.example.wheresmystuff.util.Debug;
 
 /**
@@ -32,21 +33,24 @@ public class AllFoundItemsQuery {
 		try {
 			doc = Jsoup.connect("http://steve.node13.info/findmystuff/allfounditems.php").timeout(15*1000).get();
 		} catch (IOException e) {
-			//	System.out.println(e.toString());
 			return log;
 		}
 
 
-		if (doc.text().contains("\\^")){
+		if (doc.text().length() > 2){
 			String[] array = doc.text().split("\\^");
 
 
 			Debug.log("" + Arrays.toString(array));
+
 			String[][] array2 = new String[array.length][7];
 			for (int i = 0; i < array.length; i++)
 				array2[i] = array[i].split("\\|");
+
 			items = new FoundItem[array.length];
+
 			//			Log.d("ASDF", "" + array.length);
+			Debug.log("" + array.length);
 
 			for (int i = 0; i < array.length; i++){
 				items[i] = new FoundItem(array2[i][1],
@@ -57,14 +61,14 @@ public class AllFoundItemsQuery {
 								Integer.valueOf(array2[i][5].split("/")[1]),
 								Integer.valueOf(array2[i][5].split("/")[2])),
 								new Location(array2[i][6].split(",")[0],array2[i][6].split(",")[1]));
+
 			}
-		} else {
+		} else{
 			items = new FoundItem[0];
 		}
 
 
 		log = AllItemsQueryResult.OK;
-
 
 		return log;
 	}

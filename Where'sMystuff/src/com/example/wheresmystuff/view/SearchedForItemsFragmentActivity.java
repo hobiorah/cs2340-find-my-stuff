@@ -271,7 +271,7 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 	 */
 	public void popUp(CharSequence name,Item item){
 		String present = "";
-		present += "Reward is: "+ item.getReward() + "\n Category: " + item.getCategory() + " \n Date Found: " + item.getDateEntered().serialize()
+		present += " Reward is: "+ item.getReward() + "\n Category: " + item.getCategory() + " \n Date Found: " + item.getDateEntered().serialize()
 				+ "\n Status : " + item.getStatus() + "\n Location: " + item.getLocation().toString();
 		// 1. Instantiate an AlertDialog.Builder with its constructor
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);

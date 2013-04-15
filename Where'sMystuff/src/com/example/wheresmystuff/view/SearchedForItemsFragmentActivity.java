@@ -177,7 +177,8 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 	}
 
 	/**
-	 * brings items that match the name and location user wants
+	 * brings items that match the name and location user wants So user will enter a lost item her or she wants to check if
+	 * it had been found
 	 * @param name user wants to match
 	 * @param loc location of item
 	 */
@@ -363,7 +364,7 @@ public class SearchedForItemsFragmentActivity extends FragmentActivity {
 				list.setAdapter(adapter);
 								popUp();
 			} else {
-				popUp("SHIT WENT WRONG YO");
+				popUp("Error");
 			}
 
 
